@@ -1,5 +1,37 @@
+<script setup>
+definePageMeta({
+  layout: 'dashboard',
+  middleware: 'auth'
+})
+</script>
+
 <template>
-<section class="page-wrap">
-  <h1 class="page-title">Upload Artwork</h1>
+<section>
+
+<h1 class="text-4xl font-bold mb-8">
+Overview
+</h1>
+
+<div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+  <StatCard title="Views" value="24.8K" icon="👁️" />
+  <StatCard title="Likes" value="8.2K" icon="❤️" />
+  <StatCard title="Saved" value="1.9K" icon="🔖" />
+  <StatCard title="Followers" value="3.1K" icon="👥" />
+
+</div>
+
+<div class="grid xl:grid-cols-2 gap-6 mt-8">
+
+  <div class="card-box">
+    Recent Performance Chart
+  </div>
+
+  <div class="card-box">
+    Latest Notifications
+  </div>
+
+</div>
+
 </section>
 </template>
