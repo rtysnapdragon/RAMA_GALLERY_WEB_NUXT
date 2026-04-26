@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "key": "gallery",
+      "href": "/gallery",
+      "anchor": "#gallery"
+    },
+    {
+      "key": "artists",
+      "href": "/artists",
+      "anchor": "#artists"
+    },
+    {
+      "key": "blogs",
+      "href": "/blogs",
+      "anchor": "#blogs"
+    },
+    {
+      "key": "events",
+      "href": "/events",
+      "anchor": null
+    },
+    {
+      "key": "services",
+      "href": "/services",
+      "anchor": null
+    },
+    {
+      "key": "about",
+      "href": "/about",
+      "anchor": null
+    },
+    {
+      "key": "contact",
+      "href": "/contact",
+      "anchor": null
+    }
+  ]
+}

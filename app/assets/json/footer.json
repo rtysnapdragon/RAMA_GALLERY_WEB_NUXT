@@ -1,0 +1,51 @@
+{
+  "brand": {
+    "name": "RamaGallery",
+    "tagline": { "en": "Cambodia's Art Sanctuary", "km": "ដំណាក់សិល្បៈខ្មែរ" },
+    "description": {
+      "en": "A platform celebrating Cambodian artists — from ancient Khmer tradition to contemporary vision.",
+      "km": "វេទិកាអបអរសាទរវិចិត្រករខ្មែរ — ពីប្រពៃណីខ្មែរបុរាណ ដល់ចក្ខុវិស័យសម័យទំនើប"
+    }
+  },
+  "columns": [
+    {
+      "title": { "en": "Explore", "km": "រុករក" },
+      "links": [
+        { "label": { "en": "Gallery", "km": "វិចិត្រសាល" }, "href": "/gallery" },
+        { "label": { "en": "Artists", "km": "វិចិត្រករ" }, "href": "/artists" },
+        { "label": { "en": "Events", "km": "ព្រឹត្តិការណ៍" }, "href": "/events" },
+        { "label": { "en": "Blogs", "km": "អត្ថបទ" }, "href": "/blogs" }
+      ]
+    },
+    {
+      "title": { "en": "Company", "km": "ក្រុមហ៊ុន" },
+      "links": [
+        { "label": { "en": "About", "km": "អំពីយើង" }, "href": "/about" },
+        { "label": { "en": "Our Team", "km": "ក្រុមការងារ" }, "href": "/teams" },
+        { "label": { "en": "Services", "km": "សេវាកម្ម" }, "href": "/services" },
+        { "label": { "en": "Contact", "km": "ទំនាក់ទំនង" }, "href": "/contact" }
+      ]
+    },
+    {
+      "title": { "en": "Artists", "km": "សម្រាប់វិចិត្រករ" },
+      "links": [
+        { "label": { "en": "Join as Artist", "km": "ចូលជាវិចិត្រករ" }, "href": "/register" },
+        { "label": { "en": "Upload Artwork", "km": "បញ្ចូលស្នាដៃ" }, "href": "/dashboard/upload" },
+        { "label": { "en": "AI Studio", "km": "ស្ទូឌីយ៉ូ AI" }, "href": "/dashboard/ai" },
+        { "label": { "en": "Dashboard", "km": "ផ្ទាំងគ្រប់គ្រង" }, "href": "/dashboard" }
+      ]
+    }
+  ],
+  "social": [
+    { "name": "Facebook", "href": "https://facebook.com/ramagallery", "icon": "facebook" },
+    { "name": "Instagram", "href": "https://instagram.com/ramagallery", "icon": "instagram" },
+    { "name": "Twitter", "href": "https://twitter.com/ramagallery", "icon": "twitter" },
+    { "name": "YouTube", "href": "https://youtube.com/ramagallery", "icon": "youtube" }
+  ],
+  "legal": [
+    { "label": { "en": "Privacy Policy", "km": "គោលការណ៍ភាពឯកជន" }, "href": "/privacy" },
+    { "label": { "en": "Terms of Service", "km": "លក្ខខណ្ឌ" }, "href": "/terms" },
+    { "label": { "en": "Cookie Policy", "km": "គោលការណ៍ Cookie" }, "href": "/cookies" }
+  ],
+  "copyright": { "en": "© 2025 RamaGallery. All rights reserved.", "km": "© ២០២៥ RamaGallery។ រក្សាសិទ្ធិទាំងអស់។" }
+}

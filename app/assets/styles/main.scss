@@ -1,0 +1,423 @@
+@use './color';
+// @use './variable';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// =============================================
+// RamaGallery — Global Styles
+// =============================================
+
+// ── Reset & Base ───────────────────────────
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    transition: background-color var(--transition), color var(--transition);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+// ── Typography ─────────────────────────────
+.font-display {
+    font-family: var(--font-display);
+}
+
+.font-khmer {
+    font-family: var(--font-khmer);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+}
+
+// ── Scrollbar ─────────────────────────────
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-gold);
+    border-radius: 3px;
+}
+
+// ── Selection ─────────────────────────────
+::selection {
+    background: var(--color-gold-light);
+    color: var(--color-text-primary);
+}
+
+.dark ::selection {
+    background: rgba(200, 149, 28, 0.3);
+    color: #f0ece4;
+}
+
+// ── Page Transitions ──────────────────────
+.page-enter-active,
+.page-leave-active {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.page-enter-from {
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+.page-leave-to {
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+// ── Utility Classes ───────────────────────
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+.gold-text {
+    background: linear-gradient(135deg, #c8951c, #e8c85a, #a87316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+}
+
+// ── Animation Utilities ───────────────────
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+
+    &.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// ── Gold Underline ─────────────────────────
+.gold-underline {
+    position: relative;
+    display: inline-block;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, var(--color-gold), transparent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+    }
+
+    &:hover::after {
+        transform: scaleX(1);
+    }
+}
+
+// ── Button Base ───────────────────────────
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-decoration: none;
+    white-space: nowrap;
+
+    &-primary {
+        background: var(--color-gold);
+        color: #fff;
+        padding: 0.75rem 2rem;
+        border-radius: 2px;
+
+        &:hover {
+            background: var(--color-gold-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(200, 149, 28, 0.3);
+        }
+    }
+
+    &-outline {
+        background: transparent;
+        color: var(--color-text-primary);
+        padding: 0.75rem 2rem;
+        border: 1px solid var(--color-border-strong);
+        border-radius: 2px;
+
+        &:hover {
+            border-color: var(--color-gold);
+            color: var(--color-gold);
+        }
+    }
+
+    &-ghost {
+        background: transparent;
+        color: var(--color-text-secondary);
+        padding: 0.5rem 1rem;
+
+        &:hover {
+            color: var(--color-text-primary);
+            background: var(--color-bg-secondary);
+            border-radius: 4px;
+        }
+    }
+}
+
+// ── Card ──────────────────────────────────
+.card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    transition: all var(--transition);
+
+    &:hover {
+        border-color: var(--color-border-strong);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(26, 22, 18, 0.08);
+    }
+}
+
+.dark .card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+// ── Masonry Grid ─────────────────────────
+.masonry-grid {
+    columns: 4;
+    gap: 1.5rem;
+
+    @media (max-width: 1280px) {
+        columns: 3;
+    }
+
+    @media (max-width: 900px) {
+        columns: 2;
+    }
+
+    @media (max-width: 580px) {
+        columns: 1;
+    }
+
+    >* {
+        break-inside: avoid;
+        margin-bottom: 1.5rem;
+    }
+}
+
+// ── Shimmer Skeleton ─────────────────────
+.skeleton {
+    background: linear-gradient(90deg,
+            var(--color-bg-secondary) 25%,
+            var(--color-border) 50%,
+            var(--color-bg-secondary) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+// ── Notifications Panel ───────────────────
+.notif-panel {
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    width: 380px;
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    z-index: 200;
+    background: var(--color-bg-card);
+    border-left: 1px solid var(--color-border);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.12);
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.open {
+        transform: translateX(0);
+    }
+}
+
+// ── RAImage Protection ────────────────────
+.ra-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-drag: none;
+
+    img {
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    // Watermark overlay
+    &::after {
+        content: 'RamaGallery';
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        font-family: var(--font-sans);
+        font-size: 0.625rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        pointer-events: none;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    // Block screenshots somewhat
+    .protect-overlay {
+        position: absolute;
+        inset: 0;
+        background: transparent;
+        pointer-events: none;
+        z-index: 2;
+    }
+}
+
+// ── Focus Styles ─────────────────────────
+:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+}
+
+// ── Divider ──────────────────────────────
+.divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: 3rem 0;
+}
+
+.divider-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    margin: 3rem auto;
+    max-width: 200px;
+}
+
+// ── Tag / Badge ───────────────────────────
+.tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    background: var(--color-bg-secondary);
+    transition: all var(--transition);
+
+    &:hover {
+        border-color: var(--color-gold);
+        color: var(--color-gold);
+    }
+
+    &-gold {
+        border-color: var(--color-gold);
+        color: var(--color-gold);
+        background: rgba(200, 149, 28, 0.08);
+    }
+}
+
+// ── Input ─────────────────────────────────
+.input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    transition: all var(--transition);
+
+    &:focus {
+        outline: none;
+        border-color: var(--color-gold);
+        background: var(--color-bg-card);
+    }
+
+    &::placeholder {
+        color: var(--color-text-muted);
+    }
+}
+
+// ── Tooltip ───────────────────────────────
+[data-tooltip] {
+    position: relative;
+
+    &::before {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--color-text-primary);
+        color: var(--color-bg);
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+        padding: 0.35rem 0.75rem;
+        border-radius: 2px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s;
+        z-index: 100;
+    }
+
+    &:hover::before {
+        opacity: 1;
+    }
+}
