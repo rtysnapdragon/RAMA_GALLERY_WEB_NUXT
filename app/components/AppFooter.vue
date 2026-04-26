@@ -148,7 +148,7 @@ const socialIcons: Record<string, any> = {
     font-size: 0.875rem;
     color: var(--color-text-secondary);
     line-height: 1.7;
-    max-width: 280px;
+    // max-width: 280px;
     margin-bottom: 1.5rem;
   }
 }
