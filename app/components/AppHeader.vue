@@ -35,14 +35,16 @@
         </button>
 
         <!-- Language toggle -->
-        <button
+        <LangSwitch />
+        <!-- <button
           class="lang-btn icon-btn"
           @click="toggleLocale()"
           :data-tooltip="currentLocale === 'en' ? 'ភាសាខ្មែរ' : 'English'"
         >
           <i class="ri-translate-2"></i>
           <span>{{ currentLocale === 'en' ? 'KM' : 'EN' }}</span>
-        </button>
+          <component :is="currentLocale === 'en' ? 'KmFlag' : 'EnFlag'" class="flag-icon" />
+        </button> -->
 
         <!-- Theme toggle -->
         <button
@@ -241,7 +243,7 @@ onUnmounted(() => {
   letter-spacing: 0.04em;
   color: var(--color-text-secondary);
   text-decoration: none;
-  // transition: color var(--transition);
+  transition: color var(--transition);
   border-radius: 4px;
 
   &:hover, &.active {

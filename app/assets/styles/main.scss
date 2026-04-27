@@ -1,5 +1,6 @@
 @use './color';
 @use './dashboard.scss';
+@use './font';
 // @use './variable';
 
 @tailwind base;
@@ -25,7 +26,7 @@ html {
 }
 
 body {
-    font-family: var(--font-sans);
+    font-family: var(--font-400);
     background-color: var(--color-bg);
     color: var(--color-text-primary);
     line-height: 1.6;
@@ -44,10 +45,13 @@ body {
     font-family: var(--font-khmer);
 }
 
+p,
 h1,
 h2,
-h3 {
-    font-family: var(--font-display);
+h3,
+li,
+a {
+    font-family: var(--font-800);
     font-weight: 400;
     line-height: 1.15;
     letter-spacing: -0.01em;

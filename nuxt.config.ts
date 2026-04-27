@@ -16,8 +16,8 @@ export default defineNuxtConfig({
 
   i18n: {
     locales: [
-      { code: 'en', name: 'English', iso: 'en-US', file: 'en.json', flag: '🇬🇧' },
-      { code: 'km', name: 'ខ្មែរ', iso: 'km-KH', file: 'km.json', flag: '🇰🇭' },
+      { code: 'en', name: 'English', iso: 'en-US', file: 'en.json', flag: '/flags/gb.svg' },
+      { code: 'km', name: 'ខ្មែរ', iso: 'km-KH', file: 'km.json', flag: '/flags/kh.svg' },
     ],
     defaultLocale: 'en',
     langDir: '../langs/',
@@ -26,7 +26,7 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      redirectOn: 'root',
+      // redirectOn: 'root',
     },
   },
 

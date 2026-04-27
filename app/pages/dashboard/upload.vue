@@ -37,4 +37,4 @@ Upload Artwork
 </div>
 
 </section>
-</template>
+</template> 
