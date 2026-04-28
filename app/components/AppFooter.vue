@@ -131,7 +131,7 @@ const socialIcons: Record<string, any> = {
   }
 
   .logo-text {
-    font-family: var(--font-display);
+    font-family: var(--font-400);
     font-size: 1.25rem;
     color: var(--color-text-primary);
   }
@@ -141,6 +141,8 @@ const socialIcons: Record<string, any> = {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-gold);
+    font-family: var(--font-400);
+    font-weight: 600;
     margin-bottom: 0.75rem;
   }
 
@@ -179,11 +181,11 @@ const socialIcons: Record<string, any> = {
 
 .footer-col {
   .col-title {
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
+    font-family: var(--font-400);
+    font-size: 0.8rem;
     font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    // letter-spacing: 0.2em;
+    // text-transform: uppercase;
     color: var(--color-text-primary);
     margin-bottom: 1.25rem;
   }

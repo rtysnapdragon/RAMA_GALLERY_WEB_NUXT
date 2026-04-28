@@ -4,7 +4,14 @@
     --font-600: 'Khmer OS Siemreap';
     --font-700: 'Khmer OS Siemreap';
     --font-800: 'Khmer OS Siemreap';
-    --font-900: 'Khmer OS Siemreap';
+    --font-900: 'Khmer Moullight';
+
+    // --font-400: en-400, km-400;
+    // --font-500: en-500, km-500;
+    // --font-600: en-600, km-600;
+    // --font-700: en-700, km-700;
+    // --font-800: en-800, km-800;
+    // --font-900: en-900, km-900;
 }
 
 @font-face {
@@ -47,9 +54,10 @@
     font-display: swap;
 }
 
+
 @font-face {
     font-family: var(--font-900);
-    src: url('~/assets/fonts/Siemreap-Regular.ttf') format('truetype');
+    src: local('KhmerOS_muollight'), url('~/assets/fonts/KhmerOS_muollight.ttf') format('truetype');
     font-weight: 900;
     font-style: normal;
     font-display: swap;

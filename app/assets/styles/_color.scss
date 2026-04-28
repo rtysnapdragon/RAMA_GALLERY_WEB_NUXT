@@ -32,6 +32,19 @@
     // Spacing
     --header-height: 72px;
     --section-gap: 6rem;
+
+    --bg: #f8fafc;
+    --bg-card: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --border: rgba(15, 23, 42, 0.08);
+
+    --glass: rgba(255, 255, 255, 0.7);
+    --bg-sidebar: #ffffff;
+    --text: #111;
+    --muted: #666;
+    --border: rgba(0, 0, 0, 0.08);
+    --glass: rgba(0, 0, 0, 0.04);
 }
 
 // ── Dark Mode ──────────────────────────────
@@ -47,4 +60,19 @@
     --glass-bg: rgba(26, 22, 18, 0.75);
     --glass-border: rgba(240, 236, 228, 0.08);
     --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+    --bg: #0b0b0f;
+    --bg-card: rgba(255, 255, 255, 0.04);
+    --text: #ffffff;
+    --muted: rgba(255, 255, 255, 0.55);
+    --border: rgba(255, 255, 255, 0.08);
+
+    --glass: rgba(255, 255, 255, 0.03);
+
+
+    --bg-sidebar: #0f1115;
+    --text: #fff;
+    --muted: #9aa0a6;
+    --border: rgba(255, 255, 255, 0.08);
+    --glass: rgba(255, 255, 255, 0.05);
 }

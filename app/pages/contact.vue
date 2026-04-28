@@ -33,8 +33,8 @@
               </div>
               <div class="form-group">
                 <label class="form-label">{{ tBy({ en: 'Subject', km: 'ប្រធានបទ' }) }}</label>
-                <select v-model="form.subject" class="input">
-                  <option value="">{{ tBy({ en: 'Select a topic…', km: 'ជ្រើសប្រធានបទ…' }) }}</option>
+                <select v-model="form.subject" class="input" :class="{ 'gray-placeholder': !form.subject }">
+                  <option value="" disabled>{{ tBy({ en: 'Select a topic…', km: 'ជ្រើសប្រធានបទ…' }) }}</option>
                   <option>{{ tBy({ en: 'Artist Inquiry', km: 'ការស្វែងយល់អំពីវិចិត្រករ' }) }}</option>
                   <option>{{ tBy({ en: 'Collector Support', km: 'ជំនួយអ្នកប្រមូល' }) }}</option>
                   <option>{{ tBy({ en: 'Partnership', km: 'ភាពជាដៃគូ' }) }}</option>
@@ -110,12 +110,12 @@ useSeoMeta({ title: 'Contact — RamaGallery', description: 'Get in touch with t
 
 .contact-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 4rem; @media (max-width: 768px) { grid-template-columns: 1fr; gap: 2rem; } }
 
-.form-title, .info-title { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1.5rem; }
+.form-title, .info-title { font-family: var(--font-); font-size: 1.5rem; margin-bottom: 1.5rem; }
 .form-fields { display: flex; flex-direction: column; gap: 1.25rem; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; @media (max-width: 500px) { grid-template-columns: 1fr; } }
 .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
 .form-label { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-secondary); }
-.textarea { resize: vertical; min-height: 120px; font-family: var(--font-sans); }
+.textarea { resize: vertical; min-height: 120px; font-family: var(--font-400); }
 .submit-btn { width: 100%; justify-content: center; }
 
 .form-success { text-align: center; padding: 3rem 0; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; h3 { font-family: var(--font-display); font-size: 1.5rem; } p { color: var(--color-text-secondary); } }

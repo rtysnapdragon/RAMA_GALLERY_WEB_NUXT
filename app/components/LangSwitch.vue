@@ -37,14 +37,12 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
 const { locale, locales, setLocale } = useI18n()
-console.log(" Locale ==================> ", locales.value)
 
 const isOpen = ref(false)
 
 const localeCode = computed(() => locale.value)
 
 const current = computed(() => {
-  console.log("Locale ==================> ", locales.value.find((item) => item.code === locale.value) || locales.value[0])
   return (
     locales.value.find((item) => item.code === locale.value) || locales.value[0]
   )
@@ -107,18 +105,23 @@ onBeforeUnmount(() => {
   &__trigger {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     border: none;
     border-radius: 12px;
-    padding: 0.7rem 1rem;
+    padding: 0.3rem;
     cursor: pointer;
-    font-weight: 600;
     transition: all 0.25s ease;
     background: var(--card-bg);
     color: var(--text-color);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    img{
+      width: 20px !important;
+      height: 20px !important;
+    }
 
     &:hover {
+      background: var(--card-bg);
       transform: translateY(-1px);
     }
   }
@@ -133,11 +136,15 @@ onBeforeUnmount(() => {
 
   &__menu {
     position: absolute;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     top: calc(100% + 10px);
     right: 0;
-    min-width: 220px;
+    min-width: 100px;
     border-radius: 14px;
     overflow: hidden;
+    padding: 10px 0;
     z-index: 50;
     background: var(--card-bg);
     color: var(--text-color);
@@ -145,12 +152,24 @@ onBeforeUnmount(() => {
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
   }
 
+  &__flag {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50%;
+    img{
+      width: 20px !important;
+      height: 20px !important;
+      border-radius: 50%;
+    }
+  }
   &__item {
     width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.9rem 1rem;
+    
+    gap: 0.25rem;
+    padding: 0.2rem 1rem;
     border: none;
     background: transparent;
     color: inherit;

@@ -1,11 +1,5 @@
 <template>
-  <header class="navbar header backdrop-blur-lg" 
-    :class="{ 
-      scrolled: isScrolled ,
-      hidden: !navbarVisible,
-      hide: !visible,
-      // scrolled: !isTop
-    }">
+  <header class="header backdrop-blur-lg" :class="{ scrolled: isScrolled }">
     <div class="header-inner">
       <!-- Logo -->
       <NuxtLink :to="localePath('/')" class="logo" @click="ui.closeAll()">
@@ -55,11 +49,11 @@
         <!-- Theme toggle -->
         <button
           class="icon-btn"
-          :data-tooltip="themeStore.isDark ? t('common.light_mode') : t('common.dark_mode')"
-          @click="themeStore.toggle()"
+          :data-tooltip="ui.isDark ? t('common.light_mode') : t('common.dark_mode')"
+          @click="ui.toggleTheme()"
           aria-label="Toggle theme"
         >
-          <svg v-if="themeStore.isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg v-if="ui.isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
           </svg>
           <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
@@ -142,62 +136,42 @@
 <script setup>
 import navbarData from '~/assets/json/navbar.json'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const localePath = useLocalePath()
 const route = useRoute()
 const router = useRouter()
-const themeStore = useThemeStore()
-
 const ui = useUIStore()
 const auth = useAuthStore()
 
 const navItems = navbarData.items
+const isScrolled = ref(false)
 const userMenuOpen = ref(false)
+const currentLocale = computed(() => locale.value)
 
-/* ---------------------------------
-   useScroll composable
---------------------------------- */
-const { visible, isTop ,y} = useScroll()
-const lastY = ref(0)
-const navbarVisible = ref(true)
-const isScrolled = computed(() => y.value > 20)
+const isActive = (href) => route.path === href || route.path.startsWith(href + '/')
 
-watch(y, (currentY) => {
-  // top of page = always show
-  if (currentY <= 20) {
-    navbarVisible.value = true
-    lastY.value = currentY
-    return
-  }
-
-  // scrolling down = hide
-  if (currentY > lastY.value) {
-    navbarVisible.value = false
-  }
-
-  // scrolling up = show
-  if (currentY < lastY.value) {
-    navbarVisible.value = true
-  }
-
-  lastY.value = currentY
-})
-
-/* ---------------------------------
-   active route
---------------------------------- */
-const isActive = (href) => {
-  return route.path === href || route.path.startsWith(href + '/')
+const toggleLocale = () => {
+  const newLocale = locale.value === 'en' ? 'km' : 'en'
+  locale.value = newLocale
+  if (import.meta.client) localStorage.setItem('rama_locale', newLocale)
 }
 
-/* ---------------------------------
-   logout
---------------------------------- */
 const handleLogout = () => {
   auth.logout()
   userMenuOpen.value = false
   router.push(localePath('/'))
 }
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 20
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 
 </script>
 
@@ -209,53 +183,14 @@ const handleLogout = () => {
   right: 0;
   z-index: 100;
   height: var(--header-height);
-
-  transform: translateY(0);
-  transition:
-    transform 0.35s ease,
-    background-color 0.25s ease,
-    border-color 0.25s ease;
-
-  &.hidden {
-    transform: translateY(-100%);
-  }
+  transition: all var(--transition);
 
   &.scrolled {
     border-bottom: 1px solid var(--color-border);
-    background: rgba(var(--bg-rgb), 0.78);
-    backdrop-filter: blur(16px);
   }
 
   &:not(.scrolled) {
     background: transparent;
-  }
-}
-
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-
-  transform: translateY(0);
-  opacity: 1;
-
-  transition:
-    transform 0.38s cubic-bezier(.22,.61,.36,1),
-    opacity 0.28s ease,
-    background-color 0.25s ease,
-    box-shadow 0.25s ease;
-
-  &.hide {
-    transform: translateY(-110%);
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  &.scrolled {
-    backdrop-filter: blur(14px);
-    box-shadow: 0 10px 30px rgba(0,0,0,.08);
   }
 }
 

@@ -1,4 +1,17 @@
 {
+    "login": "ចូលប្រើប្រព័ន្ធ",
+    "or": "ឬ",
+    "email": "អ៊ីមែល",
+    "password": "ពាក្យសម្ងាត់",
+    "continue_with_google": "បន្តជាមួយ Google",
+    "overview": "ទិដ្ឋភាពទូទៅ",
+    "upload": "ផ្ទុកឡើង",
+    "artworks": "ស្នាដៃសិល្បៈ",
+    "analytics": "វិភាគ",
+    "ai_tools": "ឧបករណ៍ AI",
+    "profile": "ប្រវត្តិរូប",
+    "notifications": "ការជូនដំណឹង",
+    "settings": "ការកំណត់",
     "nav": {
         "home": "ទំព័រដើម",
         "gallery": "វិចិត្រសាល",
