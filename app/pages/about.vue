@@ -105,8 +105,10 @@ const values = [
   { icon: '🌏', title: { en: 'Global Reach', km: 'ការឈានដល់ពិភពលោក' }, desc: { en: 'We connect Cambodian creators with collectors, galleries, and art lovers worldwide.', km: 'យើងភ្ជាប់អ្នកបង្កើតខ្មែរជាមួយអ្នកប្រមូលទូទាំងពិភពលោក' } },
   { icon: '🛡️', title: { en: 'Integrity', km: 'ភាពស្មោះត្រង់' }, desc: { en: 'We protect artists\' intellectual property with the most advanced image security available.', km: 'យើងការពារកម្មសិទ្ធិបញ្ញារបស់វិចិត្រករ' } },
 ]
-
-useSeoMeta({ title: 'About — RamaGallery', description: 'The story behind Cambodia\'s premier art platform.' })
+usePageSeo(
+  'About — RamaGallery',
+  'The story behind Cambodia\'s premier art platform.'
+)
 </script>
 
 <style scoped lang="scss">

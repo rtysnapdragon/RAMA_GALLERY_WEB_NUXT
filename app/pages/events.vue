@@ -84,8 +84,10 @@ const featuredEvent = computed(() => events.find(e => e.featured))
 function formatDate(d: string) {
   return new Date(d).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })
 }
-
-useSeoMeta({ title: 'Events — RamaGallery', description: 'Cambodian art events and exhibitions.' })
+usePageSeo(
+  'Events — RamaGallery',
+  'Cambodian art events and exhibitions.'
+)
 </script>
 
 <style scoped lang="scss">

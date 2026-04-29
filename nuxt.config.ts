@@ -10,6 +10,9 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/i18n',
     '@pinia/nuxt',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
+    'nuxt-schema-org'
   ],
 
   css: ['~/assets/styles/main.scss'],
@@ -32,7 +35,11 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'en'
+      },
       title: 'RamaGallery — Cambodian Art Platform',
+      titleTemplate: '%s | RamaGallery',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -40,6 +47,10 @@ export default defineNuxtConfig({
         { property: 'og:title', content: 'RamaGallery' },
         { property: 'og:description', content: 'Discover Cambodian art — browse, collect, and connect.' },
         { property: 'og:type', content: 'website' },
+        {
+          name: 'theme-color',
+          content: '#111111'
+        },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
@@ -54,7 +65,37 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: 'page', mode: 'out-in' },
   },
-
+  robots: {
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/'
+      }
+    ],
+    sitemap: 'https://ramagallery.angkordragon.space/sitemap.xml'
+  },
+  sitemap: {
+    gzip: true,
+    autoLastmod: true,
+    sources: [
+      '/api/sitemap/artworks',
+      '/api/sitemap/artists'
+    ],
+    urls: [
+      '/',
+      '/gallery',
+      '/artists',
+      '/blogs',
+      '/events',
+      '/services',
+      '/about',
+      '/contact'
+    ]
+  },
+  site: {
+    url: 'https://ramagallery.angkordragon.space',
+    name: 'RamaGallery'
+  },
   typescript: {
     strict: true,
     shim: false,

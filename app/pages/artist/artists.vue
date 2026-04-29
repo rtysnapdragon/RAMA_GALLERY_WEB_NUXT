@@ -70,8 +70,34 @@ const filteredArtists = computed(() =>
 )
 
 const formatCount = (n: number) => n >= 1000 ? `${(n / 1000).toFixed(1)}k` : n
-
-useSeoMeta({ title: 'Artists — RamaGallery', description: 'Discover Cambodia\'s finest artists.' })
+useHead({
+  link: [
+    {
+      rel: 'alternate',
+      hreflang: 'en',
+      href: 'https://ramagallery.angkordragon.space/en'
+    },
+    {
+      rel: 'alternate',
+      hreflang: 'km',
+      href: 'https://ramagallery.angkordragon.space/km'
+    },
+    {
+      rel: 'canonical',
+      href: 'https://ramagallery.angkordragon.space/artists'
+    }
+  ]
+})
+useSeoMeta({ 
+  title: 'Artists — RamaGallery', 
+  description: 'Discover Cambodia\'s finest artists.',
+  ogTitle: 'Artists — RamaGallery',
+  ogDescription: 'Discover Cambodia\'s finest artists.',
+  ogImage: '/og-image.jpg',
+  ogUrl: 'https://ramagallery.com',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+ })
 </script>
 
 <style scoped lang="scss">

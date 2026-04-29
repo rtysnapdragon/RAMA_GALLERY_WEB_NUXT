@@ -85,8 +85,10 @@ const plans = [
     features: ['Everything in Artist', 'AI Studio (unlimited)', 'Team members (3)', 'Exhibition features', 'White-label options', 'Dedicated curator'],
   },
 ]
-
-useSeoMeta({ title: 'Services — RamaGallery', description: 'Tools and services for Cambodian artists.' })
+usePageSeo(
+  'Services — RamaGallery',
+  'Artist branding, AI tools, portfolio design.'
+)
 </script>
 
 <style scoped lang="scss">

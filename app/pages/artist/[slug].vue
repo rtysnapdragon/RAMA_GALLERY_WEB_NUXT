@@ -115,6 +115,7 @@ import pagesData from '~/assets/json/pages.json'
 const { t, locale } = useI18n()
 const route = useRoute()
 const auth = useAuthStore()
+const slug = route.params.slug
 
 useScrollAnimation()
 
@@ -130,9 +131,14 @@ const handleFollow = () => {
 }
 
 useSeoMeta({
-  title: () => artist.value ? `${artist.value.name} — RamaGallery` : 'Artist',
-  description: () => artist.value?.bio ?? '',
+  title: `${slug} Artist Profile`,
+  description: `Discover artworks and biography of ${slug}.`
+  // description: () => artist.value?.bio ?? '',
 })
+// useSeoMeta({
+//   title: () => artist.value ? `${artist.value.name} — RamaGallery` : 'Artist',
+//   description: () => artist.value?.bio ?? '',
+// })
 </script>
 
 <style scoped lang="scss">

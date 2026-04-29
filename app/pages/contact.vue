@@ -101,7 +101,11 @@ async function handleSubmit() {
   submitted.value = true
 }
 
-useSeoMeta({ title: 'Contact — RamaGallery', description: 'Get in touch with the RamaGallery team.' })
+usePageSeo(
+  'Contact — RamaGallery',
+  'Get in touch with the RamaGallery team.'
+)
+
 </script>
 
 <style scoped lang="scss">
