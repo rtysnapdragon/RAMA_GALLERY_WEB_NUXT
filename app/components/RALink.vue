@@ -3,19 +3,21 @@ defineProps<{
   to: string
   label: string
 }>()
+const localePath = useLocalePath()
 </script>
 
 <template>
   <NuxtLink
     :to="localePath(to)"
     class="nav-link"
+    :class="{ 'router-link-active': $route.path === localePath(to), 'router-link-exact-active': $route.path === localePath(to) }"
   >
+    <slot name="label"></slot>
     {{ label }}
   </NuxtLink>
 </template>
 
 <style lang="scss" scoped>
-const localePath = useLocalePath()
 .nav-link {
   color: var(--text);
   text-decoration: none;

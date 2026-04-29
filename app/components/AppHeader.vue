@@ -22,7 +22,7 @@
           class="nav-link gold-underline"
           :class="{ active: isActive(item.href) }"
         >
-          {{ $t(`nav.${item.key}`) }}
+          {{ $t(`${item.key}`) }}
         </NuxtLink>
       </nav>
 
@@ -31,7 +31,7 @@
         <!-- Search -->
         <button
           class="icon-btn"
-          :data-tooltip="t('nav.search')"
+          :data-tooltip="t('search')"
           @click="ui.toggleSearch()"
           aria-label="Search"
         >
@@ -71,7 +71,7 @@
         <button
           v-if="auth.isLoggedIn"
           class="icon-btn notif-btn"
-          :data-tooltip="t('nav.notifications')"
+          :data-tooltip="t('notifications')"
           @click="ui.toggleNotifPanel()"
           aria-label="Notifications"
         >
@@ -83,8 +83,8 @@
         <!-- <NavProfile /> -->
         <!-- Auth buttons -->
         <template v-if="!auth.isLoggedIn">
-          <NuxtLink :to="localePath('/login')" class="btn btn-ghost btn-sm">{{ t('nav.login') }}</NuxtLink>
-          <NuxtLink :to="localePath('/register')" class="btn btn-primary btn-sm">{{ t('nav.register') }}</NuxtLink>
+          <NuxtLink :to="localePath('/login')" class="btn btn-ghost btn-sm">{{ t('login') }}</NuxtLink>
+          <NuxtLink :to="localePath('/register')" class="btn btn-primary btn-sm">{{ t('register') }}</NuxtLink>
         </template>
 
         <!-- User avatar (logged in) -->
@@ -96,11 +96,11 @@
               class="user-avatar"
             />
             <div v-if="userMenuOpen" class="user-dropdown">
-              <NuxtLink :to="localePath('/dashboard')" @click="userMenuOpen = false">{{ t('nav.dashboard') }}</NuxtLink>
-              <NuxtLink :to="localePath('/profile')" @click="userMenuOpen = false">{{ t('nav.profile') }}</NuxtLink>
-              <NuxtLink :to="localePath('/settings')" @click="userMenuOpen = false">{{ t('common.edit') }}</NuxtLink>
+              <NuxtLink :to="localePath('/dashboard')" @click="userMenuOpen = false">{{ $t('dashboard') }}</NuxtLink>
+              <NuxtLink :to="localePath('/profile')" @click="userMenuOpen = false">{{ $t('profile') }}</NuxtLink>
+              <NuxtLink :to="localePath('/settings')" @click="userMenuOpen = false">{{ $t('edit') }}</NuxtLink>
               <hr />
-              <button @click="handleLogout">{{ t('nav.logout') }}</button>
+              <button @click="handleLogout">{{ $t('logout') }}</button>
             </div>
           </div>
         </template>
@@ -127,12 +127,12 @@
           class="mobile-nav-link"
           @click="ui.mobileMenuOpen = false"
         >
-          {{ t(`nav.${item.key}`) }}
+          {{ t(`${item.key}`) }}
         </NuxtLink>
         <div class="mobile-nav-actions">
-          <NuxtLink v-if="!auth.isLoggedIn" :to="localePath('/login')" class="btn btn-outline" @click="ui.mobileMenuOpen = false">{{ t('nav.login') }}</NuxtLink>
-          <NuxtLink v-if="!auth.isLoggedIn" :to="localePath('/register')" class="btn btn-primary" @click="ui.mobileMenuOpen = false">{{ t('nav.register') }}</NuxtLink>
-          <NuxtLink v-if="auth.isLoggedIn" :to="localePath('/dashboard')" class="btn btn-primary" @click="ui.mobileMenuOpen = false">{{ t('nav.dashboard') }}</NuxtLink>
+          <NuxtLink v-if="!auth.isLoggedIn" :to="localePath('/login')" class="btn btn-outline" @click="ui.mobileMenuOpen = false">{{ t('login') }}</NuxtLink>
+          <NuxtLink v-if="!auth.isLoggedIn" :to="localePath('/register')" class="btn btn-primary" @click="ui.mobileMenuOpen = false">{{ t('register') }}</NuxtLink>
+          <NuxtLink v-if="auth.isLoggedIn" :to="localePath('/dashboard')" class="btn btn-primary" @click="ui.mobileMenuOpen = false">{{ t('dashboard') }}</NuxtLink>
         </div>
       </div>
     </Transition>

@@ -1,27 +1,18 @@
 <template>
   <aside class="sidebar">
-
     <!-- LOGO -->
     <NuxtLink :to="localePath('/')" class="sidebar__logo">
       RamaGallery
     </NuxtLink>
-
     <!-- NAV -->
-    <nav class="sidebar__nav">
-
-      <NuxtLink
-        v-for="item in items"
-        :key="item.to"
-        :to="localePath(item.to)"
-        class="nav-item"
-        active-class="active"
-      >
-        <i :class="item.icon"></i>
-        <span>{{ $t(item.label) }}</span>
-      </NuxtLink>
-
+    <nav  class="sidebar__nav">
+      <RALink v-for="item in items" :key="item.to" :to="item.to" class="nav-item">
+        <template #label>
+          <i :class="item.icon"></i>
+          <span>{{ $t(item.label) }}</span>
+        </template>
+      </RALink>
     </nav>
-
   </aside>
 </template>
 <script setup lang="ts">

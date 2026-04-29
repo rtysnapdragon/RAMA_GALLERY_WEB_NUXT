@@ -57,10 +57,7 @@
 
 <script setup lang="ts">
 import pagesData from '~/assets/json/pages.json'
-import { useTBy } from '~/composables/useTBy'
-
 const { t } = useI18n()
-const { tBy } = useTBy()
 useScrollAnimation()
 
 const searchQuery = ref('')

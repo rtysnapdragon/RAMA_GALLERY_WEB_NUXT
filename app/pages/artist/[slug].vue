@@ -112,10 +112,7 @@
 
 <script setup lang="ts">
 import pagesData from '~/assets/json/pages.json'
-import { useTBy } from '~/composables/useTBy'
-
 const { t, locale } = useI18n()
-const { tBy } = useTBy()
 const route = useRoute()
 const auth = useAuthStore()
 

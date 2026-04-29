@@ -101,9 +101,9 @@ onBeforeUnmount(() => {
 .lang-switch {
   position: relative;
   display: inline-block;
+  align-items: center;
 
   &__trigger {
-    display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;

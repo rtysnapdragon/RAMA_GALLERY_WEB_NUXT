@@ -1,5 +1,5 @@
 <template>
-<div class="min-h-screen flex bg-neutral-950 text-white">
+<div class="min-h-screen flex bg-gray-100 dark:bg-neutral-950">
 
   <DashboardSidebar />
 
