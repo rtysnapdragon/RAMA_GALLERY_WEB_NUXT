@@ -124,7 +124,7 @@
 
 <script setup>
 const route = useRoute()
-const localePath = useLocalePath()
+
 const slug = route.params.slug
 console.log(" SLUG=-----> ", slug); 
 

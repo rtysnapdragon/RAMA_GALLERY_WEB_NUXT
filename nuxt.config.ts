@@ -1,10 +1,11 @@
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import getComponentPaths from './app/utils/getComponentPaths'
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   future: { compatibilityVersion: 4 },
-
+  components: getComponentPaths(),
   modules: [
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
@@ -61,9 +62,21 @@ export default defineNuxtConfig({
           href: 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Noto+Serif+Khmer:wght@300;400;500&display=swap',
         },
         { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css' },
+        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' },
+        { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css' },
+        { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css' },
+        { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/phosphor-icons@1.4.2/src/css/icons.css' },
+        // { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css' },
+        // { rel: 'stylesheet', href: 'https://unpkg.com/@fortawesome/fontawesome-free@6.5.1/css/all.min.css' }
       ],
     },
     pageTransition: { name: 'page', mode: 'out-in' },
+  },
+  runtimeConfig: {
+    public: {
+      apiBase: 'http://127.0.0.1:52467',
+      wsBase: 'ws://127.0.0.1:8000'
+    }
   },
   robots: {
     rules: [

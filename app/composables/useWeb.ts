@@ -1,23 +1,28 @@
 /**
- * useWeb — RamaGallery HTTP composable
- * Wraps fetch with auth token injection, loading/error state, and auto-refresh.
- *
- * GET  → no body sent
- * POST → body required (create / update / list with filters)
+ * useWeb — RamaGallery HTTP composable (Axios version)
  */
 
 import { ref, readonly } from 'vue'
+import axios, { type AxiosRequestConfig } from 'axios'
 
 export interface UseWebOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
   body?: Record<string, unknown>
   auth?: boolean
   immediate?: boolean
+  headers?: Record<string, string>
 }
 
 export function useWeb<T = unknown>(url: string, options: UseWebOptions = {}) {
   const config = useRuntimeConfig()
-  const { method = 'GET', body, auth = true, immediate = true } = options
+
+  const {
+    method = 'GET',
+    body,
+    auth = true,
+    immediate = true,
+    headers: customHeaders,
+  } = options
 
   const data = ref<T | null>(null)
   const error = ref<string | null>(null)
@@ -30,57 +35,59 @@ export function useWeb<T = unknown>(url: string, options: UseWebOptions = {}) {
     return null
   }
 
+  const instance = axios.create({
+    baseURL: config.public.apiBase,
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  })
+
   const execute = async (overrideBody?: Record<string, unknown>) => {
     loading.value = true
     error.value = null
 
-    const baseUrl = config.public.apiBase
-    const fullUrl = url.startsWith('http') ? url : `${baseUrl}${url}`
-
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    }
-
-    if (auth) {
-      const token = getToken()
-      if (token) headers['Authorization'] = `Bearer ${token}`
-    }
-
-    const fetchOptions: RequestInit = {
-      method,
-      headers,
-    }
-
-    // GET deletes body; POST/PUT/PATCH include it
-    if (method !== 'GET' && method !== 'DELETE') {
-      const payload = overrideBody ?? body
-      if (payload) fetchOptions.body = JSON.stringify(payload)
-    }
-
     try {
-      const response = await fetch(fullUrl, fetchOptions)
+      const headers: Record<string, string> = {
+        ...(customHeaders || {}),
+      }
 
-      if (response.status === 401) {
-        // Clear stale token and redirect
-        if (import.meta.client) localStorage.removeItem('rama_token')
+      if (auth) {
+        const token = getToken()
+        if (token) {
+          headers.Authorization = `Bearer ${token}`
+        }
+      }
+
+      const requestConfig: AxiosRequestConfig = {
+        url,
+        method,
+        headers,
+      }
+
+      const payload = overrideBody ?? body
+
+      if (method !== 'GET' && method !== 'DELETE' && payload) {
+        requestConfig.data = payload
+      }
+
+      const response = await instance.request<T>(requestConfig)
+
+      data.value = response.data
+    } catch (err: any) {
+      if (err?.response?.status === 401) {
+        if (import.meta.client) {
+          localStorage.removeItem('rama_token')
+        }
         error.value = 'Unauthorized. Please sign in.'
         return
       }
 
-      if (!response.ok) {
-        const errData = await response.json().catch(() => ({}))
-        error.value = errData.detail ?? errData.message ?? `Error ${response.status}`
-        return
-      }
-
-      if (response.status === 204) {
-        data.value = null
-      } else {
-        data.value = await response.json()
-      }
-    } catch (e) {
-      error.value = e instanceof Error ? e.message : 'Network error'
+      error.value =
+        err?.response?.data?.detail ||
+        err?.response?.data?.message ||
+        err.message ||
+        'Network error'
     } finally {
       loading.value = false
     }

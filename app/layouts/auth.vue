@@ -21,8 +21,6 @@
 </template>
 
 <script setup>
-import LangSwitch from '~/components/LangSwitch.vue';
-
 useHead({
   bodyAttrs: { class: 'bg-gray-900' }
 })

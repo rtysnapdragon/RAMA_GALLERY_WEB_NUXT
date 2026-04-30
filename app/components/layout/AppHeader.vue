@@ -89,20 +89,7 @@
 
         <!-- User avatar (logged in) -->
         <template v-else>
-          <div class="user-menu" @click.stop="userMenuOpen = !userMenuOpen">
-            <img
-              :src="auth.user?.avatar ?? ''"
-              :alt="auth.displayName"
-              class="user-avatar"
-            />
-            <div v-if="userMenuOpen" class="user-dropdown">
-              <NuxtLink :to="localePath('/dashboard')" @click="userMenuOpen = false">{{ $t('dashboard') }}</NuxtLink>
-              <NuxtLink :to="localePath('/profile')" @click="userMenuOpen = false">{{ $t('profile') }}</NuxtLink>
-              <NuxtLink :to="localePath('/settings')" @click="userMenuOpen = false">{{ $t('edit') }}</NuxtLink>
-              <hr />
-              <button @click="handleLogout">{{ $t('logout') }}</button>
-            </div>
-          </div>
+          <div class="profile-user-container"><ProfileUser /></div>
         </template>
 
         <!-- Mobile hamburger -->
@@ -143,7 +130,7 @@
 import navbarData from '~/assets/json/navbar.json'
 
 const { t } = useI18n()
-const localePath = useLocalePath()
+
 const route = useRoute()
 const router = useRouter()
 const themeStore = useThemeStore()

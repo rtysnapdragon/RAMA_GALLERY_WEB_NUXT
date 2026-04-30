@@ -62,7 +62,7 @@
 <script setup lang="ts">
 import footerData from '~/assets/json/footer.json'
 
-const localePath = useLocalePath()
+
 
 // Inline SVG social icons
 const socialIcons: Record<string, any> = {

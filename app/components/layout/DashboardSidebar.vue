@@ -16,7 +16,7 @@
   </aside>
 </template>
 <script setup lang="ts">
-const localePath = useLocalePath()
+
 
 const items = [
   { to: '/dashboard', label: 'overview', icon: 'ri-dashboard-line' },

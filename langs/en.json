@@ -112,5 +112,7 @@
     "copy_link": "Copy link",
     "copied": "Copied!",
     "dark_mode": "Dark mode",
-    "light_mode": "Light mode"
+    "light_mode": "Light mode",
+    "mark_all_read": "Mark all read",
+    "no_notifications": "No notifications yet"
 }

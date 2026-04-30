@@ -137,7 +137,7 @@
 import navbarData from '~/assets/json/navbar.json'
 
 const { t, locale } = useI18n()
-const localePath = useLocalePath()
+
 const route = useRoute()
 const router = useRouter()
 const ui = useUIStore()

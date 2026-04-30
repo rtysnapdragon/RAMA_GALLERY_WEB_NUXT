@@ -7,9 +7,9 @@
   <!-- Panel -->
   <aside :class="['notif-panel', { open: ui.notifPanelOpen }]" aria-label="Notifications">
     <div class="notif-header">
-      <h3 class="notif-title">{{ t('nav.notifications') }}</h3>
+      <h3 class="notif-title">{{ t('notifications') }}</h3>
       <div class="notif-header-actions">
-        <button class="btn btn-ghost btn-xs" @click="ui.markAllRead()">Mark all read</button>
+        <button class="btn btn-ghost btn-xs" @click="ui.markAllRead()">{{ t('mark_all_read') }}</button>
         <button class="icon-close" @click="ui.notifPanelOpen = false" aria-label="Close">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <path d="M18 6 6 18M6 6l12 12"/>
@@ -26,11 +26,11 @@
         @click="ui.markRead(n.id)"
       >
         <div class="notif-icon" :class="`type-${n.type}`">
-          <span v-if="n.type === 'like'">♥</span>
-          <span v-else-if="n.type === 'follow'">+</span>
-          <span v-else-if="n.type === 'comment'">💬</span>
-          <span v-else-if="n.type === 'save'">🔖</span>
-          <span v-else>✦</span>
+          <span v-if="n.type === 'like'"><i class="bi bi-heart-fill"></i></span>
+          <span v-else-if="n.type === 'follow'"><i class="ri-user-fill"></i></span>
+          <span v-else-if="n.type === 'comment'"><i class="bi bi-chat-dots-fill"></i></span>
+          <span v-else-if="n.type === 'save'"><i class="bi bi-bookmark-fill"></i></span>
+          <span v-else><i class="bi bi-star-fill"></i></span>
         </div>
         <div class="notif-body">
           <p class="notif-msg">{{ n.message }}</p>
@@ -40,7 +40,7 @@
       </div>
 
       <div v-if="ui.notifications.length === 0" class="notif-empty">
-        <p>No notifications yet</p>
+        <p>{{ t('no_notifications') }}</p>
       </div>
     </div>
   </aside>
@@ -101,9 +101,8 @@ const formatTime = (iso: string) => {
 }
 
 .notif-title {
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 500;
+  font-family: var(--font-200);
+  font-size: 1rem;
   color: var(--color-text-primary);
 }
 

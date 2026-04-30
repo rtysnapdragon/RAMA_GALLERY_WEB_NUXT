@@ -1,28 +1,12 @@
-<script setup>
-definePageMeta({
-  layout: 'auth'
-})
 
-const auth = useAuthStore()
-
-const email = ref('')
-const password = ref('')
-
-const localePath = useLocalePath()
-
-const submit = async () => {
-  await auth.login(email.value, password.value)
-  navigateTo(localePath('/dashboard'))
-}
-</script>
 
 <template>
   <div class="auth__form">
 
     <h2 class="auth__title">{{ $t('login')}}</h2>
 
-    <input v-model="email" :placeholder="$t('email')" class="input" />
-    <input v-model="password" type="password" :placeholder="$t('password')" class="input" />
+    <input v-model="UsernameOrEmail" :placeholder="$t('username_or_email')" class="input" />
+    <input v-model="Password" type="password" :placeholder="$t('password')" class="input" />
 
     <button @click="submit" class="btn-primary">
       {{ $t('login')}}
@@ -36,6 +20,24 @@ const submit = async () => {
 
   </div>
 </template>
+<script setup>
+definePageMeta({
+  layout: 'auth'
+})
+
+const auth = useAuthStore()
+
+const UsernameOrEmail = ref('')
+const Password = ref('')
+
+const submit = async () => {
+  const {ok} = await auth.login(UsernameOrEmail.value, Password.value)
+  console.log("Login response :::::::::::", ok)
+  if (ok) {
+    await navigateTo(localePath('/'))
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .input {

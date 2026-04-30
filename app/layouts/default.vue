@@ -4,7 +4,8 @@
     <AppHeader />
 
     <!-- Notification slide panel -->
-    <NotifPanel />
+    <!-- <NotifPanel /> -->
+    <NotifPanel1 />
 
     <!-- Search overlay -->
     <SearchOverlay />
