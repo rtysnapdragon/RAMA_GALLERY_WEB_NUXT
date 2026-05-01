@@ -46,12 +46,44 @@
 
     <!-- Tabs -->
     <div class="notif-tabs">
-      <button class="tab" :class="{ active: notification.filter === 'all' }"  @click="notification.setFilter('all')" > {{ $t('all') }} </button>
-      <button class="tab" :class="{ active: notification.filter === 'unread' }" @click="notification.setFilter('unread')">{{ $t('unread') }}</button>
-      <button class="tab" :class="{ active: notification.filter === 'read' }" @click="notification.setFilter('read')">{{ $t('read') }}</button>
-      <!-- <button class="tab"  @click="notification.setFilter('mentions')" > {{ $t('mentions') }} </button>
-      <button class="tab" @click="notification.setFilter('system')" > {{ $t('system') }} </button> -->
-    </div> 
+
+      <button
+        class="tab"
+        :class="{ active: notification.filter === 'all' }"
+        @click="notification.setFilter('all')"
+      >
+        {{ $t('all') }}
+        <span class="count">{{ notification.typeCounts.all }}</span>
+      </button>
+
+      <button
+        class="tab"
+        :class="{ active: notification.filter === 'unread' }"
+        @click="notification.setFilter('unread')"
+      >
+        {{ $t('unread') }}
+        <span class="count">{{ notification.typeCounts.unread }}</span>
+      </button>
+
+      <button
+        class="tab"
+        :class="{ active: notification.filter === 'read' }"
+        @click="notification.setFilter('read')"
+      >
+        {{ $t('read') }}
+        <span class="count">{{ notification.typeCounts.read }}</span>
+      </button>
+<!-- 
+      <button
+        class="tab"
+        :class="{ active: notification.filter === 'system' }"
+        @click="notification.setFilter('system')"
+      >
+        {{ $t('system') }}
+        <span class="count">{{ notification.typeCounts.system }}</span>
+      </button> -->
+
+    </div>
     <!-- List -->
     <div class="notif-list">
       <button

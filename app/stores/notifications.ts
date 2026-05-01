@@ -17,7 +17,8 @@ type FilterType =
     | 'all'
     | 'unread'
     | 'read'
-    | 'mentions'
+    | 'likes'
+    | 'comments'
     | 'system'
 
 interface NotificationState {
@@ -44,8 +45,8 @@ export const useNotificationStore = defineStore('notifications', {
         notifSocket: null,
         notifLoading: false,
         notifToken: null,
-        // filter: 'all' as 'all' | 'unread' | 'read' | 'mentions' | 'system'
-        filter: 'all',
+        filter: 'all' as 'all' | 'unread' | 'read' | 'mentions' | 'system',
+        // filter: 'all',
         reconnectTimer: null,
         pollingTimer: null,
         initialized: false,
@@ -64,23 +65,40 @@ export const useNotificationStore = defineStore('notifications', {
                 ? state.notifications.filter(n => !n.IsRead).length
                 : 0,
 
-        filteredNotifications: (state) => {
-            const list = Array.isArray(state.notifications)
-                ? state.notifications
-                : []
-            if (state.filter === 'unread') {
-                return list.filter((n: NotificationItem) => !n.IsRead)
+        readCount: (state) => state.notifications.filter(n => n.IsRead).length,
+
+        allCount: (state) => state.notifications.length,
+
+        typeCounts: (state) => {
+            return {
+                all: state.notifications.length,
+                unread: state.notifications.filter(n => !n.IsRead).length,
+                read: state.notifications.filter(n => n.IsRead).length,
+                likes: state.notifications.filter(n => n.Type === 'like').length,
+                comments: state.notifications.filter(n => n.Type === 'comment').length,
+                system: state.notifications.filter(n => n.Type === 'system').length,
             }
-            if (state.filter === 'read') {
-                return list.filter((n: NotificationItem) => n.IsRead)
+        },
+        filteredNotifications(state) {
+            switch (state.filter) {
+                case 'unread':
+                    return state.notifications.filter(n => !n.IsRead)
+
+                case 'read':
+                    return state.notifications.filter(n => n.IsRead)
+
+                case 'system':
+                    return state.notifications.filter(n => n.Type === 'system')
+
+                case 'likes':
+                    return state.notifications.filter(n => n.Type === 'like')
+
+                case 'comments':
+                    return state.notifications.filter(n => n.Type === 'comment')
+
+                default:
+                    return state.notifications
             }
-            if (state.filter === 'mentions') {
-                return list.filter((n: NotificationItem) => n.Message?.includes('@'))
-            }
-            if (state.filter === 'system') {
-                return list.filter((n: NotificationItem) => n.Type === 'system')
-            }
-            return list
         }
     },
 
