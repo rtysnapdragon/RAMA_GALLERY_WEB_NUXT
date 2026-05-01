@@ -20,9 +20,9 @@
     <!-- Header -->
     <div class="notif-header">
       <div>
-        <h3 class="notif-title">{{ t('notifications') }}</h3>
+        <h3 class="notif-title">{{ $t('notifications') }}</h3>
         <p class="notif-subtitle">
-          {{ notification.unreadCount === 1 ? '1 unread' : 'unread notifications' }}
+          {{ notification.unreadCount === 1 ? '1 ' + $t('unread') : $t('unread_notifications') }}
         </p>
       </div>
 
@@ -46,13 +46,12 @@
 
     <!-- Tabs -->
     <div class="notif-tabs">
-      <button class="tab active"  @click="notification.setFilter('all')" > {{ $t('all') }} </button>
-      <button class="tab" @click="notification.setFilter('unread')">{{ $t('unread') }}</button>
-      <button class="tab" @click="notification.setFilter('read')">{{ $t('read') }}</button>
-      <button class="tab"  @click="notification.setFilter('mentions')" > {{ $t('mentions') }} </button>
-      <button class="tab" @click="notification.setFilter('system')" > {{ $t('system') }} </button>
+      <button class="tab" :class="{ active: notification.filter === 'all' }"  @click="notification.setFilter('all')" > {{ $t('all') }} </button>
+      <button class="tab" :class="{ active: notification.filter === 'unread' }" @click="notification.setFilter('unread')">{{ $t('unread') }}</button>
+      <button class="tab" :class="{ active: notification.filter === 'read' }" @click="notification.setFilter('read')">{{ $t('read') }}</button>
+      <!-- <button class="tab"  @click="notification.setFilter('mentions')" > {{ $t('mentions') }} </button>
+      <button class="tab" @click="notification.setFilter('system')" > {{ $t('system') }} </button> -->
     </div> 
-
     <!-- List -->
     <div class="notif-list">
       <button
@@ -84,13 +83,13 @@
             <span class="notif-time">
               {{ notification.formatTime(n.CreatedAt) }}
             </span>
-
+<!-- 
             <span
               v-if="n.actionLabel"
               class="notif-action"
             >
               {{ $t(n.ActionLabel) }}
-            </span>
+            </span> -->
           </div>
         </div>
 
@@ -232,26 +231,115 @@ const formatTime = (iso:string) => {
   display:grid;
   place-items:center;
 }
-
 .notif-tabs{
   display:flex;
-  gap:.5rem;
-  padding:.75rem 1rem;
+  gap:.55rem;
+  padding:.8rem 1rem;
   border-bottom:1px solid var(--color-border,#ececec);
+  overflow-x:auto;
 }
 
 .tab{
-  padding:.45rem .8rem;
+  position:relative;
+  padding:.62rem 1rem;
+  min-width:88px;
   border-radius:999px;
-  font-size:.75rem;
+  font-size:.78rem;
+  font-weight:700;
+  white-space:nowrap;
   background:transparent;
+  color:var(--color-text-primary);
+  transition:
+    color .28s ease,
+    transform .28s ease,
+    background .28s ease;
+  overflow:hidden;
 }
 
+/* horizontal fill animation */
+.tab::before{
+  content:'';
+  position:absolute;
+  // inset:0;
+  border-radius:999px;
+  background:linear-gradient(90deg,#6366f1,#8b5cf6,#ec4899);
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  z-index:0;
+  background:linear-gradient(90deg,#00ffff,#4cff4c,#ffff4c); 
+}
+
+/* vertical glow animation */
+.tab::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:0;
+  height:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+  transform:translate(-50%,-50%);
+  transition:
+    width .35s ease,
+    height .35s ease,
+    opacity .35s ease;
+  opacity:0;
+  z-index:1;
+}
+
+.tab{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate; /* important */
+}
+
+.tab span{
+  position:relative;
+  z-index:3;
+}
+
+.tab::before{
+  z-index:1;
+}
+
+.tab::after{
+  z-index:2;
+}
+.tab:hover{
+  transform:translateY(-2px);
+}
+
+/* ACTIVE */
 .tab.active{
-  background:#111827;
-  color:#fff;
+  color:var(--color-text-primary);
+  background-color: var(--color-bg-card-hover);
+  box-shadow:0 10px 25px rgba(99,102,241,.22);
 }
 
+// .tab.active::before{
+//   transform:scaleX(1);
+// }
+
+// .tab.active::after{
+//   width:160%;
+//   height:220%;
+//   opacity:1;
+// }
+
+// /* click bounce */
+// .tab:active{
+//   transform:scale(.96);
+// }
+
+.notif-tabs::-webkit-scrollbar{
+  height:6px;
+}
+.notif-tabs::-webkit-scrollbar-thumb{
+  border-radius:999px;
+  background:rgba(100,116,139,.28);
+}
 .notif-list{
   overflow:auto;
   flex:1;

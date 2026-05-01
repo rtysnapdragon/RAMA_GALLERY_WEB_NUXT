@@ -8,8 +8,9 @@
     <input v-model="UsernameOrEmail" :placeholder="$t('username_or_email')" class="input" />
     <input v-model="Password" type="password" :placeholder="$t('password')" class="input" />
 
-    <button @click="submit" class="btn-primary">
-      {{ $t('login')}}
+    <button @click="submit" class="btn-primary" :class="{ 'opacity-50 cursor-not-allowed': loading }">
+      <i class="ri-loader-2-fill animate-spin" v-if="loading"></i>
+      {{ loading ? 'Logging in...' : $t('login')}}
     </button>
 
     <div class="auth__divider">{{ $t('or')}}</div>
@@ -24,17 +25,24 @@
 definePageMeta({
   layout: 'auth'
 })
-
+const loading = ref(false)
 const auth = useAuthStore()
 
 const UsernameOrEmail = ref('')
 const Password = ref('')
 
 const submit = async () => {
-  const {ok} = await auth.login(UsernameOrEmail.value, Password.value)
-  console.log("Login response :::::::::::", ok)
-  if (ok) {
-    await navigateTo(localePath('/'))
+  try{
+    loading.value = true
+    const {ok} = await auth.login(UsernameOrEmail.value, Password.value)
+    console.log("Login response :::::::::::", ok)
+    if (ok) {
+      await navigateTo(localePath('/'))
+    }
+  }catch(e){
+    console.error(e)
+  }finally{
+    loading.value = false
   }
 }
 </script>

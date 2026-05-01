@@ -74,8 +74,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: 'http://127.0.0.1:52467',
-      wsBase: 'ws://127.0.0.1:8000'
+      apiBase: 'http://127.0.0.1:52467/',
+      wsBase: 'ws://127.0.0.1:8000/'
     }
   },
   robots: {

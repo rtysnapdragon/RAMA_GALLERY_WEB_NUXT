@@ -2,23 +2,24 @@
   <div class="transition-colors duration-300">
     <NuxtLayout>
       <NuxtPage />
+
+      <!-- Global Components -->
       <FloatingChat />
-      <!-- <FloatingTelegramChat /> -->
       <NotificationPanel />
     </NuxtLayout>
-    <!-- <UNotifications />
-    <ul>
-      <li v-for="todo in todos" :key="todo.id">{{ todo.name }}</li>
-    </ul> -->
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref, onMounted, watch } from 'vue'
 import { useHead } from '#imports'
-import { ref, onMounted } from 'vue'
+
 const auth = useAuthStore()
 const notification = useNotificationStore()
 
+/* ------------------------------------------
+SEO TITLE
+------------------------------------------ */
 useHead({
   titleTemplate: (titleChunk) =>
     titleChunk
@@ -26,25 +27,72 @@ useHead({
       : 'RamaGallery - Artist Portfolio Platform'
 })
 
-const todos = ref([])
+/* ------------------------------------------
+OPTIONAL SUPABASE TEST
+(remove if unused)
+------------------------------------------ */
+const todos = ref<any[]>([])
 
 async function getTodos() {
-  const { data } = await supabase.from('todos').select()
-  todos.value = data || []
+  try {
+    const { data } = await supabase
+      .from('todos')
+      .select()
+
+    todos.value = data || []
+  } catch (error) {
+    console.log(error)
+  }
 }
-onMounted(() => {
+
+onMounted( async () => {
+   auth.initFromStorage()
+
+  if (auth.token) {
+    await notification.init(auth.token)
+  }
   getTodos()
 })
 
+/* ------------------------------------------
+GLOBAL AUTH -> NOTIFICATION AUTO SYNC
+------------------------------------------ */
 watch(
   () => auth.token,
-  async (token) => {
-    if (token) {
+  async (token, oldToken) => {
+    /* login / refresh token */
+    if (token && token !== oldToken) {
       await notification.init(token)
-    } else {
+      return
+    }
+
+    /* logout */
+    if (!token) {
       notification.reset()
     }
   },
   { immediate: true }
 )
+
+/* ------------------------------------------
+TAB ACTIVE = REFRESH
+------------------------------------------ */
+if (import.meta.client) {
+  window.addEventListener('focus', () => {
+    if (auth.token) {
+      notification.fetchNotifications()
+    }
+  })
+
+  window.addEventListener('online', () => {
+    if (auth.token) {
+      notification.connectRealtime()
+      notification.fetchNotifications()
+    }
+  })
+
+  window.addEventListener('beforeunload', () => {
+    notification.cleanup()
+  })
+}
 </script>

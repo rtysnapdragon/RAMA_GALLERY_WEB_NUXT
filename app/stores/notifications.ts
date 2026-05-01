@@ -10,7 +10,8 @@ export interface NotificationItem {
     IsRead: boolean
     CreatedAt: string
     Href?: string
-    Cover?: string
+    Cover?: string,
+    notifications?: string[]
 }
 type FilterType =
     | 'all'
@@ -27,9 +28,14 @@ interface NotificationState {
     notifToken: string | null
     // filter: 'all' | 'unread' | 'read' | 'mentions' | 'system',
     filter: FilterType
-    reconnectTimer: any
-    pollingTimer: any
+    // reconnectTimer: any
+    // pollingTimer: any
+    reconnectTimer: ReturnType<typeof setTimeout> | null
+    pollingTimer: ReturnType<typeof setInterval> | null
+
     initialized: boolean
+    reconnectAttempts: number
+    maxReconnectAttempts: number
 }
 
 export const useNotificationStore = defineStore('notifications', {
@@ -43,6 +49,8 @@ export const useNotificationStore = defineStore('notifications', {
         reconnectTimer: null,
         pollingTimer: null,
         initialized: false,
+        reconnectAttempts: 0,
+        maxReconnectAttempts: 10,
     }),
 
     /* ----------------------------------
@@ -61,16 +69,16 @@ export const useNotificationStore = defineStore('notifications', {
                 ? state.notifications
                 : []
             if (state.filter === 'unread') {
-                return list.filter(n => !n.IsRead)
+                return list.filter((n: NotificationItem) => !n.IsRead)
             }
             if (state.filter === 'read') {
-                return list.filter(n => n.IsRead)
+                return list.filter((n: NotificationItem) => n.IsRead)
             }
             if (state.filter === 'mentions') {
-                return list.filter(n => n.Message.includes('@'))
+                return list.filter((n: NotificationItem) => n.Message?.includes('@'))
             }
             if (state.filter === 'system') {
-                return list.filter(n => n.Type === 'system')
+                return list.filter((n: NotificationItem) => n.Type === 'system')
             }
             return list
         }
@@ -154,26 +162,30 @@ export const useNotificationStore = defineStore('notifications', {
         ======================= */
 
         async fetchNotifications() {
-            if (!this.notifToken)
+            if (!this.notifToken) {
+                console.log('No notification token')
                 return
+            }
             try {
                 this.notifLoading = true
                 console.log('this.notifToken: ', this.notifToken)
 
                 const config = useRuntimeConfig()
 
-                const data = await useWeb<NotificationItem[]>(
+                const { data, error } = await useWeb<NotificationItem[]>(
                     `${config.public.apiBase}api/notifications?take=100`,
                     {
+                        method: 'POST',
                         headers: {
                             Authorization: `Bearer ${this.notifToken}`
                         }
                     }
                 )
-
-                this.notifications = data || []
-            } catch (e) {
-                console.error('fetchNotifications', e)
+                console.log('data============>:', data)
+                console.log('data.value============>:', data.value)
+                this.notifications = data.value || []
+            } catch (e: any) {
+                console.log('fetchNotifications', e.value?.Message)
             } finally {
                 this.notifLoading = false
             }
@@ -198,6 +210,8 @@ export const useNotificationStore = defineStore('notifications', {
         ======================= */
 
         async markRead(id: number) {
+            console.log('markRead=============>:', id)
+
             const row = this.notifications.find(n => n.Id === id)
 
             if (row) row.IsRead = true
@@ -250,11 +264,17 @@ export const useNotificationStore = defineStore('notifications', {
         ======================= */
 
         connectRealtime() {
-            if (!import.meta.client) return
-            if (!this.notifToken) return
+            if (!import.meta.client) {
+                console.log('Not in client')
+                return
+            }
+            if (!this.notifToken) {
+                console.log('No notification token')
+                return
+            }
             // if (this.notifSocket) return
             if (
-                this.socket &&
+                // this.socket &&
                 this.notifSocket &&
                 this.notifSocket.readyState ===
                 WebSocket.OPEN
@@ -262,23 +282,21 @@ export const useNotificationStore = defineStore('notifications', {
 
             const config = useRuntimeConfig()
 
-            console.log('wsBase: ', config.public.wsBase)
+            console.log('wsBase =============> : ', config.public.wsBase)
 
             const ws = new WebSocket(
                 `${config.public.wsBase}/ws/notifications/?token=${this.notifToken}`
             )
 
             ws.onopen = () => {
-                console.log(
-                    'Notification WS connected'
-                )
+                console.log('Notification WS connected')
+                this.reconnectAttempts = 0
             }
 
             ws.onmessage = (event) => {
                 try {
                     const payload = JSON.parse(event.data)
                     this.insertRealtime(payload)
-                    this.notifications.unshift(payload)
 
                 } catch (error) {
                     console.log('onmessage error ====>', error)
@@ -289,12 +307,20 @@ export const useNotificationStore = defineStore('notifications', {
 
             ws.onclose = () => {
                 this.notifSocket = null
+                if (!this.notifToken) return
+                if (this.reconnectAttempts >= 5) {
+                    console.log('WS reconnect stopped')
+                    return
+                }
+
+                this.reconnectAttempts++
+
                 this.reconnectTimer =
                     setTimeout(
                         () => {
                             this.connectRealtime()
                         },
-                        5000
+                        3000
                     )
             }
             this.notifSocket = ws
@@ -302,9 +328,8 @@ export const useNotificationStore = defineStore('notifications', {
 
         disconnectRealtime() {
             if (this.reconnectTimer) {
-                clearTimeout(
-                    this.reconnectTimer
-                )
+                clearTimeout(this.reconnectTimer)
+                this.reconnectTimer = null
             }
 
             if (this.notifSocket) {
@@ -370,8 +395,7 @@ export const useNotificationStore = defineStore('notifications', {
 
             this.startPolling()
 
-            this.initialized =
-                true
+            this.initialized = true
         },
 
         /* ------------------------------
@@ -388,14 +412,7 @@ export const useNotificationStore = defineStore('notifications', {
             this.filter = 'all'
 
             this.initialized = false
-        },
-
-        async init1(token: string) {
-            this.setToken(token)
-
-            await this.fetchNotifications()
-
-            this.connectRealtime()
+            this.reconnectAttempts = 0
         }
     }
 })

@@ -109,59 +109,60 @@
   </div>
 </section>
 </template>
+
 <script setup lang="ts">
+const config = useRuntimeConfig()
 const localePath = useLocalePath()
 
 interface Artwork {
-  Id: number
-  Title: string
-  Slug: string
-  Artist: string
-  Image: string
+  Id:number
+  Title:string
+  Slug:string
+  Artist:string
+  Image:string
 
-  LikeCount: number
-  SaveCount: number
-  ShareCount: number
-  ViewCount: number
+  LikeCount:number
+  SaveCount:number
+  ShareCount:number
+  ViewCount:number
 
-  IsLiked: boolean
-  IsSaved: boolean
+  IsLiked:boolean
+  IsSaved:boolean
 }
 
 const artworks = ref<Artwork[]>([])
 const burst = ref<Record<number, boolean>>({})
 
-/**
- * debounce timers per artwork
- */
-const likeTimers = ref<Record<number, ReturnType<typeof setTimeout>>>({})
-const saveTimers = ref<Record<number, ReturnType<typeof setTimeout>>>({})
-
 /* ------------------------------------------
 LOAD
 ------------------------------------------ */
 const fetchArtworks = async () => {
-  const { data, error } = await useWeb(
-    'api/v1/artworks',
-    { method: 'POST' }
-  )
+  try {
+    // ✅ Await useWeb so data is resolved before you use it
+    const { data, error } = await useWeb<Artwork[]>('api/v1/artworks', {
+      method: 'POST',
+    })
 
-  if (error.value) {
-    console.error(error.value)
-    return
+    if (error.value) {
+      console.error('Error:', error.value)
+      return
+    }
+
+    console.log('Artworks list =>>', data.value) // ✅ Now logs the actual array
+    artworks.value = data.value                  // ✅ Assign .value, not the ref itself
+  } catch (e) {
+    console.error(e)
   }
-
-  artworks.value = data.value || []
 }
 
 onMounted(fetchArtworks)
-
 /* ------------------------------------------
 LIKE
-UI update instantly
-real request after delay
 ------------------------------------------ */
-const toggleLike = (item: Artwork) => {
+const toggleLike = async (item: Artwork) => {
+  const oldLiked = item.IsLiked
+  const oldCount = item.LikeCount
+
   item.IsLiked = !item.IsLiked
   item.LikeCount += item.IsLiked ? 1 : -1
 
@@ -173,60 +174,49 @@ const toggleLike = (item: Artwork) => {
     }, 650)
   }
 
-  /**
-   * clear previous request
-   * user clicked fast => only final state sent
-   */
-  if (likeTimers.value[item.Id]) {
-    clearTimeout(likeTimers.value[item.Id])
-  }
-
-  likeTimers.value[item.Id] = setTimeout(async () => {
-    const { error } = await useWeb(
-      'api/v1/artwork/like',
-      {
-        method: 'POST',
-        data: {
-          ArtworkId: item.Id,
-          Liked: item.IsLiked
-        }
+  const { error } = await useWeb(
+    'api/v1/artwork/like',
+    {
+      method: 'POST',
+      body: {
+        ArtworkId: item.Id
       }
-    )
-
-    if (error.value) {
-      console.error(error.value)
     }
-  }, 500)
+  )
+
+  if (error.value) {
+    item.IsLiked = oldLiked
+    item.LikeCount = oldCount
+  }
 }
+
 
 /* ------------------------------------------
 SAVE
 ------------------------------------------ */
-const toggleSave = (item: Artwork) => {
+const toggleSave = async (item: Artwork) => {
+  const oldSaved = item.IsSaved
+  const oldCount = item.SaveCount
+
   item.IsSaved = !item.IsSaved
   item.SaveCount += item.IsSaved ? 1 : -1
 
-  if (saveTimers.value[item.Id]) {
-    clearTimeout(saveTimers.value[item.Id])
-  }
-
-  saveTimers.value[item.Id] = setTimeout(async () => {
-    const { error } = await useWeb(
-      'api/v1/artwork/save',
-      {
-        method: 'POST',
-        data: {
-          ArtworkId: item.Id,
-          Saved: item.IsSaved
-        }
+  const { error } = await useWeb(
+    'api/v1/artwork/save',
+    {
+      method: 'POST',
+      body: {
+        ArtworkId: item.Id
       }
-    )
-
-    if (error.value) {
-      console.error(error.value)
     }
-  }, 500)
+  )
+
+  if (error.value) {
+    item.IsSaved = oldSaved
+    item.SaveCount = oldCount
+  }
 }
+
 
 /* ------------------------------------------
 SHARE
@@ -244,21 +234,30 @@ const shareArtwork = async (item: Artwork) => {
       })
     } else {
       await navigator.clipboard.writeText(url)
+      alert('Copied link')
     }
 
     item.ShareCount++
 
-    await useWeb(
+    const { error } = await useWeb(
       'api/v1/artwork/share',
       {
         method: 'POST',
-        data: { ArtworkId: item.Id }
+        body: {
+          ArtworkId: item.Id
+        }
       }
     )
+
+    if (error.value) {
+      item.ShareCount--
+    }
+
   } catch (e) {
     console.error(e)
   }
 }
+
 
 /* ------------------------------------------
 VIEW
@@ -266,13 +265,19 @@ VIEW
 const trackView = async (item: Artwork) => {
   item.ViewCount++
 
-  await useWeb(
+  const { error } = await useWeb(
     'api/v1/artwork/view',
     {
       method: 'POST',
-      data: { ArtworkId: item.Id }
+      body: {
+        ArtworkId: item.Id
+      }
     }
   )
+
+  if (error.value) {
+    item.ViewCount--
+  }
 }
 </script>
 

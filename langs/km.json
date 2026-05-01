@@ -110,5 +110,12 @@
     "dark_mode": "របៀបងងឹត",
     "light_mode": "របៀបភ្លឺ",
     "mark_all_read": "អានទាំងអស់",
-    "no_notifications": "មិនទាន់មានការជូនដំណឹងទេ"
+    "no_notifications": "មិនទាន់មានការជូនដំណឹងទេ",
+    "all": "ទាំងអស់",
+    "unread": "មិនទាន់បានអាន",
+    "read": "បានអាន",
+    "mentions": "ការលើកឡើង",
+    "system": "ប្រព័ន្ធ",
+    "unread_single": "Unread",
+    "unread_notifications": "ការជូនដំណឹងមិនទាន់បានអាន"
 }

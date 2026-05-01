@@ -21,7 +21,7 @@ export interface NotificationItem {
   Message: string
   From?: string
   FromAvatar?: string
-  Read: boolean
+  IsRead: boolean
   CreatedAt: string
 
   /*
@@ -70,7 +70,7 @@ export const useUIStore = defineStore('ui', {
 
   getters: {
     unreadCount: (state) =>
-      state.notifications.filter(n => !n.Read).length
+      state.notifications.filter(n => !n.IsRead).length
   },
 
   actions: {
@@ -197,7 +197,7 @@ export const useUIStore = defineStore('ui', {
         x => x.Id === id
       )
 
-      if (row) row.Read = true
+      if (row) row.IsRead = true
 
       try {
         const config = useRuntimeConfig()
@@ -218,7 +218,7 @@ export const useUIStore = defineStore('ui', {
 
     async markAllRead() {
       this.notifications.forEach(
-        n => (n.Read = true)
+        n => (n.IsRead = true)
       )
 
       try {

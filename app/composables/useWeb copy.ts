@@ -12,13 +12,12 @@ import axios from 'axios'
 
 interface UseWebOptions {
   method?: 'GET' | 'POST'
-  data?: Record<string, any>   // ✅ renamed from body → data
-  // body?: Record<string, any>
+  body?: Record<string, any>
   auth?: boolean
   headers?: Record<string, string>
 }
 
-export async function useWeb<T = any>(
+export function useWeb1<T = any>(
   url: string,
   options: UseWebOptions = {}
 ) {
@@ -27,8 +26,7 @@ export async function useWeb<T = any>(
 
   const {
     method = 'POST',
-    // body = {},
-    data: payload = {},          // ✅ alias to avoid conflict with axios `data`
+    body = {},
     auth = true,
     headers = {},
   } = options
@@ -55,15 +53,20 @@ export async function useWeb<T = any>(
         url,
         method,
         headers: requestHeaders,
+
         ...(method === 'GET'
-          ? { params: payload }
-          : { data: payload }),
+          ? { params: body }
+          : { data: body }),
       })
 
       data.value = response.data
     } catch (err: any) {
       /* AUTO REFRESH TOKEN */
-      if (err?.response?.status === 401 && retry && auth) {
+      if (
+        err?.response?.status === 401 &&
+        retry &&
+        auth
+      ) {
         try {
           await authStore.refreshAccessToken()
           return await request(false)
@@ -81,8 +84,7 @@ export async function useWeb<T = any>(
     }
   }
 
-  // ✅ Await the request before returning
-  await request()
+  request()
 
   return {
     data: readonly(data),
