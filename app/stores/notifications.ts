@@ -210,17 +210,20 @@ export const useNotificationStore = defineStore('notifications', {
         },
 
         /* =======================
-           OPEN NOTIFICATION
+           OPEN NOTIFICATION &  CLICK ITEM
         ======================= */
 
         async openNotification(item: NotificationItem) {
-            await this.markRead(item.Id)
+            if (!item.IsRead) {
+                await this.markRead(item.Id)
+            }
 
             const ui = useUIStore()
             ui.notifPanelOpen = false
 
-            if (item.Href)
+            if (item.Href) {
                 await navigateTo(localePath(item.Href))
+            }
         },
 
         /* =======================
@@ -294,8 +297,8 @@ export const useNotificationStore = defineStore('notifications', {
             if (
                 // this.socket &&
                 this.notifSocket &&
-                this.notifSocket.readyState ===
-                WebSocket.OPEN
+                // this.notifSocket.readyState === WebSocket.OPEN
+                [WebSocket.OPEN, WebSocket.CONNECTING].includes(this.notifSocket.readyState)
             ) return
 
             const config = useRuntimeConfig()
@@ -303,7 +306,7 @@ export const useNotificationStore = defineStore('notifications', {
             console.log('wsBase =============> : ', config.public.wsBase)
 
             const ws = new WebSocket(
-                `${config.public.wsBase}/ws/notifications/?token=${this.notifToken}`
+                `${config.public.wsBase}ws/notifications/?token=${this.notifToken}`
             )
 
             ws.onopen = () => {

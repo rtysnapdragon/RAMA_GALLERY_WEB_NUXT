@@ -6,7 +6,7 @@
       class="fixed top-6 left-6 flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--color-gold)] transition-all group"
     >
       <span class="text-xl transition-transform group-hover:-translate-x-0.5">←</span>
-      <span class="font-medium text-sm tracking-wide">{{ t('back') }}</span>
+      <span class="font-medium text-sm tracking-wide">{{ $t('back') }}</span>
     </button>
 
     <div class="max-w-7xl mx-auto px-6 pt-24 pb-20">

@@ -195,7 +195,7 @@ const handleLogout = () => {
   left: 0;
   right: 0;
   z-index: 100;
-  height: var(--header-height);
+  height: 80px;
 
   transform: translateY(0);
   transition:

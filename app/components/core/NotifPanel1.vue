@@ -73,7 +73,7 @@
         {{ $t('read') }}
         <span class="count">{{ notification.typeCounts.read }}</span>
       </button>
-<!-- 
+      <!-- 
       <button
         class="tab"
         :class="{ active: notification.filter === 'system' }"
@@ -115,7 +115,7 @@
             <span class="notif-time">
               {{ notification.formatTime(n.CreatedAt) }}
             </span>
-<!-- 
+            <!-- 
             <span
               v-if="n.actionLabel"
               class="notif-action"
@@ -150,60 +150,46 @@ const { t } = useI18n()
 const ui = useUIStore()
 const notification = useNotificationStore()
 
-const unreadCount = computed(() =>
-  notification.notifications.filter(n => !n.IsRead).length
-)
+const { lock, unlock } = useScrollLock()
+
+onMounted(() => {
+  watch(
+    () => ui.notifPanelOpen,
+    (isOpen) => {
+      if (isOpen) lock()
+      else unlock()
+    },
+    { immediate: true }
+  )
+})
 
 const headerHeight = computed(() => {
-  const h = 40
+  const h = 0.1
   return h > 0 ? `${h}px` : '72px'
 })
+
 const closePanel = () => {
   ui.notifPanelOpen = false
 }
 
-const openNotification = (n:any) => {
-  notification.openNotification(n)
-}
-
-const openNotification11 = (n:any) => {
-  notification.markRead(n.id)
-
-  if (n.href) {
-    navigateTo(n.href)
-  }
-}
-
-const formatTime = (iso:string) => {
-  const d = new Date(iso)
-  const now = new Date()
-  const diff = Math.floor((now.getTime() - d.getTime()) / 1000)
-
-  if (diff < 60) return 'Just now'
-  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`
-  if (diff < 604800) return `${Math.floor(diff / 86400)}d ago`
-
-  return d.toLocaleDateString()
-}
 </script>
 
 <style scoped lang="scss">
 .notif-backdrop{
   position:fixed;
   inset:0;
-  z-index:900;
+  z-index:1000 !important;
   background:rgba(15,23,42,.42);
   backdrop-filter:blur(2px);
 }
 
 .notif-panel{
   position:fixed;
-  top:var(--header-height,72px);
+  top:var(--header-height,100px);
   right:0;
   width:390px;
   max-width:100vw;
-  height:calc(100vh - var(--header-height,72px));
+  height:calc(100vh - 0.01px);
   background:var(--color-bg-card,#fff);
   border-left:1px solid var(--color-border,#ececec);
   box-shadow:-12px 0 42px rgba(0,0,0,.14);
@@ -373,7 +359,7 @@ const formatTime = (iso:string) => {
   background:rgba(100,116,139,.28);
 }
 .notif-list{
-  overflow:auto;
+  overflow:auto; //Prevent scroll inside background but allow panel scroll
   flex:1;
 }
 
@@ -492,5 +478,21 @@ const formatTime = (iso:string) => {
 .fade-enter-from,
 .fade-leave-to{
   opacity:0;
+}
+
+
+// ── Scrollbar ─────────────────────────────
+.notif-list::-webkit-scrollbar {
+    width: 1px;
+}
+
+.notif-list::-webkit-scrollbar-track {
+    // background: var(--color-bg-secondary);
+    background: transparent;
+}
+
+.notif-list::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
 }
 </style>

@@ -9,21 +9,6 @@
     --font-700: 'km-700', 'en-700';
     --font-800: 'km-800', 'en-800';
     --font-900: 'km-900', 'en-900';
-
-    // --font-600: 'km-600', 'Inter'; match together Inter + Siemreap + Moul
-
-    // --font-500: 'Khmer OS Siemreap';
-    // --font-600: 'Khmer OS Siemreap';
-    // --font-700: 'Khmer OS Siemreap';
-    // --font-800: 'Khmer OS Siemreap';
-    // --font-900: 'Khmer Moullight';
-
-    // --font-400: en-400, km-400;
-    // --font-500: en-500, km-500;
-    // --font-600: en-600, km-600;
-    // --font-700: en-700, km-700;
-    // --font-800: en-800, km-800;
-    // --font-900: en-900, km-900;
 }
 
 // Use it
@@ -162,54 +147,3 @@
     font-weight: 900;
     font-display: swap;
 }
-
-
-
-// @font-face {
-//     font-family: var(--font-400);
-//     src: local('Khmer OS Siemreap'), url(~/assets/fonts/Siemreap-Regular.ttf) format('truetype');
-//     font-weight: 400;
-//     font-style: normal;
-//     font-display: swap;
-// }
-
-// @font-face {
-//     font-family: var(--font-500);
-//     src: url('~/assets/fonts/Siemreap-Regular.ttf') format('truetype');
-//     font-weight: 500;
-//     font-style: normal;
-//     font-display: swap;
-// }
-
-// @font-face {
-//     font-family: var(--font-600);
-//     src: url('~/assets/fonts/Siemreap-Regular.ttf') format('truetype');
-//     font-weight: 600;
-//     font-style: normal;
-//     font-display: swap;
-// }
-
-// @font-face {
-//     font-family: var(--font-700);
-//     src: url('~/assets/fonts/Siemreap-Regular.ttf') format('truetype');
-//     font-weight: 700;
-//     font-style: normal;
-//     font-display: swap;
-// }
-
-// @font-face {
-//     font-family: var(--font-800);
-//     src: url('~/assets/fonts/Siemreap-Regular.ttf') format('truetype');
-//     font-weight: 800;
-//     font-style: normal;
-//     font-display: swap;
-// }
-
-
-// @font-face {
-//     font-family: var(--font-900);
-//     src: local('KhmerOS_muollight'), url('~/assets/fonts/KhmerOS_muollight.ttf') format('truetype');
-//     font-weight: 900;
-//     font-style: normal;
-//     font-display: swap;
-// }

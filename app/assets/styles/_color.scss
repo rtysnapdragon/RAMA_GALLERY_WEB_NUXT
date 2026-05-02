@@ -1,5 +1,12 @@
 // ── Design Tokens ──────────────────────────
 :root {
+    --primary-color: #1274aa;
+    --primary-color-hover: #115985;
+    --primary-color-light: #1492d5;
+    --secondary-color: #f1de99;
+    --secondary-color-hover: #e6cd76;
+    --secondary-color-light: #f5e6a7;
+
     --color-bg: #faf9f7;
     --color-bg-secondary: #f3f1ec;
     --color-bg-card: #ffffff;
@@ -19,14 +26,6 @@
     --glass-border: rgba(255, 255, 255, 0.3);
     --glass-shadow: 0 8px 32px rgba(26, 22, 18, 0.08);
 
-    // Transitions
-    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-
-    // Spacing
-    --header-height: 72px;
-    --section-gap: 6rem;
-
     --bg: #f8fafc;
     --bg-card: #ffffff;
     --text: #0f172a;
@@ -43,6 +42,13 @@
 
 // ── Dark Mode ──────────────────────────────
 .dark {
+    --primary-color: #1274aa;
+    --primary-color-hover: #115985;
+    --primary-color-light: #1492d5;
+    --secondary-color: #f5e6a7;
+    --secondary-color-hover: #f1de99;
+    --secondary-color-light: #e6cd76;
+
     --color-bg: #0f0d0a;
     --color-bg-secondary: #1a1612;
     --color-bg-card: #211d19;

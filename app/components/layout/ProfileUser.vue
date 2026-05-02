@@ -196,7 +196,7 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(18px);
   border: 1px solid var(--color-border);
   box-shadow: 0 20px 60px rgba(0,0,0,.16);
-  z-index: 999;
+  z-index: 1000;
 }
 
 .dropdown-head {
