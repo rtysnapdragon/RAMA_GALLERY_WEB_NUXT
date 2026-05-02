@@ -11,7 +11,16 @@
     </svg>
     <span v-if="notification.unreadCount > 0" class="notif-badge-amount">{{ notification.unreadCount }}</span>
   </button>
-
+  <Transition name="badge-pop">
+    <span
+      v-if="notification.unreadCount > 0"
+      :key="notification.unreadCount"
+      class="notif-badge"
+    >
+      {{ notification.unreadCount }}
+    </span>
+  </Transition>
+      
   <!-- Backdrop -->
   <Transition name="fade">
     <div
@@ -42,18 +51,13 @@
       <div class="notif-header-actions">
         <button
           class="btn btn-ghost btn-xs"
-          :disabled="hasUnread"
-          :class="{ 'disabled disabled:opacity-40': hasUnread }"
+          :disabled="!hasUnread"
+          :class="{ 'disabled disabled:opacity-40': !hasUnread }"
           @click="notification.markAllRead()"
         >
           {{ t('mark_all_read') }}
         </button>
-        <button
-          class="btn btn-danger btn-xs"
-          @click="notification.clearAll"
-        >
-          {{ t('clear_all') }}
-        </button>
+
         <button
           class="icon-close"
           @click="closePanel"
@@ -118,70 +122,27 @@
           </div>
         </div>
       </div>
-        <!-- v-else-if="notification.filteredNotifications.length > 0" -->
 
-      <TransitionGroup name="notif" tag="div">
       <button
-        v-if="notification.filteredNotifications.length > 0"
+        v-else-if="notification.filteredNotifications.length > 0"
         v-for="n in notification.filteredNotifications"
         :key="n.Id"
-        class="notif-item group"
+        class="notif-item"
         :class="{ unread: !n.IsRead }"
         @click="notification.openNotification(n)" 
       >
         <!-- Avatar / Icon -->
-        <div class="notif-left">
-          <div class="avatar-wrap">
-
-            <RAImage v-if="n.FromAvatar" :src="n.FromAvatar" class="avatar" fallback="/images/default-art.png"/>
-            <!-- <img
-              v-if="n.FromAvatar"
-              :src="n.FromAvatar"
-              class="avatar"
-            /> -->
-
-            <div v-else class="avatar fallback">
-              {{ n.From?.charAt(0) }}
-            </div>
-
-            <!-- TYPE BADGE -->
-            <span class="type-badge" :class="`type-${n.Type}`">
-              <i v-if="n.Type === 'like'" class="ri-heart-3-fill"></i>
-              <i v-else-if="n.Type === 'comment'" class="ri-chat-3-fill"></i>
-              <i v-else-if="n.Type === 'follow'" class="bi bi-person-check-fill"></i>
-              <i v-else-if="n.Type === 'save'" class="ri-bookmark-fill"></i>
-              <i v-else-if="n.Type === 'view'" class="ri-eye-fill"></i>
-            </span>
-
-          </div>
+        <div
+          class="notif-icon"
+          :class="`type-${n.Type}`"
+        >
+          <i v-if="n.Type === 'like'" class="ri-heart-3-fill"></i>
+          <i v-else-if="n.Type === 'follow'" class="ri-user-follow-fill"></i>
+          <i v-else-if="n.Type === 'comment'" class="ri-chat-3-fill"></i>
+          <i v-else-if="n.Type === 'save'" class="ri-bookmark-fill"></i>
+          <i v-else class="ri-notification-3-fill"></i>
         </div>
-        <div class="notif-actions">
 
-          <!-- Mark as read -->
-          <button
-            class="action-btn"
-            @click.stop="notification.markAsRead(n)"
-            title="Mark as read"
-          >
-            <i class="ri-check-line"></i>
-          </button>
-          <button
-            class="action-btn danger"
-            @click.stop="notification.deleteOne(n.Id)"
-            title="Delete notification"
-          >
-            <i class="ri-delete-bin-6-line"></i>
-          </button>
-          <!-- Delete -->
-          <button
-            class="action-btn danger"
-            @click.stop="notification.removeNotification(n.Id)"
-            title="Remove"
-          >
-            <i class="ri-close-line"></i>
-          </button>
-
-        </div>
         <!-- Content -->
         <div class="notif-body">
           <p class="notif-msg">
@@ -208,10 +169,10 @@
           class="notif-dot"
         ></span>
       </button>
-      </TransitionGroup>
+
       <!-- Empty -->
       <div
-        v-if="notification.notifications.length === 0"
+        v-else-if="notification.notifications.length === 0"
         class="notif-empty"
       >
         <i class="ri-notification-off-line"></i>
@@ -664,113 +625,4 @@ const closePanel = () => {
 }
 
 
-
-.notif-left {
-  position: relative;
-}
-
-.avatar-wrap {
-  position: relative;
-  width: 42px;
-  height: 42px;
-}
-
-.avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.avatar.fallback {
-  display: grid;
-  place-items: center;
-  background: #ddd;
-  font-weight: bold;
-}
-
-.type-badge {
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 10px;
-  background: white;
-  border: 1px solid #eee;
-}
-
-/* colors */
-.type-like { color: #ef4444; }
-.type-comment { color: #3b82f6; }
-.type-follow { color: #22c55e; }
-.type-save { color: #a855f7; }
-
-
-
-
-
-
-
-
-.notif-actions {
-  position: absolute;
-  right: 10px;
-  top: 30px;
-  display: flex;
-  gap: 6px;
-
-  opacity: 0;
-  transform: translateX(10px);
-  transition: .25s ease;
-}
-
-.group:hover .notif-actions {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.action-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: rgba(0,0,0,.05);
-}
-
-.action-btn.danger {
-  color: #ef4444;
-}
-
-
-// Smooth remove animation (IMPORTANT)
-.notif-enter-active,
-.notif-leave-active {
-  transition: all .25s ease;
-}
-
-.notif-enter-from {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.notif-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-
-
-.notif-leave-active {
-  transition: all .25s ease;
-}
-
-.notif-leave-to {
-  opacity: 0;
-  transform: translateX(40px);
-}
 </style>

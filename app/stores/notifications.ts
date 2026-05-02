@@ -1,6 +1,12 @@
 // stores/notifications.ts
 import { defineStore } from 'pinia'
 
+interface ToastItem {
+    id: number
+    message: string
+    type: string
+}
+
 export interface NotificationItem {
     Id: number
     Type: 'like' | 'comment' | 'follow' | 'save' | 'system'
@@ -11,7 +17,9 @@ export interface NotificationItem {
     CreatedAt: string
     Href?: string
     Cover?: string,
-    notifications?: string[]
+    notifications?: string[],
+    lastSoundTime?: number
+    IsSelected: boolean
 }
 type FilterType =
     | 'all'
@@ -20,6 +28,7 @@ type FilterType =
     | 'likes'
     | 'comments'
     | 'system'
+    | 'view'
 
 interface NotificationState {
     notifications: NotificationItem[]
@@ -37,6 +46,15 @@ interface NotificationState {
     initialized: boolean
     reconnectAttempts: number
     maxReconnectAttempts: number
+    isFirstLoad: boolean,
+    force: boolean,
+
+    // For Debounce
+    toasts: ToastItem[],
+    buffer: NotificationItem[],
+    flushTimer: ReturnType<typeof setTimeout> | null,
+    badgePulse: boolean,
+    audio: HTMLAudioElement | null,
 }
 
 export const useNotificationStore = defineStore('notifications', {
@@ -52,6 +70,15 @@ export const useNotificationStore = defineStore('notifications', {
         initialized: false,
         reconnectAttempts: 0,
         maxReconnectAttempts: 10,
+        isFirstLoad: true, //#2: Separate "first load" vs "refresh"
+        force: false,
+
+        toasts: [] as ToastItem[],
+        buffer: [] as NotificationItem[],
+        flushTimer: null as any,
+        badgePulse: false,
+        lastSoundTime: 0,
+        audio: null
     }),
 
     /* ----------------------------------
@@ -102,10 +129,21 @@ export const useNotificationStore = defineStore('notifications', {
         }
     },
 
+
     /* ----------------------------------
        ACTIONS
     ---------------------------------- */
     actions: {
+        initSound() {
+            if (!import.meta.client) return
+
+            if (!this.audio) {
+                this.audio = new Audio(
+                    'https://notificationsounds.com/storage/sounds/file-sounds-1149-ting.mp3'
+                )
+                this.audio.volume = 0.5
+            }
+        },
         /* ------------------------------
             FILTER
         ------------------------------ */
@@ -160,30 +198,30 @@ export const useNotificationStore = defineStore('notifications', {
             return d.toLocaleDateString()
         },
 
-        insertRealtime(
-            payload: NotificationItem
-        ) {
-            const exists =
-                this.notifications.find(
-                    (n) =>
-                        n.Id === payload.Id
-                )
+        insertRealtime(payload: NotificationItem) {
+            const exists = this.notifications.find((n) => n.Id === payload.Id)
 
             if (exists) return
 
-            this.notifications.unshift(
-                payload
-            )
+            // prevent ghost reinsert
+            if (payload?.IsDeleted) return
+
+            this.notifications.unshift(payload)
         },
         /* =======================
             FETCH LIST
         ======================= */
 
-        async fetchNotifications() {
+        async fetchNotifications() {   // initial state
             if (!this.notifToken) {
                 console.log('No notification token')
                 return
             }
+            // 🔥 prevent reloading if already have data Prevent unnecessary loading flicker that none auto websocket
+            // if (!this.force && this.notifications.length > 0) {
+            //     console.log('return this.force && this.notifications.length > 0: ', this.force && this.notifications.length > 0)
+            //     return
+            // }
             try {
                 this.notifLoading = true
                 console.log('this.notifToken: ', this.notifToken)
@@ -191,21 +229,21 @@ export const useNotificationStore = defineStore('notifications', {
                 const config = useRuntimeConfig()
 
                 const { data, error } = await useWeb<NotificationItem[]>(
-                    `${config.public.apiBase}api/notifications?take=100`,
+                    `api/notifications?take=100`,
                     {
-                        method: 'POST',
+                        method: 'GET',
                         headers: {
                             Authorization: `Bearer ${this.notifToken}`
                         }
                     }
                 )
-                console.log('data============>:', data)
-                console.log('data.value============>:', data.value)
-                this.notifications = data.value || []
+                this.notifications = Array.isArray(data.value) ? data.value : []
+                // this.notifications = data.value || []
             } catch (e: any) {
                 console.log('fetchNotifications', e.value?.Message)
             } finally {
                 this.notifLoading = false
+                this.isFirstLoad = false
             }
         },
 
@@ -226,6 +264,42 @@ export const useNotificationStore = defineStore('notifications', {
             }
         },
 
+        removeNotification(id: number) {
+            this.notifications = this.notifications.filter(n => n.Id !== id)
+        },
+
+        async clearAll() {
+            this.notifications = []
+
+            try {
+                const config = useRuntimeConfig()
+
+                await useWeb(`${config.public.apiBase}api/notifications/clear`, {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${this.notifToken}`
+                    }
+                })
+            } catch (e) {
+                console.log(e)
+            }
+        },
+
+        /* =======================
+           MARK AS READ
+        ======================= */
+        async markAsRead(n: NotificationItem) {
+            if (n.IsRead) return
+
+            n.IsRead = true
+
+            try {
+                await this.markRead(n.Id)
+            } catch (e) {
+                n.IsRead = false
+            }
+        },
+
         /* =======================
            MARK READ
         ======================= */
@@ -240,14 +314,12 @@ export const useNotificationStore = defineStore('notifications', {
             try {
                 const config = useRuntimeConfig()
 
-                await useWeb(
-                    `${config.public.apiBase}api/notifications/read?Id=${id}`,
-                    {
-                        method: 'POST',
-                        headers: {
-                            Authorization: `Bearer ${this.notifToken}`
-                        }
+                await useWeb(`api/notifications/read?Id=${id}`, {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${this.notifToken}`
                     }
+                }
                 )
             } catch (error) {
                 console.log(
@@ -258,25 +330,47 @@ export const useNotificationStore = defineStore('notifications', {
         },
 
         async markAllRead() {
+            const hasUnread = this.notifications.some(n => !n.IsRead)
+            if (!hasUnread) {
+                console.log('All notifications already read — skip API')
+                return
+            }
+
+            // optimistic update
             this.notifications.forEach(n => (n.IsRead = true))
+
+            try {
+                await useWeb(`api/notifications/read-all`, {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${this.notifToken}`
+                    }
+                }
+                )
+            } catch (e) {
+                console.log('markAllRead error:', e)
+            }
+        },
+
+        async deleteOne(id: number) {
+            const old = [...this.notifications]
+
+            // remove instantly (UI feels fast)
+            this.notifications = this.notifications.filter(n => n.Id !== id)
 
             try {
                 const config = useRuntimeConfig()
 
-                await useWeb(
-                    `${config.public.apiBase}api/notifications/read-all`,
-                    {
-                        method: 'POST',
-                        headers: {
-                            Authorization: `Bearer ${this.notifToken}`
-                        }
-                    }
-                )
+                await useWeb(`api/notifications/delete?Id=${id}`, {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${this.notifToken}`
+                    },
+                })
             } catch (e) {
-                console.log(
-                    'markAllRead ===============>:',
-                    e
-                )
+                // rollback if failed
+                this.notifications = old
+                console.log('delete failed', e)
             }
         },
 
@@ -284,7 +378,7 @@ export const useNotificationStore = defineStore('notifications', {
            REALTIME WS REALTIME WEBSOCKET
         ======================= */
 
-        connectRealtime() {
+        connectRealtime() {   // live updates WebSocket (Realtime updates)
             if (!import.meta.client) {
                 console.log('Not in client')
                 return
@@ -297,8 +391,8 @@ export const useNotificationStore = defineStore('notifications', {
             if (
                 // this.socket &&
                 this.notifSocket &&
-                // this.notifSocket.readyState === WebSocket.OPEN
-                [WebSocket.OPEN, WebSocket.CONNECTING].includes(this.notifSocket.readyState)
+                this.notifSocket.readyState === WebSocket.OPEN
+                // [WebSocket.OPEN, WebSocket.CONNECTING].includes(this.notifSocket.readyState)
             ) return
 
             const config = useRuntimeConfig()
@@ -315,10 +409,14 @@ export const useNotificationStore = defineStore('notifications', {
             }
 
             ws.onmessage = (event) => {
+                console.log('ws.onmessage =============>:', event.data)
                 try {
                     const payload = JSON.parse(event.data)
                     this.insertRealtime(payload)
 
+                    // 🔥 trigger toast
+                    this.pushToast(payload)
+                    this.handleIncoming(payload)
                 } catch (error) {
                     console.log('onmessage error ====>', error)
                 }
@@ -365,19 +463,18 @@ export const useNotificationStore = defineStore('notifications', {
 
         startPolling() {
             if (this.pollingTimer) return
-            this.pollingTimer =
-                setInterval(
-                    () => {
-                        this.fetchNotifications()
-                    },
-                    30000
-                )
+            this.pollingTimer = setInterval(() => {
+                console.log("Polling fetch...")
+                this.fetchNotifications()
+            },
+                30000
+            )
             // setInterval(() => {
             //     this.fetchNotifications()
             // }, 30000)
         },
 
-        stopPolling() {
+        stopPolling() { //(backup)
             if (
                 this.pollingTimer
             ) {
@@ -403,17 +500,13 @@ export const useNotificationStore = defineStore('notifications', {
            INIT
         ======================= */
         async init(token: string) {
-            if (
-                this.initialized &&
-                this.notifToken === token
-            ) return
+            if (this.initialized && this.notifToken === token) return
 
             this.setToken(token)
 
             await this.fetchNotifications()
 
             this.connectRealtime()
-
             this.startPolling()
 
             this.initialized = true
@@ -434,6 +527,189 @@ export const useNotificationStore = defineStore('notifications', {
 
             this.initialized = false
             this.reconnectAttempts = 0
-        }
+        },
+
+        playSound1(type?: string) { //If you want different sounds per type:
+            if (!import.meta.client) return
+
+            const now = Date.now()
+            if (now - this.lastSoundTime < 1500) return
+
+            let src = 'https://notificationsounds.com/storage/sounds/file-sounds-1149-ting.mp3'
+
+            if (type === 'comment') {
+                src = 'https://notificationsounds.com/storage/sounds/file-sounds-1137-eventually.mp3'
+            }
+
+            if (!this.audio || this.audio.src !== src) {
+                this.audio = new Audio(src)
+                this.audio.volume = 0.5
+            }
+
+            this.audio.currentTime = 0
+            this.audio.play().catch(() => { })
+
+            this.lastSoundTime = now
+
+            //usage
+            // this.playSound(batch[0]?.Type)
+        },
+        playSound() {
+            if (!import.meta.client) return
+
+            const now = Date.now()
+
+            // prevent spam (min 1.5s gap)
+            if (now - this.lastSoundTime < 1500) return
+
+            if (!this.audio) {
+                this.initSound()
+            }
+            // const audio = new Audio('https://notificationsounds.com/storage/sounds/file-sounds-1150-pristine.mp3')
+            // // https://notificationsounds.com/storage/sounds/file-sounds-1137-eventually.mp3
+
+            // audio.volume = 0.6
+            if (this.audio) {
+                this.audio.currentTime = 0 // 🔥 rewind for fast replay
+                this.audio.play().catch(() => { })
+            }
+            // audio.play().catch(() => {
+            //     // ignore autoplay block
+            // })
+
+            this.lastSoundTime = now
+        },
+        triggerBadgePulse() {
+            this.badgePulse = true
+
+            setTimeout(() => {
+                this.badgePulse = false
+            }, 600)
+        },
+
+        pushToast(n: NotificationItem) {
+            console.log('pushToast=============>:', n)
+            const ui = useUIStore()
+
+            // if (ui.notifPanelOpen) {
+            //     return
+            // }
+
+            const toast = {
+                id: Date.now(),
+                message: n.Message,
+                type: n.Type
+            }
+
+            this.toasts.push(toast)
+
+            // auto remove after 4s
+            setTimeout(() => {
+                this.toasts = this.toasts.filter(t => t.id !== toast.id)
+            }, 4000)
+        },
+        handleIncoming(payload: NotificationItem) {
+            // dedupe (by Id)
+            const exists =
+                this.notifications.find(n => n.Id === payload.Id) ||
+                this.buffer.find(n => n.Id === payload.Id)
+
+            if (exists) return
+
+            this.buffer.push(payload)
+
+            // schedule batch flush
+            if (!this.flushTimer) {
+                this.flushTimer = setTimeout(() => {
+                    this.flushBuffer()
+                }, 500) // 👈 tune: 300–800ms
+            }
+        },
+        flushBuffer() { //Flush buffer (CORE LOGIC)
+            const batch = [...this.buffer]
+
+            this.buffer = []
+            clearTimeout(this.flushTimer)
+            this.flushTimer = null
+
+            if (!batch.length) return
+
+            console.log("flushBuffer=============>: ", batch)
+
+            // 1. Insert into list (latest first)
+            batch.reverse().forEach(n => {
+                this.notifications.unshift(n)
+            })
+
+            // 2. Group by type
+            const grouped = this.groupNotifications(batch)
+
+            // 3. UI feedback (controlled)
+            const ui = useUIStore()
+
+            if (!ui.notifPanelOpen) {
+                this.pushBatchToast(grouped)
+                this.playSound()
+                this.triggerBadgePulse()
+            }
+        },
+        groupNotifications(list: NotificationItem[]) { //Grouping logic (ANTI-SPAM CORE)
+            const map: Record<string, NotificationItem[]> = {}
+
+            for (const n of list) {
+                if (!map[n.Type]) map[n.Type] = []
+                map[n.Type].push(n)
+            }
+
+            return map
+        },
+
+        pushBatchToast(grouped: Record<string, NotificationItem[]>) { //Smart toast aggregation
+            Object.entries(grouped).forEach(([type, items]) => {
+
+                // single → normal toast
+                if (items.length === 1) {
+                    this.pushToast(items[0])
+                    return
+                }
+
+                // multiple → aggregated message
+                let message = ''
+
+                if (type === 'like') {
+                    message = `${items.length} new likes`
+                } else if (type === 'comment') {
+                    message = `${items.length} new comments`
+                } else if (type === 'follow') {
+                    message = `${items.length} new followers`
+                } else {
+                    message = `${items.length} new notifications`
+                }
+
+                this.toasts.push({
+                    id: Date.now() + Math.random(),
+                    message,
+                    type
+                })
+                const id = Date.now() + Math.random()
+                this.toasts.push({ id, message, type })
+                setTimeout(() => {
+                    // this.toasts = this.toasts.filter(t => t.message !== message)
+                    this.toasts = this.toasts.filter(t => t.id !== id)
+                }, 4000)
+            })
+        },
+
+        handleRealtimeNotification(payload: any) {
+            console.log('🔥 NEW NOTIFICATION:', payload)
+
+            this.notifications.unshift(payload)
+
+            const grouped = this.groupNotifications(this.notifications)
+
+            this.pushBatchToast(grouped)
+
+            this.setUnreadCount(this.notifications.filter(n => !n.IsRead).length)
+        },
     }
 })

@@ -120,5 +120,6 @@
     "read": "Read",
     "mentions": "Mentions",
     "system": "System",
-    "unread_notifications": "Unread notifications"
+    "unread_notifications": "Unread notifications",
+    "clear_all": "Clear All"
 }

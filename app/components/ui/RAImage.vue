@@ -6,42 +6,77 @@
     @dragstart.prevent
     @selectstart.prevent
   >
-    <!-- Blur placeholder -->
+    <!-- Skeleton -->
     <div v-if="!loaded" class="ra-placeholder skeleton" />
 
     <img
-      :src="src"
+      :src="finalSrc"
       :alt="alt"
       :class="['ra-img', { loaded, cover }]"
       loading="lazy"
       draggable="false"
-      @load="loaded = true"
+      @load="onLoad"
       @error="onError"
     />
 
-    <!-- Invisible protect overlay -->
+    <!-- Protect -->
     <div class="protect-overlay" />
   </div>
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  src: string
+const props = defineProps<{
+  src?: string | null
   alt?: string
   ratio?: string
   cover?: boolean
+  fallback?: string
 }>()
 
 const loaded = ref(false)
-const onError = () => { loaded.value = true }
+const hasError = ref(false)
 
-// Disable keyboard save shortcut when image is in viewport
+/* --------------------------
+DEFAULT FALLBACK
+-------------------------- */
+const defaultFallback = '/user_image_default.png'
+
+/* --------------------------
+FINAL SRC (safe)
+-------------------------- */
+const finalSrc = computed(() => {
+  if (!props.src) return props.fallback || defaultFallback
+  if (hasError.value) return props.fallback || defaultFallback
+  return props.src
+})
+
+/* --------------------------
+ERROR HANDLER
+-------------------------- */
+const onError = () => {
+  if (!hasError.value) {
+    hasError.value = true
+    loaded.value = false
+  }
+}
+
+/* --------------------------
+LOAD HANDLER
+-------------------------- */
+const onLoad = () => {
+  loaded.value = true
+}
+
+/* --------------------------
+BLOCK SAVE SHORTCUT
+-------------------------- */
 onMounted(() => {
   const handler = (e: KeyboardEvent) => {
     if ((e.ctrlKey || e.metaKey) && ['s', 'u'].includes(e.key.toLowerCase())) {
       e.preventDefault()
     }
   }
+
   window.addEventListener('keydown', handler)
   onUnmounted(() => window.removeEventListener('keydown', handler))
 })

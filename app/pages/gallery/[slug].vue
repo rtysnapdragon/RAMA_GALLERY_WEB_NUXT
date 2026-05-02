@@ -89,17 +89,15 @@
               variant="solid"
               size="xl"
               class="flex-1 text-base font-medium shadow-lg shadow-red-500/20"
-              :label="`Like (${artwork?.Likes || 0})`"
               icon="ri-heart-fill"
             />
 
             <RAButton
               @click="toggleSave"
               color="amber"
-              variant="outline"
+              variant="solid"
               size="xl"
-              class="flex-1 text-base font-medium"
-              :label="`Save to Collection (${artwork?.Saves || 0})`"
+              class="flex-1 text-base font-medium shadow-lg shadow-red-500/20"
               icon="ri-save-line"
             />
 
@@ -108,6 +106,7 @@
               color="neutral"
               variant="ghost"
               size="xl"
+              class="flex-1 text-base font-medium shadow-lg shadow-red-500/20"
               icon="ri-share-forward-line"
             />
           </div>
@@ -128,22 +127,21 @@
 
   <!-- Fullscreen Viewer -->
   <FullScreenViewer
-    v-model:is-open="showViewer"
+    v-model="showViewer"
     :image-src="artwork?.image_url || artwork?.Image"
     :title="artwork?.Title"
     :artist="artwork?.Artist"
     :likes="artwork?.Likes"
     :saves="artwork?.Saves"
-    @update:likes="(val) => artwork.Likes = val"
-    @update:saves="(val) => artwork.Saves = val"
   />
   </div>
 </template>
 
 <script setup lang="ts">
-const { t } = useI18n()
 const route = useRoute()
 const slug = route.params.slug as string
+const item_id = route.params.id as string
+console.log(" Item Id = ", item_id)
 
 const artwork = ref<any>(null)
 const isLiked = ref(false)
@@ -155,17 +153,24 @@ const openFullscreen = () => {
   showViewer.value = true
 }
 
-const { data } = await useWeb(`artworks/${slug}`, { method: 'POST' })
+const { data } = await useWeb(`api/v1/artwork/detail`, { method: 'POST',data:{Slug:slug}})
 artwork.value = data.value
+console.log(" Artwork = ", artwork.value)
 
 // Optimistic Like
 const toggleLike = async () => {
   if (!artwork.value) return
   const oldLikes = artwork.value.Likes
-  artwork.value.Likes += 1
+  if (isLiked.value) {
+    artwork.value.Likes -= 1
+  } else {
+    artwork.value.Likes += 1
+  }
   isLiked.value = !isLiked.value
+  // artwork.value.Likes += 1
+  // isLiked.value = !isLiked.value
 
-  const { error } = await useWeb('artworks/like', {
+  const { error } = await useWeb('api/v1/artwork/like', {
     method: 'POST',
     data: { ArtworkId: artwork.value.Id }
   })
@@ -182,15 +187,22 @@ const toggleSave = async () => {
   artwork.value.Saves += 1
   isSaved.value = !isSaved.value
 
-  const { error } = await useWeb('artworks/save', {
+  const { error } = await useWeb('api/v1/artworks/save', {
     method: 'POST',
-    data: { ArtworkId: artwork.value.id }
+    data: { ArtworkId: artwork.value.Id }
   })
 
   if (error.value) artwork.value.Saves = oldSaves
 }
 
-const shareArtwork = () => {
+const shareArtwork = async () => {
+    const { error } = await useWeb('api/v1/artworks/share', {
+    method: 'POST',
+    data: { ArtworkId: artwork.value.Id }
+  })
+
+  // if (error.value) return
+
   if (navigator.share) {
     navigator.share({
       title: artwork.value.Title,

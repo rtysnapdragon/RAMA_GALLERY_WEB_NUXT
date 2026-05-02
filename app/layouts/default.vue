@@ -5,10 +5,26 @@
 
     <!-- Notification slide panel -->
     <!-- <NotifPanel /> -->
-    <NotifPanel1 />
+    <!-- <NotifPanel1 /> -->
 
     <!-- Search overlay -->
     <SearchOverlay />
+
+    <!-- Toasts -->
+    <div class="toast-container">
+      <TransitionGroup name="toast-pop">
+        <div
+          v-for="(toast, idx) in ui.toasts"
+          :key="toast.id"
+          class="toast"
+          :class="`type-${toast.type}`"
+        >
+          <i :class="toast.icon"></i>
+          <span>{{ toast.message }}</span>
+          <button @click="ui.removeToast(toast.id)" class="toast-close">&times;</button>
+        </div>
+      </TransitionGroup>
+    </div>
 
     <!-- Main content -->
     <main class="main-content">

@@ -2,10 +2,9 @@
   <div class="transition-colors duration-300">
     <NuxtLayout>
       <NuxtPage />
-
-      <!-- Global Components -->
       <FloatingChat />
       <NotificationPanel />
+      <NotificationToast />
     </NuxtLayout>
   </div>
 </template>
@@ -17,56 +16,24 @@ import { useHead } from '#imports'
 const auth = useAuthStore()
 const notification = useNotificationStore()
 
-/* ------------------------------------------
-SEO TITLE
------------------------------------------- */
 useHead({
   titleTemplate: (titleChunk) =>
-    titleChunk
-      ? `${titleChunk} - RamaGallery`
-      : 'RamaGallery - Artist Portfolio Platform'
+    titleChunk ? `${titleChunk} - RamaGallery` : 'RamaGallery - Artist Portfolio Platform',
 })
 
-/* ------------------------------------------
-OPTIONAL SUPABASE TEST
-(remove if unused)
------------------------------------------- */
-const todos = ref<any[]>([])
-
-async function getTodos() {
-  try {
-    const { data } = await supabase
-      .from('todos')
-      .select()
-
-    todos.value = data || []
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-onMounted( async () => {
-   auth.initFromStorage()
-
-  if (auth.token) {
-    await notification.init(auth.token)
-  }
-  getTodos()
+onMounted(() => {
+  auth.initFromStorage()
 })
 
-/* ------------------------------------------
-GLOBAL AUTH -> NOTIFICATION AUTO SYNC
------------------------------------------- */
+/* ── Auth → notification sync ── */
 watch(
   () => auth.token,
   async (token, oldToken) => {
-    /* login / refresh token */
     if (token && token !== oldToken) {
       await notification.init(token)
+      notification.initSound()
       return
     }
-
-    /* logout */
     if (!token) {
       notification.reset()
     }
@@ -74,20 +41,25 @@ watch(
   { immediate: true }
 )
 
-/* ------------------------------------------
-TAB ACTIVE = REFRESH
------------------------------------------- */
+/* ── Window events ── */
 if (import.meta.client) {
+  // ✅ Only refetch on focus when WS is NOT alive (e.g. user was offline)
   window.addEventListener('focus', () => {
-    if (auth.token) {
+    if (auth.token && !notification.isWsAlive) {
       notification.fetchNotifications()
     }
   })
 
+  // ✅ On reconnect: restore WS first, fetch only if needed
   window.addEventListener('online', () => {
     if (auth.token) {
       notification.connectRealtime()
-      notification.fetchNotifications()
+      // WS onopen will stop polling; fetch only if WS takes time
+      setTimeout(() => {
+        if (!notification.isWsAlive) {
+          notification.fetchNotifications()
+        }
+      }, 1500)
     }
   })
 

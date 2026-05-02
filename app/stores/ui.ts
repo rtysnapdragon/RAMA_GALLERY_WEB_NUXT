@@ -46,8 +46,6 @@ interface UIState {
   searchOpen: boolean
   mobileMenuOpen: boolean
 
-  notifications: NotificationItem[]
-
   notifSocket: WebSocket | null
   notifLoading: boolean
   notifToken: string | null
@@ -61,17 +59,11 @@ export const useUIStore = defineStore('ui', {
     searchOpen: false,
     mobileMenuOpen: false,
 
-    notifications: [],
-
     notifSocket: null,
     notifLoading: false,
     notifToken: null
   }),
 
-  getters: {
-    unreadCount: (state) =>
-      state.notifications.filter(n => !n.IsRead).length
-  },
 
   actions: {
     /* =======================
