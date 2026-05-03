@@ -45,14 +45,14 @@
             <div class="aside-section">
               <p class="section-label">{{ tBy({ en: 'Contact Info', km: 'ព័ត៌មាន' }) }}</p>
               <div class="info-list">
-                <div v-for="info in contactInfo" :key="info.label.en" class="info-item"><span class="info-icon">{{ info.icon }}</span><div><p class="info-label">{{ tBy(info.label) }}</p><p class="info-value">{{ info.value }}</p></div></div>
+                <div v-for="info in contactInfo" :key="info.label.en" class="info-item"><i :class="`info-icon ${info.icon}`"></i><div><p class="info-label">{{ tBy(info.label) }}</p><p class="info-value">{{ info.value }}</p></div></div>
               </div>
             </div>
             <div class="divider" />
             <div class="aside-section">
               <p class="section-label">{{ tBy({ en: 'Follow Us', km: 'តាមដាន' }) }}</p>
               <div class="social-list">
-                <a v-for="s in socials" :key="s.name" :href="s.href" target="_blank" rel="noopener noreferrer" class="social-item"><span>{{ s.icon }}</span><span>{{ s.name }}</span></a>
+                <a v-for="s in socials" :key="s.name" :href="s.href" target="_blank" rel="noopener noreferrer" class="social-item"><i :class="`social-icon ${s.icon}`"></i><span>{{ s.name }}</span></a>
               </div>
             </div>
           </aside>
@@ -72,6 +72,7 @@
 </template>
 
 <script setup>
+const { t } = useI18n();
 useScrollAnimation()
 const submitted = ref(false)
 const isSending = ref(false)
@@ -79,11 +80,11 @@ const form = reactive({ name: '', email: '', who: 'artist', subject: '', message
 const isValid = computed(() => form.name && form.email && form.message)
 const whoOptions = [{ v: 'artist', l: { en: 'Artist', km: 'វិចិត្រករ' } }, { v: 'collector', l: { en: 'Collector', km: 'អ្នកប្រមូល' } }, { v: 'partner', l: { en: 'Partner', km: 'ដៃគូ' } }, { v: 'other', l: { en: 'Other', km: 'ផ្សេង' } }]
 const subjects = [{ en: 'Artist Inquiry', km: 'ការស្វែងយល់' }, { en: 'Collector Support', km: 'ជំនួយ' }, { en: 'Partnership', km: 'ភាពជាដៃគូ' }, { en: 'Technical Support', km: 'ជំនួយបច្ចេកទេស' }, { en: 'Press & Media', km: 'ព័ត៌មាន' }, { en: 'Other', km: 'ផ្សេង' }]
-const contactInfo = [{ icon: 'ri:home-2-fill', label: { en: 'Address', km: 'អាសយដ្ឋាន' }, value: 'Street 240, Daun Penh, Phnom Penh' }, { icon: 'ri:mail-fill', label: { en: 'Email', km: 'អ៊ីមែល' }, value: 'hello@ramagallery.com' }, { icon: 'ri-phone-fill', label: { en: 'Phone', km: 'ទូរស័ព្ទ' }, value: '+855 23 123 456' }, { icon: 'ri:time-fill', label: { en: 'Hours', km: 'ម៉ោង' }, value: 'Mon–Fri 9:00–18:00 ICT' }]
+const contactInfo = [{ icon: 'ri:home-2-fill', label: { en: 'Address', km: 'អាសយដ្ឋាន' }, value: 'Street 240, Daun Penh, Phnom Penh' }, { icon: 'ri:mail-fill', label: { en: 'Email', km: 'អ៊ីមែល' }, value: 'hello@ramagallery.com' }, { icon: 'ri:phone-fill', label: { en: 'Phone', km: 'ទូរស័ព្ទ' }, value: '+855 23 123 456' }, { icon: 'ri:time-fill', label: { en: 'Hours', km: 'ម៉ោង' }, value: 'Mon–Fri 9:00–18:00 ICT' }]
 const socials = [{ name: 'Facebook', href: 'https://facebook.com/ramagallery', icon: 'ri-facebook-fill' }, { name: 'Instagram', href: 'https://instagram.com/ramagallery', icon: 'ri-instagram-line' }, { name: 'Twitter/X', href: 'https://twitter.com/ramagallery', icon: 'ri-twitter-line' }]
 const faqs = [{ q: { en: 'How do I list my artwork?', km: 'ខ្ញុំដាក់ស្នាដៃដូចម្ដេច?' }, a: { en: 'Register free, complete your artist profile, and upload in minutes.', km: 'ចុះឈ្មោះ បំពេញប្រវត្តិ ហើយបញ្ចូលស្នាដៃ' } }, { q: { en: 'How does image protection work?', km: 'ការការពាររូបភាព?' }, a: { en: 'We use signed URLs, watermarks, and anti-scraping JavaScript.', km: 'យើងប្រើ signed URL ស្លាកទឹក និង JavaScript' } }, { q: { en: 'Is there a sales commission?', km: 'តើមាន Hand sale?' }, a: { en: '10% platform commission. Artists keep 90% of every sale.', km: 'ការ commission ១០%  វិចិត្រករ ទទួល 90%' } }, { q: { en: 'Do you support Khmer language?', km: 'គាំទ្រភាសាខ្មែរ?' }, a: { en: 'Yes — the entire platform is bilingual in Khmer and English.', km: 'បាទ/ចាស — វេទិកា ជា ពីរ ភាសា' } }]
 async function handleSubmit() { if (!isValid.value) return; isSending.value = true; await new Promise(r => setTimeout(r, 1200)); isSending.value = false; submitted.value = true }
-useSeoMeta({ title: 'Contact — RamaGallery' })
+useSeoMeta({ title: t('Contact — RamaGallery') })
 </script>
 
 <style scoped lang="scss">

@@ -40,7 +40,13 @@ watch(
   },
   { immediate: true }
 )
+//  const localeCookie = useCookie('i18n_redirected').value
+//  console.log("localeCookie.value", localeCookie)
+//   const { locale } = useI18n()
 
+//   watch(locale, (val) => {
+//     localeCookie = val
+//   })
 /* ── Window events ── */
 if (import.meta.client) {
   // ✅ Only refetch on focus when WS is NOT alive (e.g. user was offline)

@@ -1,5 +1,4 @@
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
 import getComponentPaths from './app/utils/getComponentPaths'
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -30,8 +29,13 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      // redirectOn: 'root',
+      // CRITICAL FIX
+      alwaysRedirect: true,
+
+      // ONLY detect at root
+      redirectOn: 'root',
     },
+    // detectBrowserLanguage: false //Are you SSR + client mismatch?
   },
 
   app: {
