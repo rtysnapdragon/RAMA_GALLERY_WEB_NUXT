@@ -1,0 +1,459 @@
+{
+    "categories": [
+        "All",
+        "Artist Stories",
+        "Technique",
+        "Culture",
+        "Market",
+        "AI & Art"
+    ],
+    "items": [
+        {
+            "id": 1,
+            "slug": "reviving-hol-lboeuk",
+            "title": {
+                "en": "Reviving Hol Lboeuk",
+                "km": "ការស្ដារឡើងវិញ Hol Lboeuk"
+            },
+            "excerpt": {
+                "en": "Ancient silk meets modern collectors.",
+                "km": "សូត្របុរាណជួបអ្នកប្រមូលសម័យថ្មី"
+            },
+            "author": "Sreyleak Pov",
+            "authorAvatar": "/images/authors/sreyleak.jpg",
+            "date": "2025-06-10",
+            "readTime": 6,
+            "category": "Artist Stories",
+            "image": "/images/blogs/blog1.jpg",
+            "tags": [
+                "silk",
+                "traditional"
+            ]
+        },
+        {
+            "id": 2,
+            "slug": "angkor-as-muse",
+            "title": {
+                "en": "Angkor as Muse",
+                "km": "អង្គរជាប្រភពបំផុសគំនិត"
+            },
+            "excerpt": {
+                "en": "Ancient ruins inspire contemporary artists.",
+                "km": "ប្រាសាទបុរាណបំផុសគំនិតវិចិត្រករសម័យថ្មី"
+            },
+            "author": "Ratha Sok",
+            "authorAvatar": "/images/authors/ratha.jpg",
+            "date": "2025-06-03",
+            "readTime": 8,
+            "category": "Culture",
+            "image": "/images/blogs/blog2.jpg",
+            "tags": [
+                "angkor",
+                "inspiration",
+                "history"
+            ]
+        },
+        {
+            "id": 3,
+            "slug": "ai-in-cambodian-art",
+            "title": {
+                "en": "AI Tools Are Changing How Cambodian Artists Work",
+                "km": "ឧបករណ៍ AI កំពុងផ្លាស់ប្តូររបៀបធ្វើការរបស់វិចិត្រករខ្មែរ"
+            },
+            "excerpt": {
+                "en": "Exploring how AI augments creative practice.",
+                "km": "ស្វែងយល់ពីរបៀប AI បង្កើនការអនុវត្តសិល្បៈ"
+            },
+            "author": "Kosal Heng",
+            "authorAvatar": "/images/authors/kosal.jpg",
+            "date": "2025-05-28",
+            "readTime": 5,
+            "category": "AI & Art",
+            "image": "/images/blogs/blog3.jpg",
+            "tags": [
+                "AI",
+                "technology",
+                "future"
+            ]
+        },
+        {
+            "id": 4,
+            "slug": "collecting-cambodian-art",
+            "title": {
+                "en": "A Beginner's Guide to Collecting Cambodian Art",
+                "km": "មគ្គុទ្ទេសក៍សម្រាប់អ្នកចាប់ផ្តើមប្រមូលសិល្បៈខ្មែរ"
+            },
+            "excerpt": {
+                "en": "Everything you need to know before buying your first piece.",
+                "km": "អ្វីគ្រប់យ៉ាងដែលអ្នកត្រូវដឹងមុនពេលទិញស្នាដៃដំបូង"
+            },
+            "author": "Bopha Nhem",
+            "authorAvatar": "/images/authors/bopha.jpg",
+            "date": "2025-05-20",
+            "readTime": 7,
+            "category": "Market",
+            "image": "/images/blogs/blog4.jpg",
+            "tags": [
+                "collecting",
+                "guide",
+                "market"
+            ]
+        },
+        {
+            "id": 5,
+            "slug": "digital-art-cambodia",
+            "title": {
+                "en": "The Rise of Digital Art in Cambodia",
+                "km": "ការកើនឡើងនៃសិល្បៈឌីជីថលនៅកម្ពុជា"
+            },
+            "excerpt": {
+                "en": "Khmer artists carving out space in the digital realm.",
+                "km": "វិចិត្រករខ្មែរកំពុងស្វែងរកកន្លែងក្នុងពិភពឌីជីថល"
+            },
+            "author": "Sreyleak Pov",
+            "authorAvatar": "/images/authors/sreyleak.jpg",
+            "date": "2025-05-12",
+            "readTime": 6,
+            "category": "Technique",
+            "image": "/images/blogs/blog5.jpg",
+            "tags": [
+                "digital",
+                "NFT",
+                "generative"
+            ]
+        },
+        {
+            "id": 6,
+            "slug": "bronze-casting-tradition",
+            "title": {
+                "en": "The Living Art of Khmer Bronze Casting",
+                "km": "សិល្បៈការหล่อសំរិទ្ធខ្មែរ"
+            },
+            "excerpt": {
+                "en": "Battambang workshop keeps 1,000-year-old process alive.",
+                "km": "សិក្ខាសាលាបាត់ដំបងរក្សាបន្តនូវដំណើរការអាយុ១០០០ឆ្នាំ"
+            },
+            "author": "Ratha Sok",
+            "authorAvatar": "/images/authors/ratha.jpg",
+            "date": "2025-05-05",
+            "readTime": 9,
+            "category": "Technique",
+            "image": "/images/blogs/blog6.jpg",
+            "tags": [
+                "sculpture",
+                "bronze",
+                "craft"
+            ]
+        },
+        {
+            "id": 7,
+            "slug": "collectors-guide",
+            "title": {
+                "en": "Collecting Cambodian Art: A Guide for Beginners",
+                "km": "ការប្រមូលផ្តុំសិល្បៈខ្មែរ: មគ្គុទ្ទេសក៍សម្រាប់អ្នកចាប់ផ្តើមដំបូង"
+            },
+            "excerpt": {
+                "en": "Demystifying the process of collecting Khmer art.",
+                "km": "ការបំបាត់ភាពស្មុគស្មាញនៃការប្រមូលផ្តុំសិល្បៈខ្មែរ។"
+            },
+            "author": "Bopha Nhem",
+            "authorAvatar": "/images/authors/bopha.jpg",
+            "date": "2025-06-15",
+            "readTime": 7,
+            "category": "Market",
+            "image": "/images/blogs/blog1.jpg",
+            "tags": [
+                "collecting",
+                "guide"
+            ]
+        },
+        {
+            "id": 8,
+            "slug": "bamboo-in-art",
+            "title": {
+                "en": "Bamboo Revival in Contemporary Cambodian Art",
+                "km": "ការរស់ឡើងវិញនៃໄຜ່ក្នុងសិល្បៈខ្មែរនាបច្ចុប្បន្ន"
+            },
+            "excerpt": {
+                "en": "How young artists are using bamboo in new ways.",
+                "km": "យុវសិល្បករខ្មែរកំពុងប្រើໄຜ່ក្នុងរបៀបថ្មីៗ។"
+            },
+            "author": "Kosal Heng",
+            "authorAvatar": "/images/authors/kosal.jpg",
+            "date": "2025-06-12",
+            "readTime": 6,
+            "category": "Technique",
+            "image": "/images/blogs/blog2.jpg",
+            "tags": [
+                "bamboo",
+                "sculpture",
+                "craft"
+            ]
+        },
+        {
+            "id": 9,
+            "slug": "art-market-trends",
+            "title": {
+                "en": "2025 Cambodian Art Market Trends",
+                "km": "និន្នាការទីផ្សារសិល្បៈខ្មែរឆ្នាំ២០២៥"
+            },
+            "excerpt": {
+                "en": "Key insights into what's driving the art market this year.",
+                "km": "ការយល់ដឹងសំខាន់ៗអំពីអ្វីដែលកំពុងជំរុញទីផ្សារសិល្បៈនៅឆ្នាំនេះ។"
+            },
+            "author": "Ratha Sok",
+            "authorAvatar": "/images/authors/ratha.jpg",
+            "date": "2025-06-09",
+            "readTime": 8,
+            "category": "Market",
+            "image": "/images/blogs/blog3.jpg",
+            "tags": [
+                "market",
+                "trends"
+            ]
+        },
+        {
+            "id": 10,
+            "slug": "emerging-artists",
+            "title": {
+                "en": "5 Emerging Artists to Watch in 2026",
+                "km": "វិចិត្រករថ្មី ៥រូបដែលត្រូវจับតាមមើលក្នុងឆ្នាំ២០២៦"
+            },
+            "excerpt": {
+                "en": "Discover the next generation of Khmer artists.",
+                "km": "ស្វែងរកសិល្បករខ្មែរជំនាន់ថ្មី។"
+            },
+            "author": "Sreyleak Pov",
+            "authorAvatar": "/images/authors/sreyleak.jpg",
+            "date": "2025-06-05",
+            "readTime": 5,
+            "category": "Artist Stories",
+            "image": "/images/blogs/blog4.jpg",
+            "tags": [
+                "emerging",
+                "artists"
+            ]
+        },
+        {
+            "id": 11,
+            "slug": "angkor-renewal",
+            "title": {
+                "en": "Reinterpreting Angkor: Old Myths, New Narratives",
+                "km": "ការបកស្រាយអង្គរ: រឿងនិទានចាស់ៗ និទានថ្មីៗ"
+            },
+            "excerpt": {
+                "en": "How artists are engaging with Angkor's legacy.",
+                "km": "សិល្បករខ្មែរកំពុងចូលរួមជាមួយបេតិកភណ្ឌអង្គរយ៉ាងដូចម្តេច។"
+            },
+            "author": "Ratha Sok",
+            "authorAvatar": "/images/authors/ratha.jpg",
+            "date": "2025-06-01",
+            "readTime": 7,
+            "category": "Culture",
+            "image": "/images/blogs/blog5.jpg",
+            "tags": [
+                "Angkor",
+                "history"
+            ]
+        },
+        {
+            "id": 12,
+            "slug": "ai-as-tool",
+            "title": {
+                "en": "AI as a Creative Partner",
+                "km": "AI ជាដៃគូផ្នែកច្នៃប្រឌិត"
+            },
+            "excerpt": {
+                "en": "Exploring collaboration between AI and human artists.",
+                "km": "ការសិក្សាអំពីកិច្ចសហប្រតិបត្តិការរវាង AI និងសិល្បករមនុស្ស។"
+            },
+            "author": "Kosal Heng",
+            "authorAvatar": "/images/authors/kosal.jpg",
+            "date": "2025-05-27",
+            "readTime": 6,
+            "category": "AI & Art",
+            "image": "/images/blogs/blog6.jpg",
+            "tags": [
+                "AI",
+                "technology"
+            ]
+        },
+        {
+            "id": 13,
+            "slug": "art-education",
+            "title": {
+                "en": "The State of Art Education in Cambodia",
+                "km": "ស្ថានភាពអប់រំសិល្បៈនៅកម្ពុជា"
+            },
+            "excerpt": {
+                "en": "Challenges and opportunities for young artists.",
+                "km": "បញ្ហាប្រឈម និងឱកាសសម្រាប់យុវសិល្បករ។"
+            },
+            "author": "Bopha Nhem",
+            "authorAvatar": "/images/authors/bopha.jpg",
+            "date": "2025-05-22",
+            "readTime": 5,
+            "category": "Culture",
+            "image": "/images/blogs/blog1.jpg",
+            "tags": [
+                "education",
+                "community"
+            ]
+        },
+        {
+            "id": 14,
+            "slug": "sculpture-resurgence",
+            "title": {
+                "en": "Khmer Sculpture: Then and Now",
+                "km": "ចម្លាក់ខ្មែរ: ពីអតីតកាលដល់បច្ចុប្បន្ន"
+            },
+            "excerpt": {
+                "en": "Tracing the evolution of Khmer sculptural traditions.",
+                "km": "ការតាមដានការវិវឌ្ឍន៍នៃប្រពៃណីចម្លាក់ខ្មែរ។"
+            },
+            "author": "Ratha Sok",
+            "authorAvatar": "/images/authors/ratha.jpg",
+            "date": "2025-05-18",
+            "readTime": 8,
+            "category": "Technique",
+            "image": "/images/blogs/blog2.jpg",
+            "tags": [
+                "sculpture",
+                "history"
+            ]
+        },
+        {
+            "id": 15,
+            "slug": "digital- Khmer-identity",
+            "title": {
+                "en": "Digital Khmer Identity",
+                "km": "អត្តសញ្ញាណខ្មែរឌីជីថល"
+            },
+            "excerpt": {
+                "en": "How artists are exploring identity online.",
+                "km": "សិល្បករខ្មែរកំពុងស្វែងយល់ពីអត្តសញ្ញា",
+                "id": "Identitas Khmer Digital"
+            },
+            "author": "Sreyleak Pov",
+            "authorAvatar": "/images/authors/sreyleak.jpg",
+            "date": "2025-05-18",
+            "readTime": 7,
+            "category": "Culture",
+            "image": "/images/blogs/blog3.jpg",
+            "tags": [
+                "digital",
+                "identity"
+            ]
+        },
+        {
+            "id": 16,
+            "slug": "community-art-initiatives",
+            "title": {
+                "en": "Community Art Initiatives in Siem Reap",
+                "km": "គំនិតផ្តួចផ្តើមសិល្បៈសហគមន៍នៅសៀមរាប"
+            },
+            "excerpt": {
+                "en": "Inspiring projects that bring art to the community.",
+                "km": "គម្រោងដែលបំផុសគំនិតតាមរយៈការផ្សព្វផ្សាយសិល្បៈទៅកាន់សហគមន៍។"
+            },
+            "author": "Kosal Heng",
+            "authorAvatar": "/images/authors/kosal.jpg",
+            "date": "2025-05-14",
+            "readTime": 6,
+            "category": "Artist Stories",
+            "image": "/images/blogs/blog4.jpg",
+            "tags": [
+                "community",
+                "initiatives"
+            ]
+        },
+        {
+            "id": 17,
+            "slug": "female-artists-spotlight",
+            "title": {
+                "en": "Spotlight on Cambodia's Female Artists",
+                "km": "ការផ្តោតសំខាន់ទៅលើវិចិត្រករស្រ្តីខ្មែរ"
+            },
+            "excerpt": {
+                "en": "Celebrating the contributions of women in Khmer art.",
+                "km": "ការប្រារព្ធពិធីអបអរសាទរចំពោះការចូលរួមចំណែករបស់ស្ត្រីក្នុងសិល្បៈខ្មែរ។"
+            },
+            "author": "Bopha Nhem",
+            "authorAvatar": "/images/authors/bopha.jpg",
+            "date": "2025-05-10",
+            "readTime": 7,
+            "category": "Artist Stories",
+            "image": "/images/blogs/blog5.jpg",
+            "tags": [
+                "women",
+                "artists"
+            ]
+        },
+        {
+            "id": 18,
+            "slug": "modern-sculpture-evolution",
+            "title": {
+                "en": "The Evolution of Modern Sculpture in Cambodia",
+                "km": "ការវិវឌ្ឍន៍នៃចម្លាក់សម័យទំនើបនៅកម្ពុជា"
+            },
+            "excerpt": {
+                "en": "How Khmer sculpture is changing with the times.",
+                "km": "ចម្លាក់ខ្មែរកំពុងផ្លាស់ប្តូរទៅតាមសម័យកាលយ៉ាងដូចម្តេច។"
+            },
+            "author": "Ratha Sok",
+            "authorAvatar": "/images/authors/ratha.jpg",
+            "date": "2025-05-06",
+            "readTime": 8,
+            "category": "Technique",
+            "image": "/images/blogs/blog6.jpg",
+            "tags": [
+                "sculpture",
+                "modern"
+            ]
+        },
+        {
+            "id": 19,
+            "slug": "art-collecting-tips",
+            "title": {
+                "en": "Practical Tips for Aspiring Art Collectors",
+                "km": "គន្លឹះជាក់ស្តែងសម្រាប់អ្នកប្រាថ្នាចង់ប្រមូលសិល្បៈ"
+            },
+            "excerpt": {
+                "en": "Actionable advice for starting your art collection.",
+                "km": "ដំបូន្មានជាក់ស្តែងសម្រាប់អ្នកចាប់ផ្តើមប្រមូលសិល្បៈ។"
+            },
+            "author": "Bopha Nhem",
+            "authorAvatar": "/images/authors/bopha.jpg",
+            "date": "2025-05-02",
+            "readTime": 5,
+            "category": "Market",
+            "image": "/images/blogs/blog1.jpg",
+            "tags": [
+                "collecting",
+                "guide"
+            ]
+        },
+        {
+            "id": 20,
+            "slug": "virtual-art-galleries",
+            "title": {
+                "en": "The Rise of Virtual Art Galleries",
+                "km": "ការកើនឡើងនៃវិចិត្រសាលសិល្បៈនិម្មិត"
+            },
+            "excerpt": {
+                "en": "How technology is changing art exhibition experiences.",
+                "km": "បច្ចេកវិទ្យាកំពុងផ្លាស់ប្តូរបទពិសោធន៍នៃការតាំងពិព័រណ៍សិល្បៈយ៉ាងដូចម្តេច។"
+            },
+            "author": "Kosal Heng",
+            "authorAvatar": "/images/authors/kosal.jpg",
+            "date": "2025-04-27",
+            "readTime": 6,
+            "category": "AI & Art",
+            "image": "/images/blogs/blog2.jpg",
+            "tags": [
+                "virtual",
+                "gallery"
+            ]
+        }
+    ]
+}

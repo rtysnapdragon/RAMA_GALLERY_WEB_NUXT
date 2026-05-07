@@ -1,0 +1,39 @@
+.card-box {
+    border: 1px solid rgba(255, 255, 255, .08);
+    background: rgba(255, 255, 255, .03);
+    border-radius: 24px;
+    padding: 24px;
+}
+
+.dash-link {
+    display: block;
+    padding: 12px 16px;
+    border-radius: 14px;
+    opacity: .75;
+}
+
+.dash-link:hover,
+.router-link-active {
+    background: rgba(255, 255, 255, .08);
+    opacity: 1;
+}
+
+.dash-input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .08);
+}
+
+.dash-btn {
+    padding: 14px 22px;
+    border-radius: 16px;
+    background: linear-gradient(to right, #6366f1, #ec4899);
+}
+
+.dash-btn-sm {
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .08);
+}

@@ -1,0 +1,620 @@
+{
+  "artworks": [
+    {
+      "id": 1,
+      "slug": "apsara-in-gold",
+      "title": "Apsara in Gold",
+      "title_km": "អប្សរក្នុងមាស",
+      "artist": {
+        "id": 1,
+        "name": "Sophea Khun",
+        "slug": "sophea-khun",
+        "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=sophea"
+      },
+      "image": "https://picsum.photos/seed/apsara1/600/800",
+      "category": "painting",
+      "year": 2024,
+      "likes": 342,
+      "saves": 89,
+      "price": 1200,
+      "featured": true,
+      "description": "A reinterpretation of the sacred Apsara dancer rendered in 24k gold leaf and acrylic on canvas.",
+      "tags": [
+        "apsara",
+        "gold",
+        "classical",
+        "cambodia"
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "angkor-at-dawn",
+      "title": "Angkor at Dawn",
+      "title_km": "អង្គរពេលល្ហែ",
+      "artist": {
+        "id": 2,
+        "name": "Dara Meng",
+        "slug": "dara-meng",
+        "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=dara"
+      },
+      "image": "https://picsum.photos/seed/angkor2/700/500",
+      "category": "photography",
+      "year": 2024,
+      "likes": 518,
+      "saves": 203,
+      "price": 650,
+      "featured": true,
+      "description": "Long-exposure photograph capturing the first light breaking over Angkor Wat's iconic silhouette.",
+      "tags": [
+        "angkor",
+        "photography",
+        "landscape",
+        "dawn"
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "khmer-weave-digital",
+      "title": "Khmer Weave — Digital",
+      "title_km": "ក្រចេះខ្មែរ — ឌីជីថល",
+      "artist": {
+        "id": 3,
+        "name": "Pisey Ros",
+        "slug": "pisey-ros",
+        "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=pisey"
+      },
+      "image": "https://picsum.photos/seed/weave3/600/600",
+      "category": "digital",
+      "year": 2025,
+      "likes": 276,
+      "saves": 112,
+      "price": 480,
+      "featured": true,
+      "description": "A generative digital artwork inspired by traditional Cambodian silk weaving patterns.",
+      "tags": [
+        "digital",
+        "pattern",
+        "silk",
+        "generative"
+      ]
+    },
+    {
+      "id": 4,
+      "slug": "mekong-memories",
+      "title": "Mekong Memories",
+      "title_km": "추억ន្ទន័មេគង្គ",
+      "artist": {
+        "id": 1,
+        "name": "Sophea Khun",
+        "slug": "sophea-khun",
+        "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=sophea"
+      },
+      "image": "https://picsum.photos/seed/mekong4/800/600",
+      "category": "painting",
+      "year": 2023,
+      "likes": 189,
+      "saves": 67,
+      "price": 890,
+      "featured": false,
+      "description": "Watercolour series capturing daily life along the Mekong River.",
+      "tags": [
+        "mekong",
+        "watercolour",
+        "daily life"
+      ]
+    },
+    {
+      "id": 5,
+      "slug": "guardian-spirit",
+      "title": "Guardian Spirit",
+      "title_km": "វិញ្ញាណអ្នកការពារ",
+      "artist": {
+        "id": 4,
+        "name": "Vireak Chhem",
+        "slug": "vireak-chhem",
+        "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=vireak"
+      },
+      "image": "https://picsum.photos/seed/guardian5/500/700",
+      "category": "sculpture",
+      "year": 2024,
+      "likes": 421,
+      "saves": 156,
+      "price": 3200,
+      "featured": true,
+      "description": "Bronze sculpture of a Neak Ta spirit guardian, cast using traditional lost-wax technique.",
+      "tags": [
+        "sculpture",
+        "bronze",
+        "guardian",
+        "traditional"
+      ]
+    },
+    {
+      "id": 6,
+      "slug": "silk-road-revival",
+      "title": "Silk Road Revival",
+      "title_km": "ការស្ទាក់ស្ទើរផ្លូវវត្ថុផ្គត់ផ្គង់",
+      "artist": {
+        "id": 5,
+        "name": "Channary Lim",
+        "slug": "channary-lim",
+        "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=channary"
+      },
+      "image": "https://picsum.photos/seed/silk6/700/900",
+      "category": "traditional",
+      "year": 2025,
+      "likes": 334,
+      "saves": 98,
+      "price": 1800,
+      "featured": false,
+      "description": "Hand-woven Hol Lboeuk silk textile featuring ancient Khmer royal motifs.",
+      "tags": [
+        "silk",
+        "weaving",
+        "traditional",
+        "royal"
+      ]
+    },
+    {
+      "id": 7,
+      "slug": "phnom-penh-neon",
+      "title": "Phnom Penh Neon",
+      "title_km": "ភ្នំពេញអំពូល",
+      "artist": {
+        "id": 3,
+        "name": "Pisey Ros",
+        "slug": "pisey-ros",
+        "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=pisey"
+      },
+      "image": "https://picsum.photos/seed/neon7/600/750",
+      "category": "digital",
+      "year": 2025,
+      "likes": 562,
+      "saves": 234,
+      "price": 320,
+      "featured": true,
+      "description": "Cyberpunk-inspired digital collage of Phnom Penh's night markets.",
+      "tags": [
+        "digital",
+        "neon",
+        "urban",
+        "night"
+      ]
+    },
+    {
+      "id": 8,
+      "slug": "tonle-sap-life",
+      "title": "Tonle Sap Life",
+      "title_km": "ជីវិតទន្លេសាប",
+      "artist": {
+        "id": 2,
+        "name": "Dara Meng",
+        "slug": "dara-meng",
+        "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=dara"
+      },
+      "image": "https://picsum.photos/seed/tonle8/800/550",
+      "category": "photography",
+      "year": 2024,
+      "likes": 287,
+      "saves": 119,
+      "price": 450,
+      "featured": false,
+      "description": "Documentary photography series on the floating villages of Tonle Sap Lake.",
+      "tags": [
+        "photography",
+        "documentary",
+        "tonle sap",
+        "village"
+      ]
+    }
+  ],
+  "artists": [
+    {
+      "id": 1,
+      "slug": "sophea-khun",
+      "name": "Sophea Khun",
+      "name_km": "ខួន សុភា",
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=sophea",
+      "cover": "https://picsum.photos/seed/cover1/1200/400",
+      "specialty": "Painting & Mixed Media",
+      "location": "Phnom Penh",
+      "followers": 2840,
+      "artworks_count": 47,
+      "bio": "Sophea's work bridges traditional Cambodian iconography with contemporary abstraction. Her signature gold-leaf technique has been exhibited across Southeast Asia.",
+      "social": {
+        "instagram": "sophea.art",
+        "facebook": "sopheakhunart",
+        "email": "hello@sopheakhun.art",
+        "phone": "+855 12 345 678",
+        "telegram": "sopheakhun"
+      },
+      "featured": true,
+      "verified": true
+    },
+    {
+      "id": 2,
+      "slug": "dara-meng",
+      "name": "Dara Meng",
+      "name_km": "មែង ដារ៉ា",
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=dara",
+      "cover": "https://picsum.photos/seed/cover2/1200/400",
+      "specialty": "Photography",
+      "location": "Siem Reap",
+      "followers": 4120,
+      "artworks_count": 83,
+      "bio": "Documentary photographer capturing the soul of Cambodia's landscapes and communities. Dara's Angkor series has been published in National Geographic.",
+      "social": {
+        "instagram": "darameng_photo",
+        "website": "darameng.com",
+        "email": "dara@darameng.com",
+        "phone": "+855 98 765 432",
+        "telegram": "darameng"
+      },
+      "featured": true,
+      "verified": true
+    },
+    {
+      "id": 3,
+      "slug": "pisey-ros",
+      "name": "Pisey Ros",
+      "name_km": "រស់ ពិសី",
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=pisey",
+      "cover": "https://picsum.photos/seed/cover3/1200/400",
+      "specialty": "Digital Art & Generative Design",
+      "location": "Phnom Penh",
+      "followers": 6780,
+      "artworks_count": 124,
+      "bio": "Pioneer of Cambodian digital art, Pisey creates generative works that reimagine traditional patterns through algorithms and code.",
+      "social": {
+        "instagram": "pisey.digital",
+        "twitter": "piseyros",
+        "email": "pisey.r@digital.kh",
+        "telegram": "piseydigital"
+      },
+      "featured": true,
+      "verified": true
+    },
+    {
+      "id": 4,
+      "slug": "vireak-chhem",
+      "name": "Vireak Chhem",
+      "name_km": "ឆែម វីរៈ",
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=vireak",
+      "cover": "https://picsum.photos/seed/cover4/1200/400",
+      "specialty": "Sculpture & Bronze Work",
+      "location": "Battambang",
+      "followers": 1560,
+      "artworks_count": 28,
+      "bio": "Master sculptor preserving ancient Khmer bronze-casting traditions while pushing them into contemporary contexts.",
+      "social": {
+        "facebook": "vireakchhemsculpture",
+        "email": "contact@vireakchhem.kh",
+        "phone": "+855 77 123 987"
+      },
+      "featured": false,
+      "verified": true
+    },
+    {
+      "id": 5,
+      "slug": "channary-lim",
+      "name": "Channary Lim",
+      "name_km": "លីម ចន្ទនារី",
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=channary",
+      "cover": "https://picsum.photos/seed/cover5/1200/400",
+      "specialty": "Traditional Textiles",
+      "location": "Siem Reap",
+      "followers": 2230,
+      "artworks_count": 61,
+      "bio": "Third-generation silk weaver reviving endangered Hol Lboeuk patterns using natural dyes and hand looms.",
+      "social": {
+        "instagram": "channary.silk",
+        "website": "channarylim.com",
+        "telegram": "channarysilk",
+        "phone": "+855 15 555 123"
+      },
+      "featured": true,
+      "verified": false
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "slug": "cambodia-art-week-2025",
+      "title": "Cambodia Art Week 2025",
+      "title_km": "សប្តាហ៍សិល្បៈកម្ពុជា ២០២៥",
+      "date": "2025-09-15",
+      "end_date": "2025-09-21",
+      "location": "National Museum, Phnom Penh",
+      "image": "https://picsum.photos/seed/event1/800/450",
+      "category": "exhibition",
+      "description": "Seven days celebrating contemporary Cambodian art with 50+ artists, live performances, and AI art installations.",
+      "featured": true
+    },
+    {
+      "id": 2,
+      "slug": "angkor-photo-festival",
+      "title": "Angkor Photo Festival",
+      "title_km": "ព្រឹត្តិការណ៍ថតរូបអង្គរ",
+      "date": "2025-11-08",
+      "end_date": "2025-11-14",
+      "location": "Siem Reap",
+      "image": "https://picsum.photos/seed/event2/800/450",
+      "category": "photography",
+      "description": "Annual international photography festival set against the backdrop of Angkor Wat.",
+      "featured": true
+    },
+    {
+      "id": 3,
+      "slug": "digital-khmer-hackathon",
+      "title": "Digital Khmer Hackathon",
+      "title_km": "ការប្រកួតបង្កើតសិល្បៈឌីជីថល",
+      "date": "2025-08-03",
+      "end_date": "2025-08-04",
+      "location": "RamaGallery HQ, Phnom Penh",
+      "image": "https://picsum.photos/seed/event3/800/450",
+      "category": "hackathon",
+      "description": "48-hour AI art creation challenge. Open to all skill levels. Prizes worth $5,000.",
+      "featured": false
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Sophea Khun",
+      "role": {
+        "en": "Painter, Phnom Penh",
+        "km": "ចិត្រករ, ភ្នំពេញ"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=sophea",
+      "quote": {
+        "en": "RamaGallery gave me a global audience for my work. The AI caption tool alone saves me hours every week.",
+        "km": "RamaGallery ផ្តល់ឱ្យខ្ញុំនូវទស្សនិកជនពិភពលោក។ ឧបករណ៍ AI caption តែម្នាក់ឯងសន្សំសំចៃពេលវេលាជាច្រើនម៉ោងជារៀងរាល់សប្តាហ៍។"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Dara Meng",
+      "role": {
+        "en": "Photographer, Siem Reap",
+        "km": "ជាងថតរូប, សៀមរាប"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=dara",
+      "quote": {
+        "en": "The image protection system is unparalleled. My work stays mine while still reaching collectors worldwide.",
+        "km": "ប្រព័ន្ធការពាររូបភាពគ្មានប្រៀប។ ស្នាដៃរបស់ខ្ញុំនៅតែជាកម្មសិទ្ធិរបស់ខ្ញុំ ខណៈពេលដែលឈានដល់អ្នកប្រមូលទូទាំងពិភពលោក។"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Channary Lim",
+      "role": {
+        "en": "Textile Artist, Siem Reap",
+        "km": "វិចិត្រករក្រណាត់, សៀមរាប"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=channary",
+      "quote": {
+        "en": "Finally a platform that understands Cambodian art deeply — the Khmer interface feels like home.",
+        "km": "នៅទីបំផុតមានវេទិកាដែលយល់ដឹងអំពីសិល្បៈខ្មែរយ៉ាងជ្រៅ — ចំណុចប្រទាក់ភាសាខ្មែរមានអារម្មណ៍ដូចខ្ញុំនៅផ្ទះ។"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Channary Lim",
+      "role": {
+        "en": "Textile Artist, Siem Reap",
+        "km": "វិចិត្រករក្រណាត់, សៀមរាប"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=channary",
+      "quote": {
+        "en": "Finally a platform that understands Cambodian art deeply — the Khmer interface feels like home.",
+        "km": "នៅទីបំផុតមានវេទិកាដែលយល់ដឹងអំពីសិល្បៈខ្មែរយ៉ាងជ្រៅ — ចំណុចប្រទាក់ភាសាខ្មែរមានអារម្មណ៍ដូចខ្ញុំនៅផ្ទះ។"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Channary Lim",
+      "role": {
+        "en": "Textile Artist, Siem Reap",
+        "km": "វិចិត្រករក្រណាត់, សៀមរាប"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=channary",
+      "quote": {
+        "en": "Finally a platform that understands Cambodian art deeply — the Khmer interface feels like home.",
+        "km": "នៅទីបំផុតមានវេទិកាដែលយល់ដឹងអំពីសិល្បៈខ្មែរយ៉ាងជ្រៅ — ចំណុចប្រទាក់ភាសាខ្មែរមានអារម្មណ៍ដូចខ្ញុំនៅផ្ទះ។"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Channary Lim",
+      "role": {
+        "en": "Textile Artist, Siem Reap",
+        "km": "វិចិត្រករក្រណាត់, សៀមរាប"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=channary",
+      "quote": {
+        "en": "Finally a platform that understands Cambodian art deeply — the Khmer interface feels like home.",
+        "km": "នៅទីបំផុតមានវេទិកាដែលយល់ដឹងអំពីសិល្បៈខ្មែរយ៉ាងជ្រៅ — ចំណុចប្រទាក់ភាសាខ្មែរមានអារម្មណ៍ដូចខ្ញុំនៅផ្ទះ។"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Channary Lim",
+      "role": {
+        "en": "Textile Artist, Siem Reap",
+        "km": "វិចិត្រករក្រណាត់, សៀមរាប"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=channary",
+      "quote": {
+        "en": "Finally a platform that understands Cambodian art deeply — the Khmer interface feels like home.",
+        "km": "នៅទីបំផុតមានវេទិកាដែលយល់ដឹងអំពីសិល្បៈខ្មែរយ៉ាងជ្រៅ — ចំណុចប្រទាក់ភាសាខ្មែរមានអារម្មណ៍ដូចខ្ញុំនៅផ្ទះ។"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Channary Lim",
+      "role": {
+        "en": "Textile Artist, Siem Reap",
+        "km": "វិចិត្រករក្រណាត់, សៀមរាប"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=channary",
+      "quote": {
+        "en": "Finally a platform that understands Cambodian art deeply — the Khmer interface feels like home.",
+        "km": "នៅទីបំផុតមានវេទិកាដែលយល់ដឹងអំពីសិល្បៈខ្មែរយ៉ាងជ្រៅ — ចំណុចប្រទាក់ភាសាខ្មែរមានអារម្មណ៍ដូចខ្ញុំនៅផ្ទះ។"
+      }
+    },
+    {
+      "id": 9,
+      "name": "Channary Lim",
+      "role": {
+        "en": "Textile Artist, Siem Reap",
+        "km": "វិចិត្រករក្រណាត់, សៀមរាប"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=channary",
+      "quote": {
+        "en": "Finally a platform that understands Cambodian art deeply — the Khmer interface feels like home.",
+        "km": "នៅទីបំផុតមានវេទិកាដែលយល់ដឹងអំពីសិល្បៈខ្មែរយ៉ាងជ្រៅ — ចំណុចប្រទាក់ភាសាខ្មែរមានអារម្មណ៍ដូចខ្ញុំនៅផ្ទះ។"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Channary Lim",
+      "role": {
+        "en": "Textile Artist, Siem Reap",
+        "km": "វិចិត្រករក្រណាត់, សៀមរាប"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=channary",
+      "quote": {
+        "en": "Finally a platform that understands Cambodian art deeply — the Khmer interface feels like home.",
+        "km": "នៅទីបំផុតមានវេទិកាដែលយល់ដឹងអំពីសិល្បៈខ្មែរយ៉ាងជ្រៅ — ចំណុចប្រទាក់ភាសាខ្មែរមានអារម្មណ៍ដូចខ្ញុំនៅផ្ទះ។"
+      }
+    }
+  ],
+  "teams": [
+    {
+      "id": 1,
+      "name": "Ratha Sok",
+      "role": {
+        "en": "Founder & CEO",
+        "km": "ស្ថាបនិក និង នាយកប្រតិបត្តិ"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=ratha",
+      "bio": {
+        "en": "Former museum curator with a passion for democratising Cambodian art globally.",
+        "km": ""
+      }
+    },
+    {
+      "id": 2,
+      "name": "Sreyleak Pov",
+      "role": {
+        "en": "Head of Curation",
+        "km": "ប្រធានការគ្រប់គ្រង"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=sreyleak",
+      "bio": {
+        "en": "Art historian specialising in Khmer classical and contemporary movements.",
+        "km": ""
+      }
+    },
+    {
+      "id": 3,
+      "name": "Kosal Heng",
+      "role": {
+        "en": "Lead Engineer",
+        "km": "វិស្វករស្នូល"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=kosal",
+      "bio": {
+        "en": "Full-stack engineer building the AI and platform infrastructure.",
+        "km": ""
+      }
+    },
+    {
+      "id": 4,
+      "name": "Bopha Nhem",
+      "role": {
+        "en": "Head of Community",
+        "km": "ប្រធានសហគមន៍"
+      },
+      "avatar": "https://api.dicebear.com/7.x/personas/svg?seed=bopha",
+      "bio": {
+        "en": "Community builder connecting artists with collectors and patrons worldwide.",
+        "km": ""
+      }
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "icon": "🖼️",
+      "title": {
+        "en": "Portfolio Hosting",
+        "km": "ការបង្ហោះផតហ្វូលីយ៉ូ"
+      },
+      "description": {
+        "en": "Professional portfolio pages with custom domain support, analytics, and SEO optimisation.",
+        "km": "ទំព័រផតហ្វូលីយ៉ូវិជ្ជាជីវៈជាមួយការគាំទ្រដែននាម SEO"
+      }
+    },
+    {
+      "id": 2,
+      "icon": "🤖",
+      "title": {
+        "en": "AI Art Studio",
+        "km": "ស្ទូឌីយ៉ូ AI"
+      },
+      "description": {
+        "en": "AI-powered caption generation, tag suggestion, style analysis, and image upscaling.",
+        "km": "ការបង្កើតចំណងជើងដោយ AI ការស្នើស្លាក និងការវិភាគស្ទីល"
+      }
+    },
+    {
+      "id": 3,
+      "icon": "🛡️",
+      "title": {
+        "en": "Image Protection",
+        "km": "ការការពាររូបភាព"
+      },
+      "description": {
+        "en": "Advanced image protection with watermarking, signed URLs, and anti-scraping technology.",
+        "km": "ការការពាររូបភាពជឿនលឿនជាមួយស្លាកទឹក URL ចុះហត្ថលេខា"
+      }
+    },
+    {
+      "id": 4,
+      "icon": "💰",
+      "title": {
+        "en": "Artwork Sales",
+        "km": "លក់ស្នាដៃ"
+      },
+      "description": {
+        "en": "Seamless artwork sales with secure payment processing and international shipping support.",
+        "km": "ការលក់ស្នាដៃដោយភ្លាមៗ ជាមួយការដំណើរការទូទាត់ប្រាក់ដែលមានសុវត្ថិភាព"
+      }
+    },
+    {
+      "id": 5,
+      "icon": "📊",
+      "title": {
+        "en": "Analytics Dashboard",
+        "km": "ផ្ទាំងវិភាគ"
+      },
+      "description": {
+        "en": "Deep insights into your audience, artwork performance, and collector behaviour.",
+        "km": "ការយល់ដឹងជ្រៅជ្រះអំពីទស្សនិកជន ការប្រតិបត្តិការស្នាដៃ"
+      }
+    },
+    {
+      "id": 6,
+      "icon": "🌏",
+      "title": {
+        "en": "Khmer/English Platform",
+        "km": "វេទិកា ខ្មែរ/អង់គ្លេស"
+      },
+      "description": {
+        "en": "Fully bilingual platform designed natively for Cambodian artists and international collectors.",
+        "km": "វេទិកាពីភាសាទាំងស្រុង រចនាដោយប្រចាំសម្រាប់វិចិត្រករខ្មែរ"
+      }
+    }
+  ]
+}

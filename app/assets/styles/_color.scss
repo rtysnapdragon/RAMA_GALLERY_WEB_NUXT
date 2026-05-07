@@ -1,0 +1,165 @@
+@use './variable' as *;
+
+// ── Design Tokens ──────────────────────────
+:root {
+    --primary-color: #1274aa;
+    --primary-color-hover: #115985;
+    --primary-color-light: #1492d5;
+    --secondary-color: #f1de99;
+    --secondary-color-hover: #e6cd76;
+    --secondary-color-light: #f5e6a7;
+
+    --panel-bg: #faf9f7;
+
+    --color-bg: #faf9f7;
+    --color-bg-secondary: #f3f1ec;
+    --color-bg-card: #ffffff;
+    --color-text-primary: #1a1612;
+    --color-text-secondary: #5b5047;
+    --color-text-muted: #9a917f;
+    --color-border: rgba(26, 22, 18, 0.1);
+    --color-border-strong: rgba(26, 22, 18, 0.2);
+
+    // Gold accent
+    --color-gold: #c8951c;
+    --color-gold-light: #f1de99;
+
+    // Glassmorphism
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: 0 8px 32px rgba(26, 22, 18, 0.08);
+
+    --bg: #f8fafc;
+    --bg-card: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --border: rgba(15, 23, 42, 0.08);
+
+    --glass: rgba(255, 255, 255, 0.7);
+    --bg-sidebar: #ffffff;
+    --text: #111;
+    --muted: #666;
+    --border: rgba(0, 0, 0, 0.08);
+    --glass: rgba(0, 0, 0, 0.04);
+
+
+    /* Brand */
+    --accent: #E8E04A;
+    --accent-hover: #d4cc38;
+    --accent-dim: rgba(232, 224, 74, 0.15);
+
+    /* Surfaces */
+    --bg: #F5F5F0;
+    --surface: #FFFFFF;
+    --surface-2: #F8F8F4;
+    --border: #EBEBEB;
+    --border-2: #E2E2DC;
+
+    /* Text */
+    --text-1: #141414;
+    --text-2: #6B6B63;
+    --text-3: #9B9B93;
+
+    /* Status */
+    --green: #22C55E;
+    --green-bg: rgba(34, 197, 94, 0.1);
+    --red: #EF4444;
+    --red-bg: rgba(239, 68, 68, 0.1);
+    --blue: #3B82F6;
+    --blue-bg: rgba(59, 130, 246, 0.1);
+    --orange: #F97316;
+    --orange-bg: rgba(249, 115, 22, 0.1);
+
+    --bg-base: #F0F2F7;
+    --bg-surface: #FFFFFF;
+    --bg-elevated: #F8F9FC;
+    --bg-overlay: #ECEEF4;
+    --bg-hover: rgba(0, 0, 0, .03);
+    --bg-active: rgba(255, 107, 53, .08);
+
+    --border-color: rgba(0, 0, 0, .08);
+    --border-accent: rgba(255, 107, 53, .5);
+
+    --text-primary: #111318;
+    --text-secondary: #4A5568;
+    --text-muted: #9BA3B5;
+    --text-inverse: #F4F5F7;
+
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, .08), 0 1px 2px rgba(0, 0, 0, .04);
+    --shadow-float: 0 8px 24px rgba(0, 0, 0, .12);
+    --scrollbar-thumb: rgba(0, 0, 0, .12);
+
+}
+
+// ── Dark Mode ──────────────────────────────
+.dark {
+    --primary-color: #1274aa;
+    --primary-color-hover: #115985;
+    --primary-color-light: #1492d5;
+    --secondary-color: #f5e6a7;
+    --secondary-color-hover: #f1de99;
+    --secondary-color-light: #e6cd76;
+
+    --panel-bg: rgba(59, 57, 51, 0.8);
+
+    --color-bg: #0f0d0a;
+    --color-bg-secondary: #1a1612;
+    --color-bg-card: #211d19;
+    --color-text-primary: #f0ece4;
+    --color-text-secondary: #b8b1a3;
+    --color-text-muted: #6e6256;
+    --color-border: rgba(240, 236, 228, 0.08);
+    --color-border-strong: rgba(240, 236, 228, 0.15);
+    --glass-bg: rgba(26, 22, 18, 0.75);
+    --glass-border: rgba(240, 236, 228, 0.08);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+    --bg: #0b0b0f;
+    --bg-card: rgba(255, 255, 255, 0.04);
+    --text: #ffffff;
+    --muted: rgba(255, 255, 255, 0.55);
+    --border: rgba(255, 255, 255, 0.08);
+
+
+    --bg-sidebar: #0f1115;
+    --text: #fff;
+    --muted: #9aa0a6;
+    --border: rgba(255, 255, 255, 0.08);
+    --glass: rgba(255, 255, 255, 0.05);
+
+
+
+    // Dark theme (default)
+    --bg-base: #0A0B0F;
+    --bg-surface: #111318;
+    --bg-elevated: #181A21;
+    --bg-overlay: #1E2028;
+    --bg-hover: rgba(255, 255, 255, .04);
+    --bg-active: rgba(255, 107, 53, .12);
+
+    --border-color: rgba(255, 255, 255, .07);
+    --border-accent: rgba(255, 107, 53, .4);
+
+    --text-primary: #F4F5F7;
+    --text-secondary: #9BA3B5;
+    --text-muted: #565D70;
+    --text-inverse: #0A0B0F;
+
+    --accent: #{$accent-primary};
+    --accent-rgb: 255, 107, 53;
+    --accent-2: #{$accent-secondary};
+    --accent-2-rgb: 0, 212, 170;
+    --accent-blue: #{$accent-blue};
+    --accent-purple: #{$accent-purple};
+    --accent-red: #{$accent-red};
+    --accent-gold: #{$accent-gold};
+
+    --sidebar-w: 240px;
+    --topbar-h: 60px;
+
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, .4), 0 1px 2px rgba(0, 0, 0, .3);
+    --shadow-float: 0 8px 24px rgba(0, 0, 0, .5);
+
+    --scrollbar-thumb: rgba(255, 255, 255, .1);
+    --scrollbar-track: transparent;
+}

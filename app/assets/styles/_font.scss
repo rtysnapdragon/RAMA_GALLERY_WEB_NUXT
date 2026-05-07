@@ -1,0 +1,149 @@
+:root {
+    // Define fonts (separate Khmer + English per weight)
+    --font-100: 'km-100', 'en-100';
+    --font-200: 'km-200', 'en-200';
+    --font-300: 'km-300', 'en-300';
+    --font-400: 'km-400', 'en-400';
+    --font-500: 'km-500', 'en-500';
+    --font-600: 'km-600', 'en-600';
+    --font-700: 'km-700', 'en-700';
+    --font-800: 'km-800', 'en-800';
+    --font-900: 'km-900', 'en-900';
+}
+
+// Use it
+// h1 {
+//   font-family: var(--font-700);
+// }
+
+// strong {
+//   font-family: var(--font-800);
+// }
+
+/* Khmer fonts */
+@font-face {
+    font-family: 'km-100';
+    src: url('/assets/fonts/KhmerOS_muollight.ttf') format('truetype');
+    font-weight: 100;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'km-200'; // Kantumruy font
+    src: url('/assets/fonts/Kantumruy/KantumruyPro-Regular.ttf') format('truetype');
+    font-weight: 200;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'km-300';
+    src: url('/assets/fonts/KhmerOS_muollight.ttf') format('truetype');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'km-400';
+    src: url('/assets/fonts/Siemreap-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'km-500';
+    src: url('/assets/fonts/KhmerOS_muolpali.ttf') format('truetype');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'km-600';
+    src: url('/assets/fonts/Siemreap-Regular.ttf') format('truetype');
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'km-700';
+    src: url('/assets/fonts/Siemreap-Regular.ttf') format('truetype');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'km-800';
+    src: url('/assets/fonts/Siemreap-Regular.ttf') format('truetype');
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'km-900';
+    src: local("/assets/fonts/KhmerOS_muolpali.ttf"), url('/assets/fonts/KhmerOS_muolpali.ttf') format('truetype');
+    font-weight: 900;
+    font-display: swap;
+}
+
+/* English fonts */
+@font-face {
+    font-family: 'en-100'; //  english font
+    src: url('/assets/fonts/YourEnglishFont-ExtraLight.ttf') format('truetype');
+    font-weight: 100;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'en-200';
+    src: url('/assets/fonts/YourEnglishFont-Light.ttf') format('truetype');
+    font-weight: 200;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'en-300';
+    src: url('/assets/fonts/YourEnglishFont-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'en-400';
+    src: url('/assets/fonts/YourEnglishFont-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'en-500';
+    src: url('/assets/fonts/YourEnglishFont-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'en-600';
+    src: url('/assets/fonts/YourEnglishFont-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'en-700';
+    src: url('/assets/fonts/YourEnglishFont-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'en-800';
+    src: url('/assets/fonts/YourEnglishFont-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'en-900';
+    src: local("/assets/fonts/En/bahnschrift.ttf"), url('/assets/fonts/En/ArchivoBlack-Regular.ttf') format('truetype');
+    font-weight: 900;
+    font-display: swap;
+}

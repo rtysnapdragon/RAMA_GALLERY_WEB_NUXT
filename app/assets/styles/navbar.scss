@@ -1,0 +1,52 @@
+@use 'variables' as var;
+
+$app-blur: blur(14px);
+
+.app-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    transition: all .35s ease;
+}
+
+.navbar-show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.navbar-hide {
+    transform: translateY(-120%);
+    opacity: 0;
+}
+
+.navbar-top {
+    background: transparent;
+}
+
+.navbar-solid {
+    backdrop-filter: $app-blur;
+    background: rgba(20, 20, 20, .65);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .12);
+}
+
+.slide-right-enter-active,
+.slide-right-leave-active {
+    transition: all .3s ease;
+}
+
+.slide-right-enter-from,
+.slide-right-leave-to {
+    transform: translateX(100%);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .25s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}

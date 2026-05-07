@@ -1,0 +1,8 @@
+Source,Description,Best For,Direct Links / Access
+Ministry of Economy and Finance (MEF) - Open Data Portal,Most up-to-date official lists (2025) after boundary adjustments by Ministry of Interior,"Villages, Communes, Districts, Provinces (CSV/Excel)","• Cambodia Villages List 2025
+• Cambodia Commune List 2025
+• Cambodia Geographical List 2025"
+National Institute of Statistics (NIS) - Ministry of Planning,"Official statistics, population census, and administrative summaries","Population by province/district, census reports","nis.gov.kh – Look for ""Commune Database (CDB)"" and General Population Census 2019 (latest full census)"
+Humanitarian Data Exchange (HDX) - OCHA,Administrative boundaries (shapefiles + codes) – updated regularly,GIS / boundary data (Province → District → Commune),Cambodia - Subnational Administrative Boundaries (levels 0–3)
+Open Development Cambodia (ODC),Gazetteer and administrative lists (Khmer + English),"Easy searchable lists of provinces, districts, communes, villages","opendevelopmentcambodia.net – Search ""Administrative"" or ""Gazetteer"""
+Cambodia Administrative Data Portal,Interactive explorer with maps and hierarchy,Quick visual lookup of all levels,khmadmin.org

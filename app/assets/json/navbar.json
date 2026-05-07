@@ -1,0 +1,48 @@
+{
+  "items": [
+    {
+      "key": "gallery",
+      "href": "/gallery",
+      "anchor": "#gallery",
+      "children": [
+        { "key": "all_works", "href": "/gallery" },
+        { "key": "featured_art", "href": "/gallery?filter=featured" },
+        { "key": "new_arrivals", "href": "/gallery?filter=new" }
+      ]
+    },
+    {
+      "key": "artists",
+      "href": "/artist",
+      "anchor": "#artists",
+      "children": [
+        { "key": "all_artists", "href": "/artist" },
+        { "key": "top_creators", "href": "/artist?filter=top" }
+      ]
+    },
+    {
+      "key": "blogs",
+      "href": "/blogs",
+      "anchor": "#blogs"
+    },
+    {
+      "key": "events",
+      "href": "/events",
+      "anchor": null
+    },
+    {
+      "key": "services",
+      "href": "/services",
+      "anchor": null
+    },
+    {
+      "key": "about",
+      "href": "/about",
+      "anchor": null
+    },
+    {
+      "key": "contact",
+      "href": "/contact",
+      "anchor": null
+    }
+  ]
+}
