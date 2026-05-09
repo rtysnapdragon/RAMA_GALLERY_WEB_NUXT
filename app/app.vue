@@ -21,14 +21,24 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted, watch } from 'vue'
 import { useHead } from '#imports'
 
 const auth = useAuthStore()
 const notification = useNotificationStore()
 
+//Nuxt i18n updates <html lang=""> through useLocaleHead(). 
+// Without this, lang attribute may stay static.
+const head = useLocaleHead()
+
 useHead({
+  htmlAttrs: {
+    lang: head.value.htmlAttrs.lang,
+    dir: head.value.htmlAttrs.dir,
+  },
+  link: head.value.link,
+  meta: head.value.meta,
   titleTemplate: (titleChunk) =>
     titleChunk ? `${titleChunk} - RamaGallery` : 'RamaGallery - Artist Portfolio Platform',
 })

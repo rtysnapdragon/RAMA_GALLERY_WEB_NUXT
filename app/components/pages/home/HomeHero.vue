@@ -161,6 +161,8 @@
 }
 
 .btn-primary {
+  font-family: var(--font-900) !important;
+  font-weight: 600;
   background: var(--color-gold);
   color: #fff;
   border: none;

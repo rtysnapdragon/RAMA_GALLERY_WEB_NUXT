@@ -252,34 +252,34 @@ const handleLogout = () => {
   &-icon {
     font-size: 1.5rem;
     color: var(--color-gold);
-    font-family: var(--font-display);
+    font-family: var(--font-900);
     line-height: 1;
   }
 
   &-text {
-    font-family: var(--font-display);
+    font-family: var(--font-900);
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 900;
     color: var(--color-text-primary);
     letter-spacing: 0.02em;
   }
 }
 
 .nav-desktop {
+  font-family: var(--font-900) !important;
+  font-weight: 900;
   display: flex;
   align-items: center;
   gap: 0.25rem;
   flex: 1;
-  font-family: var(--font-500) !important;
-
+  letter-spacing: 0.04em;
+  
   @media (max-width: 900px) { display: none; }
 }
 
 .nav-link {
   padding: 0.5rem 0.875rem;
   font-size: 0.8125rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
   color: var(--color-text-secondary);
   text-decoration: none;
   transition: color var(--transition);

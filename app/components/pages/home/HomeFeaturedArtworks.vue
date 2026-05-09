@@ -108,10 +108,12 @@ const featuredArtworks = computed(() => {
 }
 
 .section-title {
+  font-family: var(--font-400);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
 }
 
 .section-subtitle {
+  font-family: var(--font-400);
   font-size: 0.95rem;
   opacity: 0.7;
 }
@@ -209,6 +211,8 @@ const featuredArtworks = computed(() => {
 
 /* INFO */
 .artwork-title {
+  font-family: var(--font-400);
+  font-weight: 400;
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.2;

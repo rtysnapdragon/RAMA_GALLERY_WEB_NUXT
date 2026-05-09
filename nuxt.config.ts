@@ -18,22 +18,22 @@ export default defineNuxtConfig({
   css: ['~/assets/styles/main.scss'],
 
   i18n: {
-    locales: [
-      { code: 'en', name: 'English', iso: 'en-US', file: 'en.json', flag: '/flags/gb.svg' },
-      { code: 'km', name: 'ខ្មែរ', iso: 'km-KH', file: 'km.json', flag: '/flags/kh.svg' },
-    ],
-    defaultLocale: 'en',
+    lazy: true, 
     langDir: '../langs/',
     strategy: 'prefix_except_default',
-    lazy: true,
+    defaultLocale: 'en',
+    locales: [
+      { code: 'en', name: 'English', iso: 'en', file: 'en.json', flag: '/flags/gb.svg' },
+      { code: 'km', name: 'ខ្មែរ', iso: 'km', file: 'km.json', flag: '/flags/kh.svg' },
+    ],
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
       // CRITICAL FIX
-      alwaysRedirect: true,
-
+      // alwaysRedirect: true,
       // ONLY detect at root
       redirectOn: 'root',
+      alwaysRedirect: false,
     },
     // detectBrowserLanguage: false //Are you SSR + client mismatch?
   },
