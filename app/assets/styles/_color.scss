@@ -1,13 +1,28 @@
-@use './variable' as *;
+@use './variables' as *;
 
 // ── Design Tokens ──────────────────────────
 :root {
     --primary-color: #1274aa;
     --primary-color-hover: #115985;
     --primary-color-light: #1492d5;
-    --secondary-color: #f1de99;
-    --secondary-color-hover: #e6cd76;
-    --secondary-color-light: #f5e6a7;
+    --secondary-color: #836b13;
+
+    --bg-nav: #cccccf;
+
+    /* Brand Colors from appConfig */
+    --color-primary: v-bind('$config.rama.primaryColor');
+    --color-primary-hover: v-bind('$config.rama.primaryHover');
+    --color-accent: v-bind('$config.rama.accent');
+    --color-gold: v-bind('$config.rama.primaryColor');
+    /* Keep your existing gold alias */
+
+    --color-secondary: v-bind('$config.rama.secondaryColor');
+
+    --color-success: v-bind('$config.rama.success');
+    --color-danger: v-bind('$config.rama.danger');
+    --color-info: v-bind('$config.rama.info');
+
+
 
     --panel-bg: #faf9f7;
 
@@ -96,9 +111,13 @@
     --primary-color: #1274aa;
     --primary-color-hover: #115985;
     --primary-color-light: #1492d5;
-    --secondary-color: #f5e6a7;
+    --secondary-color: #a39d83;
     --secondary-color-hover: #f1de99;
     --secondary-color-light: #e6cd76;
+
+    --bg-nav: #636375;
+
+    --color-gold: #E5B93D;
 
     --panel-bg: rgba(59, 57, 51, 0.8);
 

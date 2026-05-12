@@ -2,6 +2,7 @@
   <div class="layout-root min-h-screen grid place-items-center" @click.self="ui.closeAll()">
     <!-- Header -->
     <AppHeader />
+    <!-- <Navbar /> -->
 
     <!-- Toasts -->
     <div class="toast-container">
@@ -49,6 +50,6 @@ onMounted(() => {
 
 .main-content {
   flex: 1;
-  padding-top: var(--header-height);
+  // padding-top: var(--header-height);
 }
 </style>

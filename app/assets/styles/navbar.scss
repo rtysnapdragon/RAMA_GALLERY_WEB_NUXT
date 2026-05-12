@@ -1,4 +1,4 @@
-@use 'variables' as var;
+@use './variables' as *;
 
 $app-blur: blur(14px);
 

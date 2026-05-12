@@ -12,6 +12,7 @@
           :src="avatarUrl"
           :alt="displayName"
           class="avatar"
+          @error="onImageError"
         />
         <span class="status-dot"></span>
       </div>
@@ -27,6 +28,7 @@
               :src="avatarUrl"
               :alt="displayName"
               class="avatar-large"
+              @error="onImageError"
             />
             <span class="status-dot large"></span>
           </div>
@@ -84,7 +86,9 @@ const localePath = useLocalePath()
 
 const open = ref(false)
 const rootRef = ref(null)
-
+const onImageError = (e) => {
+  e.target.src = '/images/user_image_default.png'
+}
 const displayName = computed(() => {
   return auth.user?.Profile?.Name || 'Rama User'
 })

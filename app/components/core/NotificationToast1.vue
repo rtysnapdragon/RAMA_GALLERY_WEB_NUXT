@@ -14,7 +14,7 @@
         </div>
 
         <div class="content">
-          {{ t.message }}
+          {{ $t(t.message) }}
         </div>
       </div>
     </TransitionGroup>

@@ -1,12 +1,10 @@
 <template>
-  <header class="navbar header backdrop-blur-lg" 
+  <header class="glass-navbar" 
     :class="{ 
       scrolled: isScrolled ,
       hidden: !navbarVisible,
-      hide: !visible,
-      // scrolled: !isTop
     }">
-    <div class="header-inner">
+    <div class="navbar-container">
       <!-- Logo -->
       <NuxtLink :to="localePath('/')" class="logo" @click="ui.closeAll()">
         <span class="logo-icon">ར</span>
@@ -14,6 +12,18 @@
       </NuxtLink>
 
       <!-- Desktop Nav — from navbar.json -->
+      <!-- <ul class="nav-desktop">
+        <li v-for="link in navItems" :key="link.key">
+          <NuxtLink
+            :to="localePath(link.href)"
+            class="nav-link gold-underline"
+            :class="{ 'nav-link--active': route.path === localePath(link.href) || (link.href !== '/' && route.path.startsWith(link.href)) }"
+          >
+            {{ $t(`${link.key}`) }} 
+          </NuxtLink>
+        </li>
+      </ul> -->
+      
       <nav class="nav-desktop" aria-label="Main navigation">
         <NuxtLink
           v-for="item in navItems"
@@ -28,7 +38,6 @@
 
       <!-- Right controls -->
       <div class="header-actions">
-        <SearchOverlay2 />
         <!-- Search -->
         <button
           class="icon-btn search-btn"
@@ -43,15 +52,6 @@
 
         <!-- Language toggle -->
         <LangSwitch />
-        <!-- <button
-          class="lang-btn icon-btn"
-          @click="toggleLocale()"
-          :data-tooltip="currentLocale === 'en' ? 'ភាសាខ្មែរ' : 'English'"
-        >
-          <i class="ri-translate-2"></i>
-          <span>{{ currentLocale === 'en' ? 'KM' : 'EN' }}</span>
-          <component :is="currentLocale === 'en' ? 'KmFlag' : 'EnFlag'" class="flag-icon" />
-        </button> -->
 
         <!-- Theme toggle -->
         <button
@@ -69,7 +69,7 @@
         </button>
 
         <!-- Notifications (auth only) -->
-        <!-- <button
+        <button
           v-if="auth.isLoggedIn"
           class="icon-btn notif-btn"
           :data-tooltip="t('notifications')"
@@ -80,8 +80,8 @@
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
           </svg>
           <span v-if="notification.unreadCount > 0" class="notif-badge">{{ notification.unreadCount }}</span>
-        </button> -->
-        <NotifPanel1 />
+        </button>
+        <!-- <NotifPanel1 /> -->
         <!-- <NavProfile /> -->
                  <!-- Mobile hamburger -->
         <button class="hamburger icon-btn" @click="ui.toggleMobileMenu()" aria-label="Menu">
@@ -102,8 +102,6 @@
         <template v-else>
           <div class="profile-user-container"><ProfileUser /></div>
         </template>
-
-
       </div>
     </div>
 
@@ -130,30 +128,31 @@ const userMenuOpen = ref(false)
 /* ---------------------------------
    useScroll composable
 --------------------------------- */
-const { visible, isTop ,y} = useScroll()
-const lastY = ref(0)
+// Scroll composable
+const { y } = useScroll()
 const navbarVisible = ref(true)
-const isScrolled = computed(() => y.value > 20)
+const lastScrollY = ref(0)
+const isScrolled = computed(() => y.value > 30)
 
+// Smooth hide/show logic
 watch(y, (currentY) => {
+  const scrollDown = currentY > lastScrollY.value
   // top of page = always show
-  if (currentY <= 20) {
+  if (currentY <= 30) {
+    // Always show at the top
     navbarVisible.value = true
-    lastY.value = currentY
-    return
+    // lastY.value = currentY
+    // return
   }
-
-  // scrolling down = hide
-  if (currentY > lastY.value) {
+  else if (scrollDown && currentY > 150) {
+    // Hide when scrolling down (after a small threshold)
     navbarVisible.value = false
   }
-
-  // scrolling up = show
-  if (currentY < lastY.value) {
-    navbarVisible.value = true
+  else {
+      // Show when scrolling up
+      navbarVisible.value = true
   }
-
-  lastY.value = currentY
+  lastScrollY.value = currentY
 })
 
 /* ---------------------------------
@@ -175,71 +174,95 @@ const handleLogout = () => {
 </script>
 
 <style scoped lang="scss">
-.header {
+:root {
+  --nav-bg: rgba(255, 255, 255, 0.75);
+  --nav-border: rgba(255, 255, 255, 0.4);
+  --text-color: #1f2937;
+  --shadow-color: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+}
+
+.dark {
+  --nav-bg: rgba(75, 76, 78, 0.75);
+  --nav-border: rgba(255, 255, 255, 0.1);
+  --text-color: #e2e8f0;
+  --shadow-color: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+}
+
+.glass-navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  height: 80px;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: calc(100% - 40px);
+  max-width: 1400px;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--nav-border);
+  box-shadow: var(--shadow-color);
+  
+/* Smooth transitions */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
-  transform: translateY(0);
-  transition:
-    transform 0.35s ease,
-    background-color 0.25s ease,
-    border-color 0.25s ease;
+  /* Extra subtle lift when visible */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    // background: linear-gradient(145deg, rgba(255,255,255,0.18), transparent);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
+    background: linear-gradient(
+      145deg,
+      rgba(255,255,255,0.15),
+      rgba(255,255,255,0)
+    );
+  }
 
+  &:hover {
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
+  }
+
+/* Hidden State - Smooth slide up */
   &.hidden {
-    transform: translateY(-100%);
+    transform: translate(-50%, -120px); /* slides completely out of view */
+    opacity: 0;
+    pointer-events: none;
   }
 
+/* Scrolled State */
   &.scrolled {
-    border-bottom: 1px solid var(--color-border);
-    background: rgba(var(--bg-rgb), 0.78);
-    backdrop-filter: blur(16px);
+    border-color: color-mix(in srgb, var(--color-gold), transparent 85%);
+    top: 12px;
+    padding: 12px 26px;
+    background: rgba(var(--bg-rgb, 255 255 255), 0.85);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.18);
   }
 
+&:hover:not(.hidden) {
+    box-shadow: 0 22px 45px -12px rgba(0, 0, 0, 0.22);
+    transform: translateX(-50%) translateY(-2px); /* subtle lift */
+  }
   &:not(.scrolled) {
     background: transparent;
   }
 }
 
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-
-  transform: translateY(0);
-  opacity: 1;
-
-  transition:
-    transform 0.38s cubic-bezier(.22,.61,.36,1),
-    opacity 0.28s ease,
-    background-color 0.25s ease,
-    box-shadow 0.25s ease;
-
-  &.hide {
-    transform: translateY(-110%);
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  &.scrolled {
-    backdrop-filter: blur(14px);
-    box-shadow: 0 10px 30px rgba(0,0,0,.08);
-  }
-}
-
-.header-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  height: 100%;
+/* Container */
+.navbar-container {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;           /* Important for absolute centering fallback */
 }
 
 .logo {
@@ -248,7 +271,7 @@ const handleLogout = () => {
   gap: 0.625rem;
   text-decoration: none;
   flex-shrink: 0;
-
+  z-index: 2;
   &-icon {
     font-size: 1.5rem;
     color: var(--color-gold);
@@ -270,23 +293,23 @@ const handleLogout = () => {
   font-weight: 900;
   display: flex;
   align-items: center;
-  gap: 0.25rem;
   flex: 1;
   letter-spacing: 0.04em;
-  
+  gap: 0.5rem; 
+margin: 0 3rem;           /* Creates breathing room */
   @media (max-width: 900px) { display: none; }
 }
 
 .nav-link {
   padding: 0.5rem 0.875rem;
   font-size: 0.8125rem;
-  color: var(--color-text-secondary);
+  color: var(--secondary-color);
   text-decoration: none;
   transition: color var(--transition);
   border-radius: 4px;
 
   &:hover, &.active {
-    color: var(--color-text-primary);
+    color: var(--primary-color);
   }
 
   &.active {
@@ -302,14 +325,18 @@ const handleLogout = () => {
   margin-left: auto;
 }
 
-
  // Mobile responsive only (hidden on desktop)
 @media (max-width: 768px) {
   .theme-toggle, .search-btn {
     display: none !important;
   }
 }
-
+/* Optional: Make nav links closer together on smaller wide screens */
+@media (max-width: 1100px) {
+  .nav-desktop {
+    gap: 1.75rem;
+  }
+}
 .icon-btn {
   display: flex;
   align-items: center;
@@ -319,14 +346,14 @@ const handleLogout = () => {
   border-radius: 50%;
   background: transparent;
   border: none;
-  color: var(--color-text-secondary);
+  color: var(--secondary-color);
   cursor: pointer;
   transition: all var(--transition);
   position: relative;
 
   &:hover {
     background: var(--color-bg-secondary);
-    color: var(--color-text-primary);
+    color: var(--secondary-color);
   }
 }
 
@@ -459,6 +486,7 @@ const handleLogout = () => {
   pointer-events: none;
   transition: 0.2s ease;
 }
+
 
 /* Arrow (optional) */
 .lang-btn::before {

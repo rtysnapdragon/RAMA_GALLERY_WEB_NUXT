@@ -15,6 +15,7 @@
       <SearchOverlay1 />
       <AIAssistantFloat />
       <ThemeSwitcher />
+      <NotifPanel1 />
       <MobileNavigateBar />
        <ChatWidget />
     </NuxtLayout>

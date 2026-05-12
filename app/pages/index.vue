@@ -1,10 +1,15 @@
 <template>
   <div class="home-page">
-    <HomeHero  />
+    <!-- <div class="animate-on-scroll"><HeroSection /></div> -->
+    <div class="animate-on-scroll"><HomeHero :services="pagesData.services" /></div>
     <div class="animate-on-scroll"><HomeFeaturedArtworks :artworks="pagesData.artworks" /></div>
     <div class="animate-on-scroll"><HomeFeaturedArtists :artists="pagesData.artists" /></div>
     <div class="animate-on-scroll"><HomeServices :services="pagesData.services" /></div>
     <div class="animate-on-scroll"><HomeTestimonials :testimonials="pagesData.testimonials" /></div>
+    <div class="animate-on-scroll"><FeaturedGallery /></div>
+    <div class="animate-on-scroll"><AboutTeaser /></div>
+    <div class="animate-on-scroll"><ExhibitionsBanner /></div>
+    <div class="animate-on-scroll"><ContactSection /></div>
     <!-- <div class="animate-on-scroll"><TestimonialsSection :testimonials="pagesData.testimonials" /></div> -->
   </div>
 </template>

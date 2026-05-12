@@ -1,5 +1,5 @@
 <template>
-  <header class="navbar header backdrop-blur-lg" 
+  <header class="navbar header glass-navbar" 
     :class="{ 
       scrolled: isScrolled ,
       hidden: !navbarVisible,
@@ -28,9 +28,10 @@
 
       <!-- Right controls -->
       <div class="header-actions">
+        <SearchOverlay2 />
         <!-- Search -->
         <button
-          class="icon-btn"
+          class="icon-btn search-btn"
           :data-tooltip="t('search')"
           @click="ui.toggleSearch()"
           aria-label="Search"
@@ -82,6 +83,15 @@
         </button> -->
         <NotifPanel1 />
         <!-- <NavProfile /> -->
+                 <!-- Mobile hamburger -->
+        <button class="hamburger icon-btn" @click="ui.toggleMobileMenu()" aria-label="Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <line v-if="!ui.mobileMenuOpen" x1="3" y1="6" x2="21" y2="6"/>
+            <line v-if="!ui.mobileMenuOpen" x1="3" y1="12" x2="21" y2="12"/>
+            <line v-if="!ui.mobileMenuOpen" x1="3" y1="18" x2="21" y2="18"/>
+            <path v-if="ui.mobileMenuOpen" d="M18 6 6 18M6 6l12 12"/>
+          </svg>
+        </button>
         <!-- Auth buttons -->
         <template v-if="!auth.isLoggedIn">
           <NuxtLink :to="localePath('/login')" class="btn btn-ghost btn-sm">{{ t('login') }}</NuxtLink>
@@ -93,37 +103,12 @@
           <div class="profile-user-container"><ProfileUser /></div>
         </template>
 
-        <!-- Mobile hamburger -->
-        <button class="hamburger icon-btn" @click="ui.toggleMobileMenu()" aria-label="Menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <line v-if="!ui.mobileMenuOpen" x1="3" y1="6" x2="21" y2="6"/>
-            <line v-if="!ui.mobileMenuOpen" x1="3" y1="12" x2="21" y2="12"/>
-            <line v-if="!ui.mobileMenuOpen" x1="3" y1="18" x2="21" y2="18"/>
-            <path v-if="ui.mobileMenuOpen" d="M18 6 6 18M6 6l12 12"/>
-          </svg>
-        </button>
+
       </div>
     </div>
 
-    <!-- Mobile menu -->
-    <Transition name="mobile-menu">
-      <div v-if="ui.mobileMenuOpen" class="mobile-nav">
-        <NuxtLink
-          v-for="item in navItems"
-          :key="item.key"
-          :to="localePath(item.href)"
-          class="mobile-nav-link"
-          @click="ui.mobileMenuOpen = false"
-        >
-          {{ t(`${item.key}`) }}
-        </NuxtLink>
-        <div class="mobile-nav-actions">
-          <NuxtLink v-if="!auth.isLoggedIn" :to="localePath('/login')" class="btn btn-outline" @click="ui.mobileMenuOpen = false">{{ t('login') }}</NuxtLink>
-          <NuxtLink v-if="!auth.isLoggedIn" :to="localePath('/register')" class="btn btn-primary" @click="ui.mobileMenuOpen = false">{{ t('register') }}</NuxtLink>
-          <NuxtLink v-if="auth.isLoggedIn" :to="localePath('/dashboard')" class="btn btn-primary" @click="ui.mobileMenuOpen = false">{{ t('dashboard') }}</NuxtLink>
-        </div>
-      </div>
-    </Transition>
+    <!-- Mobile Sidebar -->
+    <MobileSidebar />
   </header>
 </template>
 
@@ -190,6 +175,42 @@ const handleLogout = () => {
 </script>
 
 <style scoped lang="scss">
+:root {
+  --nav-bg: rgba(255, 255, 255, 0.75);
+  --nav-border: rgba(255, 255, 255, 0.4);
+  --text-color: #1f2937;
+  --shadow-color: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+}
+
+.dark {
+  --nav-bg: rgba(15, 23, 42, 0.75);
+  --nav-border: rgba(255, 255, 255, 0.1);
+  --text-color: #e2e8f0;
+  --shadow-color: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+}
+
+.glass-navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: calc(100% - 40px);
+  max-width: 1200px;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--nav-border);
+  box-shadow: var(--shadow-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
 .header {
   position: fixed;
   top: 0;
@@ -267,33 +288,34 @@ const handleLogout = () => {
   &-icon {
     font-size: 1.5rem;
     color: var(--color-gold);
-    font-family: var(--font-display);
+    font-family: var(--font-900);
     line-height: 1;
   }
 
   &-text {
-    font-family: var(--font-display);
+    font-family: var(--font-900);
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 900;
     color: var(--color-text-primary);
     letter-spacing: 0.02em;
   }
 }
 
 .nav-desktop {
+  font-family: var(--font-900) !important;
+  font-weight: 900;
   display: flex;
   align-items: center;
   gap: 0.25rem;
   flex: 1;
-
+  letter-spacing: 0.04em;
+  
   @media (max-width: 900px) { display: none; }
 }
 
 .nav-link {
   padding: 0.5rem 0.875rem;
   font-size: 0.8125rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
   color: var(--color-text-secondary);
   text-decoration: none;
   transition: color var(--transition);
@@ -319,7 +341,7 @@ const handleLogout = () => {
 
  // Mobile responsive only (hidden on desktop)
 @media (max-width: 768px) {
-  .theme-toggle {
+  .theme-toggle, .search-btn {
     display: none !important;
   }
 }
@@ -449,56 +471,6 @@ const handleLogout = () => {
 }
 
 // Mobile nav
-.mobile-nav {
-  position: absolute;
-  top: var(--header-height);
-  left: 0;
-  right: 0;
-  background: var(--color-bg-card);
-  border-bottom: 1px solid var(--color-border);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  z-index: 99;
-
-  @media (min-width: 901px) { display: none; }
-}
-
-.mobile-nav-link {
-  padding: 0.875rem 1rem;
-  font-size: 1rem;
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  border-radius: 4px;
-  transition: all var(--transition);
-
-  &:hover {
-    background: var(--color-bg-secondary);
-    color: var(--color-text-primary);
-  }
-}
-
-.mobile-nav-actions {
-  display: flex;
-  gap: 0.75rem;
-  padding: 0.75rem 0 0.25rem;
-  border-top: 1px solid var(--color-border);
-  margin-top: 0.5rem;
-}
-
-.mobile-menu-enter-active,
-.mobile-menu-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.mobile-menu-enter-from,
-.mobile-menu-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
-}
-
-
 
 .lang-btn {
   position: relative;

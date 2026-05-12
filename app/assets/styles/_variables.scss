@@ -102,3 +102,38 @@ $shadow-md:  0 4px 6px rgba(0,0,0,.1),  0 2px 4px rgba(0,0,0,.06);
 $shadow-lg:  0 10px 15px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.05);
 $shadow-xl:  0 20px 25px rgba(0,0,0,.15),0 10px 10px rgba(0,0,0,.04);
 $shadow-glow: 0 0 20px rgba(255,107,53,.3);
+
+
+// ─── Color Tokens ────────────────────────────────────────────────────────────
+$color-ink:         #1a1410;
+$color-cream:       #f5f0e8;
+$color-gold:        #c9a96e;
+$color-gold-light:  #e8d5a3;
+$color-terracotta:  #b85c38;
+$color-muted:       #8a7968;
+$color-border:      rgba(201, 169, 110, 0.25);
+$color-border-dark: rgba(201, 169, 110, 0.15);
+$color-surface:     #faf7f2;
+$color-surface-dark:#1e1a16;
+$color-card-dark:   #252018;
+
+// ─── Typography ──────────────────────────────────────────────────────────────
+$font-display: 'Cormorant Garamond', serif;
+$font-body:    'DM Sans', sans-serif;
+
+// ─── Spacing ─────────────────────────────────────────────────────────────────
+$section-gap:  clamp(80px, 10vw, 140px);
+$container-px: clamp(16px, 5vw, 80px);
+
+// ─── Transitions ─────────────────────────────────────────────────────────────
+$ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+$ease-sine: cubic-bezier(0.37, 0, 0.63, 1);
+$duration-base: 0.35s;
+$duration-slow: 0.65s;
+
+// ─── Breakpoints ─────────────────────────────────────────────────────────────
+$bp-sm:  640px;
+$bp-md:  768px;
+$bp-lg:  1024px;
+$bp-xl:  1280px;
+$bp-2xl: 1536px;
