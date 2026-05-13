@@ -5,7 +5,7 @@
     <div class="animate-on-scroll"><HomeFeaturedArtworks :artworks="pagesData.artworks" /></div>
     <div class="animate-on-scroll"><HomeFeaturedArtists :artists="pagesData.artists" /></div>
     <div class="animate-on-scroll"><HomeServices :services="pagesData.services" /></div>
-    <div class="animate-on-scroll"><HomeTestimonials :testimonials="pagesData.testimonials" /></div>
+    <!-- <div class="animate-on-scroll"><HomeTestimonials :testimonials="pagesData.testimonials" /></div> -->
     <div class="animate-on-scroll"><FeaturedGallery /></div>
     <div class="animate-on-scroll"><AboutTeaser /></div>
     <div class="animate-on-scroll"><ExhibitionsBanner /></div>

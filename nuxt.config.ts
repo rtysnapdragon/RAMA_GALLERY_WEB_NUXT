@@ -94,59 +94,42 @@ export default defineNuxtConfig({
     headers: {
       contentSecurityPolicy: {
         'default-src': ["'self'"],
-        'base-uri': ["'self'"],
-        // 'img-src': ["'self'", 'data:', 'https:'],
+
+        'style-src': [
+          "'self'",
+          "'unsafe-inline'",
+          'https://cdn.jsdelivr.net',
+        ],
+
+        'font-src': [
+          "'self'",
+          'data:',
+          'https:',
+          'https://cdn.jsdelivr.net',
+        ],
+
         'img-src': [
           "'self'",
           'data:',
-          'https:',                    // Allow all HTTPS images (for dev)
-          'https://api.dicebear.com',
-          'https://picsum.photos',
-          'https://ui-avatars.com',
-          "'sha256-9O8u7v1t2s3x4y5z6a7b8c9d0e1f2a3b4c5d6e7f8g9h0i1j2k3l4m5n6o7p8q9r0'",   // For default-avatar.png
-          "'sha256-m5H09l59Q2l58h47t+u152/J4uC29n36h/i9/e5j/0E='",                  // For google-icon.png
-          "'sha256-4eF0h95kU1b5/J4uC29n36h/i9/e5j/0E='",                          // For x.png
-          "'sha256-9hM8q8j6j4i3k5k7b2c4g6e8w9a1n3p5t7d9f1j3h5k7g9c3b2n1p5t7d9f1j3h5k7g9c1b2n1p5t7d9f1j3h5k7"
+          'https:',
         ],
-        'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],   // unsafe-eval needed in dev
-        'style-src': ["'self'", "'unsafe-inline'"],
-        'font-src': ["'self'", 'data:', 'https:'],
-        'object-src': ["'none'"],
-        'frame-ancestors': ["'none'"],
-        'upgrade-insecure-requests': true,
+
+        'script-src': [
+          "'self'",
+          "'unsafe-inline'",
+          "'unsafe-eval'"
+        ],
 
         'connect-src': [
           "'self'",
-          'http://127.0.0.1:52467',     // Your Django backend
+          'http://127.0.0.1:52467',
           'http://localhost:52467',
-          'ws://127.0.0.1:8000',        // WebSocket
-          'wss://127.0.0.1:8000',
-          'https://api.dicebear.com',
           'http://localhost:3000',
           'http://127.0.0.1:3000',
         ],
-        'media-src': ["'self'", 'https:', 'http:'],
-        'object-src': ["'none'"],
-        'frame-ancestors': ["'none'"],
-        'base-uri': ["'self'"],
-        // 'upgrade-insecure-requests': process.env.NODE_ENV === 'production'
       },
 
-      crossOriginEmbedderPolicy: 'require-corp',
-      crossOriginOpenerPolicy: 'same-origin',
-      crossOriginResourcePolicy: 'same-origin',
-      referrerPolicy: 'strict-origin-when-cross-origin',
-
-      strictTransportSecurity: {
-        maxAge: 31536000,
-        includeSubDomains: true,
-        preload: true
-      },
-
-      xContentTypeOptions: true,
-      xDNSPrefetchControl: true,
-      xFrameOptions: 'DENY',
-      xXSSProtection: true
+      crossOriginResourcePolicy: 'cross-origin',
     },
 
     // Rate Limiting

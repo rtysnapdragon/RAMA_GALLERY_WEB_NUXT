@@ -73,8 +73,6 @@
         </article>
       </div>
     </div>
-
-    {{ featuredArtworks }}
   </section>
 </template>
 

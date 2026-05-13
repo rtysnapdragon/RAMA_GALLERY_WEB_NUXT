@@ -27,7 +27,7 @@
 
     <!-- Footer -->
     <AppFooter />
-
+    <MobileSidebar />
   </div>
 </template>
 

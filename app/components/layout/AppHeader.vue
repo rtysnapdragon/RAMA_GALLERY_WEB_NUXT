@@ -85,12 +85,8 @@
         <!-- <NavProfile /> -->
                  <!-- Mobile hamburger -->
         <button class="hamburger icon-btn" @click="ui.toggleMobileMenu()" aria-label="Menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <line v-if="!ui.mobileMenuOpen" x1="3" y1="6" x2="21" y2="6"/>
-            <line v-if="!ui.mobileMenuOpen" x1="3" y1="12" x2="21" y2="12"/>
-            <line v-if="!ui.mobileMenuOpen" x1="3" y1="18" x2="21" y2="18"/>
-            <path v-if="ui.mobileMenuOpen" d="M18 6 6 18M6 6l12 12"/>
-          </svg>
+          <i v-if="!ui.mobileMenuOpen" class="ri-menu-fold-line"></i>
+          <i v-else class="ri-close-line"></i>
         </button>
         <!-- Auth buttons -->
         <template v-if="!auth.isLoggedIn">
@@ -106,7 +102,6 @@
     </div>
 
     <!-- Mobile Sidebar -->
-    <MobileSidebar />
   </header>
 </template>
 
